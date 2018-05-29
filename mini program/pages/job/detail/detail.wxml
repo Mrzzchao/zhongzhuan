@@ -1,0 +1,72 @@
+<view class="page-body l-full l-flex-column bg-g">
+	<view class="job-list-wrap l-flex-1 l-relative">
+		<view class="l-full l-flex-column job-list-cont">
+			<view class="l-scroll-y">
+				<!-- 招聘公司简介 -->
+				<view class="comp-abstract l-flex-column">
+					<view class="company-job-name l-flex-row">
+						<view class="job-name-detail l-flex-1">招聘{{job.job_name}}</view>
+						<view class="company-payment">{{job.salary}}</view>
+					</view>
+					<view class="company-name l-flex-row">
+						<view class="company-logo">
+							<image class="company-logo-img" src="/images/logo1.jpg" alt="company's logo"></image>
+						</view>
+						{{job.company}}
+					</view>
+					<view class="company-welfare l-flex-row">
+						<view class="comp-welfares" wx:for="{{job.tags}}" wx:key="{{item}}">{{item}}</view>
+					</view>
+				</view>
+				<!-- /招聘公司简介 -->
+				<!-- 职位详情简介  start -->
+				<view class="offer-info-cont">
+					<view class="offer-info-tit">
+						职位详情
+						<view class="offer-tit-before"></view>
+					</view>
+					<view class="offer-info-desc">
+						<view class="oid-detail">
+							1、负责官方社区的交互界面设计，分析用户的操作习惯和偏好，从用户体验的角度出发，提出最佳的交互设计和界面设计方案；
+						</view>
+						<view class="oid-detail">
+							2、负责管理产品的体验，跟踪产品的体验效果数据，持续改善产品的用户体验
+						</view>
+						<view class="oid-tit">
+							任职要求：
+						</view>
+						<view class="oid-detail">
+							1、本科及以上学历，有优秀的交互原型设计能力，熟悉UCD方法和工作流程；
+						</view>
+						<view class="oid-detail">
+							2、拥有用户体验方面的理论知识，熟悉视觉设计、了解网页前端技术能；熟练使用Photoshop、AXure 等原型软件。
+						</view>
+						<view class="oid-detail">
+							3、可接受转行求职人员或应届生，但需要对互联网类工作感兴趣
+						</view>
+						<view class="oid-detail">
+							Boss说了，不让好员工挣钱的公司永远没希望！在这里，应届生的工资照样秒杀职场老炮儿！你只负责努力就好了，变着花样发钱这种事儿交给boss来！除了同行业最棒工资待遇，更有不期而至的个人奖、团队奖、年终奖，拿到手软！ 【集团公司未来前景不可限量】集团公司，长远的发展机会，成员90后，没有中年大妈的家长里短，没有阳奉阴违的职场甄嬛，听不懂流行语get不到热门信息的，不约！
+						</view>
+						<view class="oid-detail">
+							2、拥有用户体验方面的理论知识，熟悉视觉设计、了解网页前端技术能；熟练使用Photoshop、AXure 等原型软件。
+						</view>
+						<view class="oid-detail">
+							3、可接受转行求职人员或应届生，但需要对互联网类工作感兴趣
+						</view>
+						<view class="oid-detail">
+							Boss说了，不让好员工挣钱的公司永远没希望！在这里，应届生的工资照样秒杀职场老炮儿！你只负责努力就好了，变着花样发钱这种事儿交给boss来！除了同行业最棒工资待遇，更有不期而至的个人奖、团队奖、年终奖，拿到手软！ 【集团公司未来前景不可限量】集团公司，长远的发展机会，成员90后，没有中年大妈的家长里短，没有阳奉阴违的职场甄嬛，听不懂流行语get不到热门信息的，不约！
+						</view>
+					</view>
+				</view>
+
+				<!-- 职位详情简介  end -->
+			</view>
+		</view>
+	</view>
+
+	<!-- 投递简历按钮 start -->
+	<view class="footer-wrap footer-btn l-box-center">
+		<view class="btn-blue but-send">投递简历</view>
+	</view>
+	<!-- 投递简历按钮 end -->
+</view>

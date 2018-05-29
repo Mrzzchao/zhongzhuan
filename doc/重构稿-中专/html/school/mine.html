@@ -1,0 +1,240 @@
+<!DOCTYPE html>
+<!DOCTYPE html>
+<html>
+<head>
+	<meta http-equiv="Content-Type" content="text/html;charset=UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+	<title> 个人中心 </title>
+	<link rel="stylesheet" href="../../src/school/css/school.css">
+</head>
+<body>
+<div class="page-body l-full l-flex-column">
+	<!-- 职位列表 start-->
+	<div class=" l-flex-1 l-relative">
+		<div class="l-full l-flex-column info-list-wrap">
+			<div class="l-scroll-y info-list-wrapper">
+				<!-- 头部的个人信息 -->
+				<div class="header-mine">
+					<div class="send-history l-flex-row">
+						<div class="send-history-icon"></div>
+						投递记录
+					</div>
+					<div class="info-mine ">
+						<div class="info-mine-icon">
+							<img src="../../src/school/images/user.jpeg" alt="user-icon" class="mine-icon-img">
+						</div>
+						<div class="info-mine-name">
+							李子琪
+						</div>
+					</div>
+				</div>		
+				<!-- /头部的个人信息 -->
+
+				<!-- 信息列表 start -->
+				<div class="info-list-cont">
+					<!-- 报错 -->
+					<div class="if-wrong-input">
+						联系电话有误
+					</div>
+					<!-- 姓名 -->
+					<div class="info-item l-flex-row">
+						<div class="info-item-name">姓名</div>
+						<div class="info-list-detail l-flex-1">
+							<input type="text" placeholder="请输入姓名">
+						</div>
+					</div>
+					<!-- /姓名 -->
+
+					<!-- 性别 -->
+					<div class="info-item l-flex-row">
+						<div class="info-item-name">性别</div>
+						<div class="info-list-detail l-flex-1">
+							<input type="text" placeholder="请选择" class="input-bor">
+						</div>
+					</div>
+					<!-- /性别 -->
+
+					<!-- 出生日期 -->
+					<div class="info-item l-flex-row">
+						<div class="info-item-name">出生日期</div>
+						<div class="info-list-detail l-flex-1">
+							<input type="text" placeholder="请选择" class="input-bor">
+						</div>
+					</div>
+					<!-- /出生日期 -->
+
+					<!-- 最高学历 -->
+					<div class="info-item l-flex-row">
+						<div class="info-item-name">最高学历</div>
+						<div class="info-list-detail l-flex-1">
+							<input type="text" placeholder="请选择" class="input-bor">
+						</div>
+					</div>
+					<!-- /最高学历 -->
+					
+					<!-- 联系电话 -->
+					<div class="info-item l-flex-row">
+						<div class="info-item-name">联系电话</div>
+						<div class="info-list-detail l-flex-1">
+							<input type="text" placeholder="请输入联系电话">
+						</div>
+					</div>
+					<!-- /联系电话 -->
+
+					<!-- 邮箱 -->
+					<div class="info-item l-flex-row">
+						<div class="info-item-name">邮箱</div>
+						<div class="info-list-detail l-flex-1">
+							<input type="text" placeholder="请输入邮箱">
+						</div>
+					</div>
+					<!-- /邮箱 -->
+
+					<!-- 教育经历 -->
+					<!-- 如果已经有填好了的信息，则加上class：edu-exper-comp -->
+					<div class="info-item info-item-h edu-exper-comp ">
+						<div class="edu-exper-tit l-flex-row">
+							<div class="info-item-name">教育经历</div>
+							<div class="info-list-detail l-flex-1 l-flex-row">
+								<div class="info-list-add"></div>
+								<!-- 如果已经有填好了的信息，这里文案改为：继续添加-->
+								<div class="info-add-click">点击添加</div>
+							</div>	
+						</div>
+						<!-- 填好的信息详情 -->
+						<div class="edu-exper-wrap">
+							<!-- 编辑图标 -->
+							<div class="edu-exper-edit"><div class="edit-img"></div></div>
+							<!-- 信息详情 -->
+							<div class="edu-exper-cont l-flex-row">
+								<div class="edu-exper-detail">2008 - 2012</div>
+								<div class="edu-exper-detail">本科</div>
+							</div>
+							<div class="edu-exper-cont l-flex-row">
+								<div class="edu-exper-detail">清华大学</div>
+								<div class="edu-exper-detail">建筑设计</div>
+							</div>
+						</div>
+						<!-- /填好的信息详情 -->
+					</div>
+					<!-- /教育经历 -->
+
+					<!-- 工作经历 -->
+					<div class="info-item info-item-h edu-exper-comp">
+						<div class="edu-exper-tit l-flex-row">
+							<div class="info-item-name">工作经历</div>
+							<div class="info-list-detail l-flex-1 l-flex-row">
+								<div class="info-list-add"></div>
+								<div class="info-add-click">点击添加</div>
+							</div>
+						</div>
+						<!-- 填好的信息详情 -->
+						<div class="edu-exper-wrap">
+							<!-- 编辑图标 -->
+							<div class="edu-exper-edit"><div class="edit-img"></div></div>
+							<!-- 信息详情 -->
+							<div class="edu-exper-cont l-flex-row">
+								<div class="edu-exper-detail">2014.10 - 2014.11</div>
+							</div>
+							<div class="edu-exper-cont l-flex-row">
+								<div class="edu-exper-detail">腾讯科技股份有限公司</div>
+								<div class="edu-exper-detail">UI设计</div>
+							</div>
+							<div class="offer-info-desc">
+								<p class="oid-detail">
+									1、负责官方社区的交互界面设计，分析用户的操作习惯和偏好，从用户体验的角度出发，提出最佳的交互设计和界面设计方案；
+								</p>
+								<p class="oid-detail">
+									2、负责管理产品的体验，跟踪产品的体验效果数据，持续改善产品的用户体验
+								</p>
+							</div>
+						</div>
+						<!-- /填好的信息详情 -->
+					</div>
+					<!-- /工作经历 -->
+
+					<!-- 技能证书 -->
+					<div class="info-item info-item-h edu-exper-comp">
+						<div class="edu-exper-tit l-flex-row">
+							<div class="info-item-name">技能证书</div>
+							<div class="info-list-detail l-flex-1 l-flex-row">
+								<div class="info-list-add"></div>
+								<div class="info-add-click">点击添加</div>
+							</div>
+						</div>
+						<!-- 填好的信息详情 -->
+						<div class="edu-exper-wrap">
+							<!-- 编辑图标 -->
+							<div class="edu-exper-edit"><div class="edit-img"></div></div>
+							<!-- 信息详情 -->
+							<div class="edu-exper-cont l-flex-row">
+								<div class="edu-exper-detail">2015.10</div>
+							</div>
+							<div class="edu-exper-cont l-flex-row">
+								<div class="edu-exper-detail">结业证</div>
+							</div>
+							<!-- 证书图片 -->
+							<div class="certif-pic ">
+								<div class="certif-pic-img l-flex-row">
+									<img class="certif-imgs" src="../../src/school/images/zs1.jpeg">
+									<img class="certif-imgs" src="../../src/school/images/zs2.jpeg">
+								</div>	
+							</div>
+						</div>
+						<div class="edu-exper-wrap">
+							<!-- 编辑图标 -->
+							<div class="edu-exper-edit"><div class="edit-img"></div></div>
+							<!-- 信息详情 -->
+							<div class="edu-exper-cont l-flex-row">
+								<div class="edu-exper-detail">2016.09</div>
+							</div>
+							<div class="edu-exper-cont l-flex-row">
+								<div class="edu-exper-detail">技能证书</div>
+							</div>
+							<!-- 证书图片 -->
+							<div class="certif-pic ">
+								<div class="certif-pic-img l-flex-row">
+									<img class="certif-imgs" src="../../src/school/images/zs3.jpeg">
+								</div>	
+							</div>
+						</div>
+						<!-- /填好的信息详情 -->
+					</div>
+					<!-- /技能证书 -->
+				</div>
+				<!-- 信息列表 end -->
+
+			</div>
+		</div>
+	</div>
+	<!-- 职位列表 end-->
+
+	<!-- 如果页面有编辑操作，这里就用保存按钮 -->
+	<!-- 保存按钮 start -->
+	<div class="footer-wrap footer-btn l-box-center hide">
+		<div class="btn-blue but-send">保存</div>
+	</div>
+
+	<!-- 底部导航 start -->
+	<div class="footer-wrap  l-flex-row">
+
+		<!-- 如果处在当前页面，加上class：footer-item-cur -->
+		<div class="footer-item l-box-center l-flex-1 l-flex-column  ">
+			<div class="footer-item-pic footer-home "></div>
+			<div class="footer-item-name">首页</div>
+		</div>
+		<div class="footer-item l-box-center l-flex-1 l-flex-column ">
+			<div class="footer-item-pic footer-video"></div>
+			<div class="footer-item-name">视频</div>
+		</div>
+		<div class="footer-item l-box-center l-flex-1 l-flex-column footer-item-cur">
+			<div class="footer-item-pic footer-mine"></div>
+			<div class="footer-item-name">我的</div>
+		</div>
+	</div>
+	<!-- 底部导航 end -->
+</div>
+
+
+</body>
+</html>

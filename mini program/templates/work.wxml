@@ -1,0 +1,23 @@
+<!-- 填好的信息详情 -->
+<view class="edu-exper-wrap">
+  <!-- 编辑图标 -->
+  <view class="edu-exper-edit" bindtap='editWork'>
+    <view class="edit-img"></view>
+  </view>
+  <!-- 信息详情 -->
+  <view class="edu-exper-cont l-flex-row">
+    <view class="edu-exper-detail">2014.10 - 2014.11</view>
+  </view>
+  <view class="edu-exper-cont l-flex-row">
+    <view class="edu-exper-detail">腾讯科技股份有限公司</view>
+    <view class="edu-exper-detail">UI设计</view>
+  </view>
+  <view class="offer-info-desc">
+    <view class="oid-detail">
+      1、负责官方社区的交互界面设计，分析用户的操作习惯和偏好，从用户体验的角度出发，提出最佳的交互设计和界面设计方案；
+    </view>
+    <view class="oid-detail">
+      2、负责管理产品的体验，跟踪产品的体验效果数据，持续改善产品的用户体验
+    </view>
+  </view>
+</view>

@@ -1,0 +1,50 @@
+<view class="page-body l-full l-flex-column bg-g">
+  <!-- 职位列表 start-->
+  <view class="job-list-wrap l-flex-1 l-relative">
+    <view class="l-full l-flex-column job-list-cont">
+      <view class="l-scroll-y">
+        <!-- 一条信息 -->
+        <block wx:for="{{jobList}}" wx:key="{{item.id}}">
+          <navigator url='/pages/job/detail/detail?id={{item.id}}'>
+            <view class="job-lister clearfix l-flex-row">
+              <view class="company-logo">
+                <image src="/images/company.png" alt="company's logo"></image>
+              </view>
+              <view class="company-job l-flex-1 l-flex-column">
+                <view class="company-job-name l-flex-row">
+                  <view class="job-name-detail l-flex-1">{{item.job_name}}</view>
+                  <view class="company-payment">{{item.salary}}</view>
+                </view>
+                <view class="company-name">{{item.company}}</view>
+                <view class="company-welfare l-flex-row">
+                  <view class="comp-welfares" wx:key="{{tag}}" wx:for="{{item.tags}}" wx:for-item="tag">{{tag}}</view>
+                  <view class="when-info-update">4-25</view>
+                </view>
+              </view>
+            </view>
+          </navigator>
+
+        </block>
+        <!-- /一条信息 -->
+
+        <!-- 加载状态 -->
+        <!-- 加载更多... -->
+        <view class="load-more">
+          上滑加载更多
+        </view>
+        <!-- 加载中... -->
+        <view class="load-more l-flex-row l-box-center">
+          <view class="load-more-icon"></view>
+          加载中...
+        </view>
+        <!-- 到底了... -->
+        <view class="load-more">
+          已经到底了...
+        </view>
+        <!-- /加载状态 -->
+
+      </view>
+    </view>
+  </view>
+  <!-- 职位列表 end-->
+</view>

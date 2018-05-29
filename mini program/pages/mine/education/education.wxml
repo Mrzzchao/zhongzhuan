@@ -1,0 +1,36 @@
+<view class="page-body l-full l-flex-column bg-g">
+	<!-- 职位列表 start-->
+	<view class=" l-flex-1 l-relative">
+		<view class="l-full l-flex-column info-list-wrap">
+			<view class="l-scroll-y info-list-wrapper">
+				<!-- 信息列表 start -->
+				<view class="info-list-cont work-exp-edit">
+					<!-- 工作经历 -->
+          <view class="info-item info-item-h edu-exper-comp">
+            <include src="/templates/education.wxml"/>
+          </view>
+					<!-- /填好的信息详情 -->
+					<view class="edu-exper-tit ">
+						<view class="info-list-detail l-box-center l-flex-row">
+                <navigator url="/pages/mine/education/add/add">
+                  <view class="info-list-add"></view>
+                  <view class="info-add-click">点击添加</view>
+                </navigator>
+						</view>
+					</view>
+					<!-- /工作经历 -->
+				
+				</view>
+				<!-- 信息列表 end -->
+
+			</view>
+		</view>
+	</view>
+	<!-- 职位列表 end-->
+
+	<!-- 如果页面有编辑操作，这里就用保存按钮 -->
+	<!-- 保存按钮 start -->
+	<view class="footer-wrap footer-btn l-box-center">
+		<view class="btn-blue but-send">保存</view>
+	</view>
+</view>

@@ -1,0 +1,157 @@
+<form bindsubmit='formSubmit'>
+  <view class="page-body l-full l-flex-column">
+    <!-- 职位列表 start-->
+    <view class=" l-flex-1 l-relative">
+      <view class="l-full l-flex-column info-list-wrap">
+        <view class="l-scroll-y info-list-wrapper">
+          <!-- 头部的个人信息 -->
+          <view class="header-mine">
+            <view class="send-history l-flex-row">
+              <view class="send-history-icon"></view>
+              投递记录
+            </view>
+            <view class="info-mine ">
+              <view class="info-mine-icon">
+                <image src="/images/user.jpeg" alt="user-icon" class="mine-icon-img"></image>
+              </view>
+              <view class="info-mine-name">
+                李子琪
+              </view>
+            </view>
+          </view>
+          <!-- /头部的个人信息 -->
+
+          <!-- 信息列表 start -->
+          <view class="info-list-cont">
+            <!-- 报错 -->
+            <view class="if-wrong-input">
+              联系电话有误
+            </view>
+            <!-- 姓名 -->
+            <view class="info-item l-flex-row">
+              <view class="info-item-name">姓名</view>
+              <view class="info-list-detail l-flex-1">
+                <input type="text" name="real_name" placeholder="请输入姓名" />
+              </view>
+            </view>
+            <!-- /姓名 -->
+
+            <!-- 性别 -->
+            <view class="info-item l-flex-row">
+              <view class="info-item-name">性别</view>
+              <view class="info-list-detail l-flex-1">
+                <picker range='{{sexList}}' bindchange='bindSex'>
+                  <input type="text" placeholder="请选择" class="{{sex ? '' : 'input-bor'}}" value='{{sex}}' name="sexuality" />
+                </picker>
+              </view>
+            </view>
+            <!-- /性别 -->
+
+            <!-- 出生日期 -->
+            <view class="info-item l-flex-row">
+              <view class="info-item-name">出生日期</view>
+              <view class="info-list-detail l-flex-1">
+                <picker mode="date" bindchange='bindDate'>
+                  <input type="text" placeholder="请选择" class="{{date ? '' : 'input-bor'}}" value="{{date}}" name="born_date" />
+                </picker>
+              </view>
+            </view>
+            <!-- /出生日期 -->
+
+            <!-- 最高学历 -->
+            <view class="info-item l-flex-row">
+              <view class="info-item-name">最高学历</view>
+              <view class="info-list-detail l-flex-1">
+                <picker range='{{eduList}}' bindchange='bindEdu'>
+                  <input type="text" placeholder="请选择" class="{{education ? '' : 'input-bor'}}" value='{{education}}' name="highest_education" />
+                </picker>
+              </view>
+            </view>
+            <!-- /最高学历 -->
+
+            <!-- 联系电话 -->
+            <view class="info-item l-flex-row">
+              <view class="info-item-name">联系电话</view>
+              <view class="info-list-detail l-flex-1">
+                <input type="number" placeholder="请输入联系电话" name="mobile" />
+              </view>
+            </view>
+            <!-- /联系电话 -->
+
+            <!-- 邮箱 -->
+            <view class="info-item l-flex-row">
+              <view class="info-item-name">邮箱</view>
+              <view class="info-list-detail l-flex-1">
+                <input type="text" placeholder="请输入邮箱" name="email" />
+              </view>
+            </view>
+            <!-- /邮箱 -->
+
+            <!-- 教育经历 -->
+            <!-- 如果已经有填好了的信息，则加上class：edu-exper-comp -->
+            <view class="info-item info-item-h edu-exper-comp ">
+              <view class="edu-exper-tit l-flex-row">
+                <view class="info-item-name">教育经历</view>
+                <view class="info-list-detail l-flex-1 l-flex-row">
+                  <!-- 如果已经有填好了的信息，这里文案改为：继续添加-->
+                  <navigator url="/pages/mine/education/add/add">
+                    <view class="info-list-add"></view>
+                    <view class="info-add-click">点击添加</view>
+                  </navigator>
+                </view>
+              </view>
+              <!-- 填好的信息详情 -->
+              <include src="/templates/education.wxml" />
+              <!-- /填好的信息详情 -->
+            </view>
+            <!-- /教育经历 -->
+
+            <!-- 工作经历 -->
+            <view class="info-item info-item-h edu-exper-comp">
+              <view class="edu-exper-tit l-flex-row">
+                <view class="info-item-name">工作经历</view>
+                <view class="info-list-detail l-flex-1 l-flex-row">
+                  <navigator url="/pages/mine/work/add/add">
+                    <view class="info-list-add"></view>
+                    <view class="info-add-click">点击添加</view>
+                  </navigator>
+                </view>
+              </view>
+              <!-- 填好的信息详情 -->
+              <include src="/templates/work.wxml"/>
+              <!-- /填好的信息详情 -->
+            </view>
+            <!-- /工作经历 -->
+
+            <!-- 技能证书 -->
+            <view class="info-item info-item-h edu-exper-comp">
+              <view class="edu-exper-tit l-flex-row">
+                <view class="info-item-name">技能证书</view>
+                <view class="info-list-detail l-flex-1 l-flex-row">
+                  <navigator url="/pages/mine/skill/add/add">
+                    <view class="info-list-add"></view>
+                    <view class="info-add-click">点击添加</view>
+                  </navigator>
+                </view>
+              </view>
+              <!-- 填好的信息详情 -->
+              <include src="/templates/skill.wxml" />
+              <!-- /填好的信息详情 -->
+            </view>
+            <!-- /技能证书 -->
+          </view>
+
+          <!-- 信息列表 end -->
+
+        </view>
+      </view>
+    </view>
+    <!-- 职位列表 end-->
+
+    <!-- 如果页面有编辑操作，这里就用保存按钮 -->
+    <!-- 保存按钮 start -->
+    <view class="footer-wrap footer-btn l-box-center">
+      <button class="btn-blue but-send" formType="submit">保存</button>
+    </view>
+  </view>
+</form>

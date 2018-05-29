@@ -1,0 +1,43 @@
+<view class="page-body l-full l-flex-column bg-g">
+  <!-- 职位列表 start-->
+  <view class="job-list-wrap l-flex-1 l-relative">
+    <view class="l-full l-flex-column vedio-cont">
+      <view class="l-scroll-y">
+        <view class="vedio-list l-flex-row">
+
+          <navigator url='/pages/resource/ppt/ppt'>
+            <view class="vedio-item l-flex-column">
+              <view class="vedio-item-img">
+                <image class="vi-pic" src="/images/1.png"></image>
+              </view>
+              <view class="vedio-item-tit">
+                求职指导：职业规划和简历书写
+              </view>
+            </view>
+
+          </navigator>
+
+          <view class="vedio-item l-flex-column">
+            <view class="vedio-item-img">
+              <image class="vi-pic" src="/images/zs2.jpeg"></image>
+            </view>
+            <view class="vedio-item-tit">
+              求职指导：职业规划
+            </view>
+          </view>
+
+          <view class="vedio-item l-flex-column">
+            <view class="vedio-item-img">
+              <image class="vi-pic" src="/images/zs3.jpeg"></image>
+            </view>
+            <view class="vedio-item-tit">
+              求职指导：职业规划和简历书写,你不知道的那些事儿
+            </view>
+          </view>
+
+        </view>
+      </view>
+    </view>
+  </view>
+  <!-- 职位列表 end-->
+</view>

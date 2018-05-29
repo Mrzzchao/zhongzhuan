@@ -1,0 +1,54 @@
+{
+  "pages": [
+    "pages/job/list/list",
+    "pages/index/index",
+    "pages/mine/mine",
+    "pages/mine/education/education",
+    "pages/mine/skill/skill",
+    "pages/mine/work/work",
+    "pages/mine/skill/add/add",
+    "pages/mine/work/add/add",
+    "pages/mine/education/add/add",
+    "pages/job/detail/detail",
+    "pages/resource/resource",
+    "pages/resource/ppt/ppt"
+  ],
+  "window": {
+    "navigationBarTextStyle": "black",
+    "navigationBarTitleText": "中专项目",
+    "navigationBarBackgroundColor": "#F8F8F8",
+    "backgroundColor": "#F8F8F8"
+  },
+  "tabBar": {
+    "backgroundColor": "#ffffff",
+    "color": "#aab5bd",
+    "selectedColor": "#7398f5",
+    "list": [
+      {
+        "pagePath": "pages/job/list/list",
+        "text": "首页",
+        "iconPath": "/images/home-g.png",
+        "selectedIconPath": "/images/home-b.png"
+      },
+      {
+        "pagePath": "pages/resource/resource",
+        "text": "视频",
+        "iconPath": "/images/video-g.png",
+        "selectedIconPath": "/images/video-b.png"
+      },
+      {
+        "pagePath": "pages/mine/mine",
+        "text": "我的",
+        "iconPath": "/images/mine-g.png",
+        "selectedIconPath": "/images/mine-b.png"
+      }
+    ]
+  },
+  "networkTimeout": {
+    "request": 10000,
+    "connectSocket": 10000,
+    "uploadFile": 10000,
+    "downloadFile": 10000
+  },
+  "debug": false
+}

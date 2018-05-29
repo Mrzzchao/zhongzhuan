@@ -1,0 +1,12 @@
+<view class="page-body l-box-center l-box-horizontal-center ">
+	<view class="ppt-down-wrap">
+		<view class="ppt-down-cont">
+			<image class="pd-pic" src="/images/1.png" ></image>
+		</view>
+		<view class="ppt-down-tit">
+			合规和职业道德
+		</view>
+		<!-- 下载ppt按钮 start -->
+		<view class="btn-blue but-send">下载PPT</view>
+	</view>
+</view>

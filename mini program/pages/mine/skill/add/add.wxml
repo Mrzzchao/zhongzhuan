@@ -1,0 +1,54 @@
+<view class="page-body l-full l-flex-column bg-g">
+	<!-- 职位列表 start-->
+	<view class=" l-flex-1 l-relative">
+		<view class="l-full l-flex-column info-list-wrap">
+			<view class="l-scroll-y info-list-wrapper">
+				<!-- 信息列表 start -->
+				<view class="info-list-cont work-exp-editing">
+					<!-- 报错 -->
+					<view class="if-wrong-input hide">
+						联系电话有误
+					</view>
+					<!-- 证书名称 -->
+					<view class="info-item l-flex-row">
+						<view class="info-item-name">证书名称</view>
+						<view class="info-list-detail l-flex-1">
+							<input type="text" name="name" placeholder="请输入证书名称" />
+						</view>
+					</view>
+					<!-- /证书名称 -->
+
+					<!-- 获得时间 -->
+					<view class="info-item l-flex-row">
+						<view class="info-item-name">获得时间</view>
+						<view class="info-list-detail l-flex-1">
+							  <picker mode="date" fields="month" bindchange='bindDate'>
+                  <input type="text" value="{{obtained_time}}" name="obtained_time" placeholder="请选择" class="{{obtained_time ? '' : 'input-bor'}} l-flex-1" />
+                </picker>
+						</view>
+					</view>
+					<!-- /获得时间 -->
+					<!-- 上传附件 -->
+					<view class="info-item l-flex-row">
+						<view class="info-item-name">上传附件</view>
+						<view class="info-list-detail l-flex-1">
+							<input type="text" placeholder="拍照" class="input-bor l-flex-1" bindtap='chooseImg'/>
+							—
+							<input type="text" placeholder="相册" class="input-bor l-flex-1"/>
+						</view>
+					</view>
+					<!-- /上传附件 -->
+				</view>
+				<!-- 信息列表 end -->
+
+			</view>
+		</view>
+	</view>
+	<!-- 职位列表 end-->
+
+	<!-- 如果页面有编辑操作，这里就用保存按钮 -->
+	<!-- 保存按钮 start -->
+	<view class="footer-wrap footer-btn l-box-center">
+		<view class="btn-blue but-send" bindtap='save'>保存</view>
+	</view>
+</view>
