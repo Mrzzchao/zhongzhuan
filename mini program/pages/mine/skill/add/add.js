@@ -10,7 +10,8 @@ Page({
       name: '',
       img_url: '',
       obtained_time: ''
-    }
+    },
+    uploadImgUrl: ''
   },
 
   /**
@@ -27,7 +28,13 @@ Page({
   },
 
   chooseImg(e) {
-    app.utils.WxFunc.chooseImage('camera').then((res) => {
+    console.log(e)
+    app.utils.WxFunc.chooseImage(e.currentTarget.dataset.type).then((res) => {
+      const tempFilePaths = res.tempFilePaths
+
+      this.setData({
+        uploadImgUrl: tempFilePaths[0]
+      })
       console.log(res)
     })
   },
