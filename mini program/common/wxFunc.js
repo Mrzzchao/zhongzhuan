@@ -66,7 +66,7 @@ function requestPayment(obj) {
 }
 
 /**
- * 封装微信的request
+ * 封装微信的chooseImage
  */
 function chooseImage(type) {
   return new Promise((resolve, reject) => {
@@ -81,6 +81,43 @@ function chooseImage(type) {
         reject(e)
       }
     })
+  }).catch((e) => {
+    console.log('请求错误:', e)
+  })
+}
+
+/**
+ * 封装微信的login
+ */
+function login() {
+  return new Promise((resolve, reject) => {
+    wx.login({
+      success: (res) => {
+        if (res.code) {
+          resolve(res)
+        } else {
+          console.log('登录失败！' + res.errMsg)
+        }
+      }
+    });
+  }).catch((e) => {
+    console.log('请求错误:', e)
+  })
+}
+
+/**
+ * 封装微信的checkSession
+ */
+function checkSession() {
+  return new Promise((resolve, reject) => {
+    wx.checkSession({
+      success: (res) => {
+        resolve(res)
+      },
+      fail: (res) => {
+        reject(res)
+      }
+    });
   }).catch((e) => {
     console.log('请求错误:', e)
   })
