@@ -1,58 +1,67 @@
-<view class="page-body l-full l-flex-column bg-g">
-  <!-- 职位列表 start-->
-  <view class=" l-flex-1 l-relative">
-    <view class="l-full l-flex-column info-list-wrap">
-      <view class="l-scroll-y info-list-wrapper">
-        <!-- 信息列表 start -->
-        <view class="info-list-cont work-exp-editing">
-          <!-- 报错 -->
-          <view class="if-wrong-input hide">
-            联系电话有误
-          </view>
-          <!-- 证书名称 -->
-          <view class="info-item l-flex-row">
-            <view class="info-item-name">证书名称</view>
-            <view class="info-list-detail l-flex-1">
-              <input type="text" name="name" placeholder="请输入证书名称" />
+<form bindsubmit='formSubmit'>
+  <view class="page-body l-full l-flex-column bg-g">
+    <!-- 职位列表 start-->
+    <view class=" l-flex-1 l-relative">
+      <view class="l-full l-flex-column info-list-wrap">
+        <view class="l-scroll-y info-list-wrapper">
+          <!-- 信息列表 start -->
+          <view class="info-list-cont work-exp-editing">
+            <!-- 报错 -->
+            <view class="if-wrong-input hide">
+              联系电话有误
             </view>
-          </view>
-          <!-- /证书名称 -->
+            <!-- 证书名称 -->
+            <view class="info-item l-flex-row">
+              <view class="info-item-name">证书名称</view>
+              <view class="info-list-detail l-flex-1">
+                <input type="text" name="name" placeholder="请输入证书名称" />
+              </view>
+            </view>
+            <!-- /证书名称 -->
 
-          <!-- 获得时间 -->
-          <view class="info-item l-flex-row">
-            <view class="info-item-name">获得时间</view>
-            <view class="info-list-detail l-flex-1">
-              <picker mode="date" fields="month" bindchange='bindDate'>
-                <input type="text" value="{{obtained_time}}" name="obtained_time" placeholder="请选择" class="{{obtained_time ? '' : 'input-bor'}} l-flex-1" />
-              </picker>
+            <!-- 获得时间 -->
+            <view class="info-item l-flex-row">
+              <view class="info-item-name">获得时间</view>
+              <view class="info-list-detail l-flex-1">
+                <picker mode="date" fields="month" bindchange='bindDate'>
+                  <input type="text" value="{{obtained_time}}" name="obtained_time" placeholder="请选择" class="{{obtained_time ? '' : 'input-bor'}} l-flex-1" />
+                </picker>
+              </view>
             </view>
-          </view>
-          <!-- /获得时间 -->
-          <!-- 上传附件 -->
-          <view class="info-item l-flex-row">
-            <view class="info-item-name">上传附件</view>
-            <view class="info-list-detail l-flex-1 l-flex-row">
-              <input type="text" bindtap='chooseImg' data-type="camera" placeholder="拍照" class="input-bor l-flex-1" />
-              <view> 一 </view>
-              <input type="text" bindtap='chooseImg' data-type="album" placeholder="相册" class="input-bor l-flex-1" />
+            <!-- /获得时间 -->
+            <!-- 上传附件 -->
+            <view class="info-item l-flex-row">
+              <view class="info-item-name">上传附件</view>
+              <view class="info-list-detail l-flex-1 l-flex-row">
+                <input type="text" bindtap='chooseImg' data-type="camera" placeholder="拍照" class="input-bor l-flex-1" />
+                <view> 一 </view>
+                <input type="text" bindtap='chooseImg' data-type="album" placeholder="相册" class="input-bor l-flex-1" />
+              </view>
             </view>
-          </view>
-          <!-- /上传附件 -->
+            <!-- /上传附件 -->
 
-          <view class="l-flex-row">
-          <image style="width: 200px; height: 200px; background-color: #eeeeee;" src="{{uploadImgUrl}}"></image>
+            <!-- <view class="l-flex-row">
+              <image style="width: 200px; height: 200px; background-color: #eeeeee;" src="{{uploadImgUrl}}"></image>
+            </view> -->
+
+                <!-- 证书图片 -->
+            <view class="certif-pic ">
+              <view class="certif-pic-img l-flex-row">
+                <image class="certif-imgs" wx:for="{{uploadImgUrls}}" wx:key="{{index}}" src="{{item}}" ></image>
+              </view>
+            </view>
           </view>
+          <!-- 信息列表 end -->
+
         </view>
-        <!-- 信息列表 end -->
-
       </view>
     </view>
-  </view>
-  <!-- 职位列表 end-->
+    <!-- 职位列表 end-->
 
-  <!-- 如果页面有编辑操作，这里就用保存按钮 -->
-  <!-- 保存按钮 start -->
-  <view class="footer-wrap footer-btn l-box-center">
-    <view class="btn-blue but-send" bindtap='save'>保存</view>
+    <!-- 如果页面有编辑操作，这里就用保存按钮 -->
+    <!-- 保存按钮 start -->
+    <view class="footer-wrap footer-btn l-box-center">
+      <button class="btn-blue but-send" formType="submit">保存</button>
+    </view>
   </view>
-</view>
+</form>

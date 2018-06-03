@@ -1,62 +1,69 @@
-<view class="page-body l-full l-flex-column bg-g">
-	<!-- 职位列表 start-->
-	<view class=" l-flex-1 l-relative">
-		<view class="l-full l-flex-column info-list-wrap">
-			<view class="l-scroll-y info-list-wrapper">
-				<!-- 信息列表 start -->
-				<view class="info-list-cont work-exp-editing">
-					<!-- 报错 -->
-					<view class="if-wrong-input hide">
-						联系电话有误
-					</view>
-					<!-- 公司名称 -->
-					<view class="info-item l-flex-row">
-						<view class="info-item-name">公司名称</view>
-						<view class="info-list-detail l-flex-1">
-							<input type="text" placeholder="请输入公司名称"/>
-						</view>
-					</view>
-					<!-- /公司名称 -->
-					<!-- 你的职位 -->
-					<view class="info-item l-flex-row">
-						<view class="info-item-name">你的职位</view>
-						<view class="info-list-detail l-flex-1">
-							<input type="text" placeholder="请输入你的职位"/>
-						</view>
-					</view>
-					<!-- /你的职位 -->
+<form bindsubmit='formSubmit'>
+  <view class="page-body l-full l-flex-column bg-g">
+    <!-- 职位列表 start-->
+    <view class=" l-flex-1 l-relative">
+      <view class="l-full l-flex-column info-list-wrap">
+        <view class="l-scroll-y info-list-wrapper">
+          <!-- 信息列表 start -->
+          <view class="info-list-cont work-exp-editing">
+            <!-- 报错 -->
+            <view class="if-wrong-input hide">
+              联系电话有误
+            </view>
+            <!-- 公司名称 -->
+            <view class="info-item l-flex-row">
+              <view class="info-item-name">公司名称</view>
+              <view class="info-list-detail l-flex-1">
+                <input type="text" name="company_name" placeholder="请输入公司名称" />
+              </view>
+            </view>
+            <!-- /公司名称 -->
+            <!-- 你的职位 -->
+            <view class="info-item l-flex-row">
+              <view class="info-item-name">你的职位</view>
+              <view class="info-list-detail l-flex-1">
+                <input name="title" type="text" placeholder="请输入你的职位" />
+              </view>
+            </view>
+            <!-- /你的职位 -->
 
-					<!-- 在职时间 -->
-					<view class="info-item l-flex-row">
-						<view class="info-item-name">在职时间</view>
-						<view class="info-list-detail l-flex-1">
-							<input type="text" placeholder="请选择" class="input-bor"/>
-							—
-							<input type="text" placeholder="请选择" class="input-bor"/>
-						</view>
-					</view>
-					<!-- /在职时间 -->
+            <!-- 在职时间 -->
+            <view class="info-item l-flex-row">
+              <view class="info-item-name">在职时间</view>
+              <view class="info-list-detail l-flex-1 l-flex-row">
+                <picker mode="date" fields="month" bindchange='bindDateStart'>
+                  <input type="text" value="{{date_start}}" name="date_start" placeholder="请选择" class="{{date_start ? '' : 'input-bor'}} l-flex-1" />
 
-					<!-- 工作简介 -->
-					<view class="info-item l-flex-column info-item-h  job-describ">
-						<view class="info-item-name">工作简介</view>
-						<view class="info-list-detail">
-							<textarea class="job-describ-detail"  placeholder="请输入工作简介" contenteditable="true">
+                </picker>
+                <view> 一 </view>
+                <picker mode="date" fields="month" bindchange='bindDateEnd'>
+                  <input type="text" value="{{date_end}}" name="date_end" placeholder="请选择" class="{{date_end ? '' : 'input-bor'}} l-flex-1" />
+                </picker>
+              </view>
+            </view>
+            <!-- /在职时间 -->
 
-							</textarea>
-						</view>
-					</view>
-				</view>
-				<!-- 信息列表 end -->
+            <!-- 工作简介 -->
+            <view class="info-item l-flex-column info-item-h  job-describ">
+              <view class="info-item-name">工作简介</view>
+              <view class="info-list-detail">
+                <textarea class="job-describ-detail" name="work_intro" placeholder="请输入工作简介" contenteditable="true">
 
-			</view>
-		</view>
-	</view>
-	<!-- 职位列表 end-->
+                </textarea>
+              </view>
+            </view>
+          </view>
+          <!-- 信息列表 end -->
 
-	<!-- 如果页面有编辑操作，这里就用保存按钮 -->
-	<!-- 保存按钮 start -->
-	<view class="footer-wrap footer-btn l-box-center">
-		<view class="btn-blue but-send" bindtap='save'>保存</view>
-	</view>
-</view>
+        </view>
+      </view>
+    </view>
+    <!-- 职位列表 end-->
+
+    <!-- 如果页面有编辑操作，这里就用保存按钮 -->
+    <!-- 保存按钮 start -->
+    <view class="footer-wrap footer-btn l-box-center">
+      <button class="btn-blue but-send" formType="submit">保存</button>
+    </view>
+  </view>
+</form>

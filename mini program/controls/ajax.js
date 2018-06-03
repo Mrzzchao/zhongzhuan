@@ -22,9 +22,9 @@ function hideLoading() {
 /**
  * 获取岗位列表
  */
-function getJobList() {
+function getJobList(pageNo) {
   showLoading()
-  return WxFunc.requestPost(Api.jobList).then((res) => {
+  return WxFunc.requestPost(Api.jobList, {pageNo}).then((res) => {
     hideLoading()
     if(res.code === 100) {
       return res.data

@@ -37,7 +37,8 @@ function formatData(rows) {
 module.exports = {
 	fetchAll(req, res) {
         const pageNo = req.body.pageNo || 1
-        SQLHandler.queryAll(pageNo).then((rows) => {
+        const pageSize = req.body.pageSize || 10
+        SQLHandler.queryAll(pageNo, pageSize).then((rows) => {
             rows = formatData(rows)
             res.json({
                 code: 100,

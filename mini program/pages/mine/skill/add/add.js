@@ -11,7 +11,7 @@ Page({
       img_url: '',
       obtained_time: ''
     },
-    uploadImgUrl: ''
+    uploadImgUrls: []
   },
 
   /**
@@ -31,19 +31,15 @@ Page({
     console.log(e)
     app.utils.WxFunc.chooseImage(e.currentTarget.dataset.type).then((res) => {
       const tempFilePaths = res.tempFilePaths
-
       this.setData({
-        uploadImgUrl: tempFilePaths[0]
+        uploadImgUrls: [...this.data.uploadImgUrls, ...tempFilePaths]
       })
       console.log(res)
     })
   },
 
-  save(e) {
-    console.log('save ')
-    wx.navigateTo({
-      url: '/pages/mine/skill/skill',
-    })
-  },
+  formSubmit(e) {
+    console.log(e)
+  }
 
 })

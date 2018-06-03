@@ -7,7 +7,26 @@ Page({
    * 页面的初始数据
    */
   data: {
-    jobList: []  // 工作列表
+    jobList: [],  // 工作列表
+    loadInfo: {
+      status: 'none',
+      msg: '上滑加载更多'
+    },
+    loadMsg: {
+      '0': {
+        status: 'load',
+        msg: '上滑加载更多'
+      },
+      '1': {
+        status: 'loading',
+        msg: '加载中...'
+      },
+      '2': {
+        status: 'loaded',
+        msg: '已经到底了...'
+      }
+    },
+    pageNo: 1
   },
 
   /**
@@ -22,10 +41,40 @@ Page({
       return job
     })
   },
-  fetchData() {
-    app.utils.Ajax.getJobList().then((data) => {
+  fetchData(page = 1) {
+    return app.utils.Ajax.getJobList(page).then((data) => {
       data = this.formatData(data)
-      this.setData({jobList: data})
+      this.setData({jobList: this.data.jobList.concat(data)})
+      return data
     })
+  },
+  scrollToEnd(e) {
+    let loadInfo = this.data.loadInfo
+    if (loadInfo.status === 'loaded') {
+      return;
+    }
+
+    let nextPage = this.data.pageNo + 1
+    this.setData({
+      loadInfo: this.data.loadMsg[1]
+    })
+    this.setData({
+      pageNo: nextPage
+    })
+    this.fetchData(nextPage).then((data) => {
+      if (data.length) {  // 存在数据
+        this.setData({
+          loadInfo: this.data.loadMsg[0]
+        })
+      } else {           // 已全部加载
+        this.setData({
+          loadInfo: this.data.loadMsg[2]
+        })
+      }
+    })
+  },
+  scroll(e) {
+    console.log('-----')
+    console.log(e)
   }
 })

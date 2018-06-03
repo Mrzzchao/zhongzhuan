@@ -18,11 +18,11 @@ function DBHandler (sql, arr) {
 
 
 // 查询全部
-SQL.prototype.queryAll = function (pageNo = 1) {
+SQL.prototype.queryAll = function (pageNo = 1, pageSize = 10) {
 
     let startLimit, endLimit, sql;
-    endLimit = pageNo * 10;
-    startLimit = endLimit - 10;
+    endLimit = pageNo * pageSize;
+    startLimit = endLimit - pageSize;
 
 
     sql = `SELECT * FROM ${this.table} LIMIT ?, ?`

@@ -3,6 +3,7 @@
   <view class="job-list-wrap l-flex-1 l-relative">
     <view class="l-full l-flex-column job-list-cont">
       <view class="l-scroll-y">
+      <scroll-view class="l-full l-flex-column job-list-cont" scroll-y="true" bindscrolltolower="scrollToEnd" bindscroll="scroll">
         <!-- 一条信息 -->
         <block wx:for="{{jobList}}" wx:key="{{item.id}}">
           <navigator url='/pages/job/detail/detail?id={{item.id}}'>
@@ -27,22 +28,12 @@
         </block>
         <!-- /一条信息 -->
 
-        <!-- 加载状态 -->
-        <!-- 加载更多... -->
-        <view class="load-more">
-          上滑加载更多
-        </view>
         <!-- 加载中... -->
-        <view class="load-more l-flex-row l-box-center">
-          <view class="load-more-icon"></view>
-          加载中...
+        <view class="load-more {{loadInfo.status === 'loading' ? 'l-flex-row l-box-center' : ''}}">
+          <view class="load-more-icon " wx:if="{{loadInfo.status === 'loading'}}"></view>
+          {{loadInfo.msg}}
         </view>
-        <!-- 到底了... -->
-        <view class="load-more">
-          已经到底了...
-        </view>
-        <!-- /加载状态 -->
-
+      </scroll-view>
       </view>
     </view>
   </view>
