@@ -1,0 +1,45 @@
+
+#新比分预发布
+#43.247.69.20   live.m.500.com
+#43.247.69.20    ews.500.com
+#43.247.69.20    m.500.com
+
+
+#新比分线下
+#10.0.1.115 live.m.500.com
+
+#实名认证
+#10.0.1.31    ets.500boss.com
+#210.74.0.24  ets.500.com
+#10.0.1.15 wx.500boss.com
+
+#自己
+#192.168.50.49 mchao.500boss.com
+192.168.50.49 mchao.500.com
+#192.168.50.49 crazybet.choopaoo.com
+#192.168.50.49 live.m.500.com
+#192.168.50.49 m.500.com
+
+#走势图线下
+#10.0.0.58	m.500.com
+
+#竞猜
+#10.0.1.28 wiki.boss.com
+#10.0.1.167 crazybet.choopaoo.com
+
+#预发布
+#43.247.69.20    wx.500.com
+43.247.69.20    m.500.com
+#43.247.69.20    www.500cache.com
+#43.247.69.20 ets.500boss.com
+#210.74.0.24  ets.500.com
+
+#线下
+#10.0.1.15 wx.500boss.com
+#10.0.0.37 passport.500.com
+#10.0.1.31 ets.500.com
+#10.0.1.31 ets.500boss.com
+
+43.247.69.20 m.500.com
+
+#0.0.0.0 account.jetbrains.com
