@@ -6,6 +6,7 @@ Page({
    * 页面的初始数据
    */
   data: {
+    eduStr: '27,28,29,30',
     eduList: []
   },
 
@@ -16,18 +17,18 @@ Page({
     this.fetchData()
   },
 
+  fetchData() {
+    app.utils.Ajax.getEduList(this.data.eduStr).then((data) => {
+      this.setData({
+        skillList: data
+      })
+    })
+  },
+
   editEdu(e) {
     console.log('edit')
     wx.navigateTo({
       url: '/pages/mine/education/add/add',
-    })
-  },
-
-  fetchData() {
-    app.utils.Ajax.getEduList().then((data) => {
-      this.setData({
-        eduList: data
-      })
     })
   }
 })

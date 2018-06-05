@@ -12,12 +12,13 @@ function formatData(rows) {
         let obj = {};
 
         return Object.assign({}, row, {
-            create_time: date
+            create_time: date,
+            img_urls: row.img_urls.split(';')
         }, obj);
     });
 }
 
-module.exports = {
+let exportObj = {
     fetchAll(req, res) {
         const pageNo = req.body.pageNo || 1
         const pageSize = req.body.pageSize || 10
@@ -31,14 +32,26 @@ module.exports = {
         })
     },
 
+    fetchByIds(req, res) {
+        const id = req.body.id
+        SQLHandler.queryByIds(id).then((rows) => {
+            rows = formatData(rows)
+            res.json({
+                code: 100,
+                msg: 'success',
+                data: rows
+            })
+        })
+    },
+    
     // 添加技能认证
     addOne(req, res) {
-        let {obtained_time, remarks, id} = req.body
-        let obj = {obtained_time, remarks, id}
-        obj.img_url = `${domain}/${req.file.destination}/${req.file.filename}`
-        SQLHandler.queryById(id).then((rows) => {
+        let {obtained_time, remarks, id, timestamp} = req.body
+        let obj = {obtained_time, remarks, id, timestamp}
+        obj.img_urls = `${domain}/${req.file.destination}/${req.file.filename}`
+        SQLHandler.queryByType('timestamp', timestamp).then((rows) => {
             if(rows.length) {
-                updateOne(req, res)
+                exportObj.updateImg(req, res, rows[0])
             } else {
                 SQLHandler.insert(obj).then((rows) => {
                     if(rows.affectedRows) {
@@ -99,10 +112,30 @@ module.exports = {
 
 
      // 修改技能认证
-    updateOne(req, res) {
+    updateOne(req, res, data = {}) {
         let obj = {obtained_time, remarks, id} = req.body
-        obj.img_url = `${domain}/${req.file.destination}/${req.file.filename}`
+        let img_url = `${domain}/${req.file.destination}/${req.file.filename}`
+        obj.img_urls = img_url
         SQLHandler.update(obj).then((rows) => {
+            if(rows.affectedRows) {
+                res.json({
+                    code: 100,
+                    msg: 'success'
+                })
+            } else {
+                res.json({
+                    code: 102,
+                    msg: 'fail'
+                })
+            }
+        })
+    },
+
+    // 处理多张图片上传
+    updateImg(req, res, data) {
+        let img_url = `${domain}/${req.file.destination}/${req.file.filename}`
+        data.img_urls = data.img_urls + ";" + img_url
+        SQLHandler.update(data).then((rows) => {
             if(rows.affectedRows) {
                 res.json({
                     code: 100,
@@ -118,3 +151,5 @@ module.exports = {
     }
 
 };
+
+module.exports = exportObj

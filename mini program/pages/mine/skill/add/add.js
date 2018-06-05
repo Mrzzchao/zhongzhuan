@@ -40,14 +40,23 @@ Page({
 
   formSubmit(e) {
     let formData = e.detail.value
+    formData.timestamp = new Date().getTime()
     const uploadConfig = {
       filePathArr: this.data.uploadImgUrls,
       formData
     }
-    app.utils.Ajax.submitSkill(uploadConfig).then((res) => {
-      console.log(res)
+    app.utils.Ajax.submitSkill(uploadConfig).then((flag) => {
+      console.log(flag)
+      if(flag) {
+        wx.showToast({
+          title: '上传成功',
+        })
+
+        wx.navigateTo({
+          url: '/pages/mine/skill/skill',
+        })
+      }
     })
-    console.log(e)
   }
 
 })

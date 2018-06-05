@@ -38,10 +38,18 @@ SQL.prototype.queryById = function (id) {
     return DBHandler(sql, arr)
 }
 
+// 根据id字符串查询
+SQL.prototype.queryByIds = function (id) {
+    let sql, arr
+    sql = `select * from ${this.table} where id in ?`
+    arr = [[id.split(',')]];
+    return DBHandler(sql, arr)
+}
+
 // 根据指定类型查询
 SQL.prototype.queryByType = function (type, val) {
     let sql, arr
-    sql = `select * from ${this.table} ${type} = ?`
+    sql = `select * from ${this.table} where ${type} = ?`
     arr = [val];
     return DBHandler(sql, arr)
 }

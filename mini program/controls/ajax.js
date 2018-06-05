@@ -48,8 +48,8 @@ function getJobDetail(id) {
 /**
  * 获取教育列表
  */
-function getEduList() {
-  return WxFunc.requestPost(Api.educationList).then((res) => {
+function getEduList(id) {
+  return WxFunc.requestPost(Api.educationList, {id}).then((res) => {
     if (res.code === 100) {
       return res.data
     }
@@ -70,8 +70,8 @@ function submitEdu(obj) {
 /**
  * 获取工作列表
  */
-function getWorkList() {
-  return WxFunc.requestPost(Api.workList).then((res) => {
+function getWorkList(id) {
+  return WxFunc.requestPost(Api.workList, { id }).then((res) => {
     if (res.code === 100) {
       return res.data
     }
@@ -92,8 +92,8 @@ function submitWork(obj) {
 /**
  * 获取技能列表
  */
-function getSkillList() {
-  return WxFunc.requestPost(Api.skillList).then((res) => {
+function getSkillList(id) {
+  return WxFunc.requestPost(Api.skillList, {id}).then((res) => {
     if (res.code === 100) {
       return res.data
     }
@@ -105,9 +105,9 @@ function getSkillList() {
  */
 function submitSkill(obj) {
   return WxFunc.uploadFiles({url: Api.skillAdd, ...obj}).then((res) => {
-    if (res.code === 100) {
-      return true
-    }
+    console.log(res)
+    const flag = res.every((item) => {return item})
+    return flag
   })
 }
 

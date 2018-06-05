@@ -127,17 +127,18 @@ function checkSession() {
  * 封装微信的uploadFile
  */
 function uploadFile({url, filePath, name, formData = {}}) {
+  let uploadTask = null
   return new Promise((resolve, reject) => {
-    const uploadTask = wx.uploadFile({
+    uploadTask = wx.uploadFile({
       url,
       filePath,
       name,
       formData,
       success: (res) => {
-        resolve(res)
+        resolve(res.data)
       },
       fail: (res) => {
-        reject(res)
+        reject(res.data)
         uploadTask.abort() // 取消上传任务
       }
     })
@@ -148,6 +149,13 @@ function uploadFile({url, filePath, name, formData = {}}) {
       console.log('预期需要上传的数据总长度', res.totalBytesExpectedToSend)
       console.log('--------------------------------')
     })
+  }).then((res) => {
+    res = JSON.parse(res)
+    if(res.code === 100) {
+      return true
+    } else {
+      return false
+    }
   }).catch((e) => {
     console.log('请求错误:', e)
     uploadTask.abort() // 取消上传任务
@@ -171,8 +179,9 @@ function uploadFiles({ url, filePathArr, name = 'file', formData = {} }) {
  * 封装微信的downloadFile
  */
 function downloadFile({ url}) {
+  let downloadTask = null
   return new Promise((resolve, reject) => {
-    const downloadFile = wx.downloadFile({
+    downloadTask = wx.downloadFile({
       url,
       success: (res) => {
         resolve(res)

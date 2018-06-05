@@ -17,7 +17,12 @@ Page({
       work_experience: [],
       skill_certification: []
     },
-    eduInfo: [],
+    eduStr: '27,28,29,30',
+    eduList: [],
+    skillStr: '27,28,29,30',
+    skillList: [],
+    workStr: '27,28,29,30',
+    workList: [],
     sexList: ['保密', '男', '女'],
     eduList: ['大专', '本科', '硕士', '博士', '其他'],
     sex: '',
@@ -74,7 +79,19 @@ Page({
   fetchData() {
     app.utils.Ajax.getEduList().then((data) => {
       this.setData({
-        eduInfo: data
+        eduList: data
+      })
+    })
+
+    app.utils.Ajax.getSkillList(this.data.skillStr).then((data) => {
+      this.setData({
+        skillList: data
+      })
+    })
+
+    app.utils.Ajax.getWorkList(this.data.workStr).then((data) => {
+      this.setData({
+        workList: data
       })
     })
   },

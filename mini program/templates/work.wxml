@@ -1,16 +1,16 @@
 <!-- 填好的信息详情 -->
-<view class="edu-exper-wrap">
+<view class="edu-exper-wrap" wx:for="{{workList}}" wx:key="{{item.id}}">
   <!-- 编辑图标 -->
   <view class="edu-exper-edit" bindtap='editWork'>
     <view class="edit-img"></view>
   </view>
   <!-- 信息详情 -->
   <view class="edu-exper-cont l-flex-row">
-    <view class="edu-exper-detail">2014.10 - 2014.11</view>
+    <view class="edu-exper-detail"></view>
   </view>
   <view class="edu-exper-cont l-flex-row">
-    <view class="edu-exper-detail">腾讯科技股份有限公司</view>
-    <view class="edu-exper-detail">UI设计</view>
+    <view class="edu-exper-detail">{{item.company_name}}</view>
+    <view class="edu-exper-detail">{{item.title}}</view>
   </view>
   <view class="offer-info-desc">
     <view class="oid-detail">

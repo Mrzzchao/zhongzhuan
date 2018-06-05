@@ -55,7 +55,7 @@ router.post(api.workUpdate, work.updateOne);
 
 
 // skill
-router.post(api.skillList, skill.fetchAll);
+router.post(api.skillList, skill.fetchByIds);
 router.post(api.skillAdd, upload.uploadImgOne, skill.addOne);
 router.post(api.skillDelete, skill.deleteOne);
 router.post(api.skillDeleteMulti, skill.deleteMulti);
