@@ -9,20 +9,13 @@ let skill = require('../controls/skill')
 let student = require('../controls/student')
 let study = require('../controls/study')
 let work = require('../controls/work')
-// let upload = require(('../controls/upload'))
-let upload = require(('../utils/upload'))
+let upload = require(('../controls/upload'))
 
 
 let api = require('../api');
 
 
 let router = express.Router();
-
-router.post('/api/upload', upload.single('file'), function (req, res) {
-    console.log(req.file)
-    console.log('---------------')
-    res.end('==========')
-}); // 图片上传
 
 // user
 router.post(api.userList, user.fetchAll);
@@ -63,7 +56,7 @@ router.post(api.workUpdate, work.updateOne);
 
 // skill
 router.post(api.skillList, skill.fetchAll);
-router.post(api.skillAdd, skill.addOne);
+router.post(api.skillAdd, upload.uploadImgOne, skill.addOne);
 router.post(api.skillDelete, skill.deleteOne);
 router.post(api.skillDeleteMulti, skill.deleteMulti);
 router.post(api.skillUpdate, skill.updateOne);

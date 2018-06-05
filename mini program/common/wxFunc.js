@@ -126,9 +126,9 @@ function checkSession() {
 /**
  * 封装微信的uploadFile
  */
-function uploadFile(url, filePath, name, formData = {}) {
+function uploadFile({url, filePath, name, formData = {}}) {
   return new Promise((resolve, reject) => {
-    wx.uploadFile({
+    const uploadTask = wx.uploadFile({
       url,
       filePath,
       name,
@@ -138,11 +138,62 @@ function uploadFile(url, filePath, name, formData = {}) {
       },
       fail: (res) => {
         reject(res)
+        uploadTask.abort() // 取消上传任务
       }
+    })
+
+    uploadTask.onProgressUpdate((res) => {
+      console.log('上传进度', res.progress)
+      console.log('已经上传的数据长度', res.totalBytesSent)
+      console.log('预期需要上传的数据总长度', res.totalBytesExpectedToSend)
+      console.log('--------------------------------')
     })
   }).catch((e) => {
     console.log('请求错误:', e)
+    uploadTask.abort() // 取消上传任务
   })
+
+}
+
+/**
+ * 多图片上传
+ */
+function uploadFiles({ url, filePathArr, name = 'file', formData = {} }) {
+  let uploadArr = filePathArr.map((filePath) => {
+    return uploadFile({url, filePath, name, formData})
+  })
+  return Promise.all(uploadArr).catch((e) => {
+    console.log('上传失败:', e)
+  })
+}
+
+/**
+ * 封装微信的downloadFile
+ */
+function downloadFile({ url}) {
+  return new Promise((resolve, reject) => {
+    const downloadFile = wx.downloadFile({
+      url,
+      success: (res) => {
+        resolve(res)
+      },
+      fail: (res) => {
+        reject(res)
+        downloadFile.abort() // 取消下载任务
+      }
+    })
+
+    downloadTask.onProgressUpdate((res) => {
+      console.log('下载进度', res.progress)
+      console.log('已经下载的数据长度', res.totalBytesWritten)
+      console.log('预期需要下载的数据总长度', res.totalBytesExpectedToWrite)
+      console.log('--------------------------------')
+    })
+  }).catch((e) => {
+    console.log('请求错误:', e)
+    downloadFile.abort() // 取消下载任务
+  })
+
 }
 
 
@@ -150,5 +201,7 @@ module.exports = {
   request,
   requestPost,
   requestPayment,
-  chooseImage
+  chooseImage,
+  uploadFile,
+  uploadFiles
 }

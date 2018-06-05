@@ -1,8 +1,8 @@
 let moment = require('moment');     // 数据处理
-let func = require('../sql/func');
 const table = require('../configs/table');
-
 let {SQL} = require('../sql/sql')
+
+const domain = 'http://193.112.122.181:9999'
 
 let SQLHandler = new SQL(table.SKILL_CERTIFICATION)
 
@@ -16,7 +16,6 @@ function formatData(rows) {
         }, obj);
     });
 }
-
 
 module.exports = {
     fetchAll(req, res) {
@@ -34,17 +33,25 @@ module.exports = {
 
     // 添加技能认证
     addOne(req, res) {
-        let obj = {img_url, obtained_time, remarks, id} = req.body
-        SQLHandler.insert(obj).then((rows) => {
-            if(rows.affectedRows) {
-                res.json({
-                    code: 100,
-                    msg: 'success'
-                })
+        let {obtained_time, remarks, id} = req.body
+        let obj = {obtained_time, remarks, id}
+        obj.img_url = `${domain}/${req.file.destination}/${req.file.filename}`
+        SQLHandler.queryById(id).then((rows) => {
+            if(rows.length) {
+                updateOne(req, res)
             } else {
-                res.json({
-                    code: 102,
-                    msg: 'fail'
+                SQLHandler.insert(obj).then((rows) => {
+                    if(rows.affectedRows) {
+                        res.json({
+                            code: 100,
+                            msg: 'success'
+                        })
+                    } else {
+                        res.json({
+                            code: 102,
+                            msg: 'fail'
+                        })
+                    }
                 })
             }
         })
@@ -93,7 +100,8 @@ module.exports = {
 
      // 修改技能认证
     updateOne(req, res) {
-        let obj = {img_url, obtained_time, remarks, id} = req.body
+        let obj = {obtained_time, remarks, id} = req.body
+        obj.img_url = `${domain}/${req.file.destination}/${req.file.filename}`
         SQLHandler.update(obj).then((rows) => {
             if(rows.affectedRows) {
                 res.json({
@@ -107,6 +115,6 @@ module.exports = {
                 })
             }
         })
-    },
+    }
 
 };

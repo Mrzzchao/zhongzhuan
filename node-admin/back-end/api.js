@@ -71,5 +71,4 @@ module.exports = {
     downloadDeleteMulti: path + '/download/delete-multi',
     downloadUpdate: path + '/download/update',
 
-
 };

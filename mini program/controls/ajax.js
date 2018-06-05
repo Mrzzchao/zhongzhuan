@@ -104,12 +104,13 @@ function getSkillList() {
  * 提交技能信息
  */
 function submitSkill(obj) {
-  return WxFunc.requestPost(Api.skillAdd, obj).then((res) => {
+  return WxFunc.uploadFiles({url: Api.skillAdd, ...obj}).then((res) => {
     if (res.code === 100) {
       return true
     }
   })
 }
+
 module.exports = {
   getJobList,
   getJobDetail,

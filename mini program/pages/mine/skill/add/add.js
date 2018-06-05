@@ -39,6 +39,14 @@ Page({
   },
 
   formSubmit(e) {
+    let formData = e.detail.value
+    const uploadConfig = {
+      filePathArr: this.data.uploadImgUrls,
+      formData
+    }
+    app.utils.Ajax.submitSkill(uploadConfig).then((res) => {
+      console.log(res)
+    })
     console.log(e)
   }
 
