@@ -57,6 +57,17 @@ function getEduList(id) {
 }
 
 /**
+ * 获取教育列表单项
+ */
+function getEduItem(id) {
+  return WxFunc.requestPost(Api.educationItem, { id }).then((res) => {
+    if (res.code === 100) {
+      return res.data
+    }
+  })
+}
+
+/**
  * 提交教育信息
  */
 function submitEdu(obj) {
@@ -72,6 +83,17 @@ function submitEdu(obj) {
  */
 function getWorkList(id) {
   return WxFunc.requestPost(Api.workList, { id }).then((res) => {
+    if (res.code === 100) {
+      return res.data
+    }
+  })
+}
+
+/**
+ * 获取工作列表单项
+ */
+function getWorkItem(id) {
+  return WxFunc.requestPost(Api.workItem, { id }).then((res) => {
     if (res.code === 100) {
       return res.data
     }
@@ -101,6 +123,17 @@ function getSkillList(id) {
 }
 
 /**
+ * 获取技能列表单项
+ */
+function getSkillItem(id) {
+  return WxFunc.requestPost(Api.skillItem, { id }).then((res) => {
+    if (res.code === 100) {
+      return res.data
+    }
+  })
+}
+
+/**
  * 提交技能信息
  */
 function submitSkill(obj) {
@@ -113,10 +146,13 @@ function submitSkill(obj) {
 
 module.exports = {
   getJobList,
-  getJobDetail,
   getEduList,
   getWorkList,
   getSkillList,
+  getEduItem,
+  getWorkItem,
+  getSkillItem,
+  getJobDetail,
   submitEdu,
   submitWork,
   submitSkill

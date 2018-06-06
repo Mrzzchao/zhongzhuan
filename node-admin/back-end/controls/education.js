@@ -32,6 +32,30 @@ module.exports = {
         })
     },
 
+    fetchById(req, res) {
+        const id = req.body.id
+        SQLHandler.queryById(id).then((rows) => {
+            rows = formatData(rows)
+            res.json({
+                code: 100,
+                msg: 'success',
+                data: rows[0] || {}
+            })
+        })
+    },
+
+    fetchByIds(req, res) {
+        const id = req.body.id
+        SQLHandler.queryByIds(id).then((rows) => {
+            rows = formatData(rows)
+            res.json({
+                code: 100,
+                msg: 'success',
+                data: rows
+            })
+        })
+    },
+
     // 添加教育经历
     addOne(req, res) {
         let obj = {school_name, college_major, educated_time, educational_history} = req.body

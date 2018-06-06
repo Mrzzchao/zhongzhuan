@@ -20,7 +20,7 @@ Page({
   fetchData() {
     app.utils.Ajax.getEduList(this.data.eduStr).then((data) => {
       this.setData({
-        skillList: data
+        eduList: data
       })
     })
   },

@@ -1,7 +1,7 @@
 <!-- 填好的信息详情 -->
 <view class="edu-exper-wrap" wx:for="{{workList}}" wx:key="{{item.id}}">
   <!-- 编辑图标 -->
-  <view class="edu-exper-edit" bindtap='editWork'>
+  <view class="edu-exper-edit" bindtap='editWork' data-id="{{item.id}}">
     <view class="edit-img"></view>
   </view>
   <!-- 信息详情 -->

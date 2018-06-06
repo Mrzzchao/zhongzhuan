@@ -1,45 +1,43 @@
-<!-- 工作经历 -->
-<view>
-  <!-- 填好的信息详情 -->
-  <view class="edu-exper-wrap" wx:for="{{skillList}}">
-    <!-- 编辑图标 -->
-    <view class="edu-exper-edit" bindtap='editSkill'>
-      <view class="edit-img"></view>
-    </view>
-    <!-- 信息详情 -->
-    <view class="edu-exper-cont l-flex-row">
-      <view class="edu-exper-detail">{{item.obtained_time}}</view>
-    </view>
-    <view class="edu-exper-cont l-flex-row">
-      <view class="edu-exper-detail">{{item.name}}</view>
-    </view>
-    <!-- 证书图片 -->
-    <view class="certif-pic ">
-      <view class="certif-pic-img l-flex-row">
-        <block wx:key="{{imgUrl}}" wx:for="{{item.img_urls}}" wx:for-item="imgUrl">
-          {{imgUrl}}
-          <image class="certif-imgs"  src="{{imgUrl}}" ></image>
-        </block>
-      </view>
+
+<!-- 填好的信息详情 -->
+<view class="edu-exper-wrap" wx:for="{{skillList}}" wx:key="{{item.id}}">
+  <!-- 编辑图标 -->
+  <view class="edu-exper-edit" bindtap='editSkill' data-id="{{item.id}}">
+    <view class="edit-img"></view>
+  </view>
+  <!-- 信息详情 -->
+  <view class="edu-exper-cont l-flex-row">
+    <view class="edu-exper-detail">{{item.obtained_time}}</view>
+  </view>
+  <view class="edu-exper-cont l-flex-row">
+    <view class="edu-exper-detail">{{item.name}}</view>
+  </view>
+  <!-- 证书图片 -->
+  <view class="certif-pic ">
+    <view class="certif-pic-img l-flex-row">
+      <block wx:key="{{imgUrl}}" wx:for="{{item.img_urls}}" wx:for-item="imgUrl">
+        {{imgUrl}}
+        <image class="certif-imgs" src="{{imgUrl}}"></image>
+      </block>
     </view>
   </view>
-  <view class="edu-exper-wrap">
-    <!-- 编辑图标 -->
-    <view class="edu-exper-edit">
-      <view class="edit-img"></view>
-    </view>
-    <!-- 信息详情 -->
-    <view class="edu-exper-cont l-flex-row">
-      <view class="edu-exper-detail">2016.09</view>
-    </view>
-    <view class="edu-exper-cont l-flex-row">
-      <view class="edu-exper-detail">技能证书</view>
-    </view>
-    <!-- 证书图片 -->
-    <view class="certif-pic ">
-      <view class="certif-pic-img l-flex-row">
-        <image class="certif-imgs" src="/images/zs3.jpeg"></image>
-      </view>
+</view>
+<view class="edu-exper-wrap">
+  <!-- 编辑图标 -->
+  <view class="edu-exper-edit">
+    <view class="edit-img"></view>
+  </view>
+  <!-- 信息详情 -->
+  <view class="edu-exper-cont l-flex-row">
+    <view class="edu-exper-detail">2016.09</view>
+  </view>
+  <view class="edu-exper-cont l-flex-row">
+    <view class="edu-exper-detail">技能证书</view>
+  </view>
+  <!-- 证书图片 -->
+  <view class="certif-pic ">
+    <view class="certif-pic-img l-flex-row">
+      <image class="certif-imgs" src="/images/zs3.jpeg"></image>
     </view>
   </view>
 </view>

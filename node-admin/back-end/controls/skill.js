@@ -32,6 +32,18 @@ let exportObj = {
         })
     },
 
+    fetchById(req, res) {
+        const id = req.body.id
+        SQLHandler.queryById(id).then((rows) => {
+            rows = formatData(rows)
+            res.json({
+                code: 100,
+                msg: 'success',
+                data: rows[0] || {}
+            })
+        })
+    },
+
     fetchByIds(req, res) {
         const id = req.body.id
         SQLHandler.queryByIds(id).then((rows) => {
@@ -112,7 +124,7 @@ let exportObj = {
 
 
      // 修改技能认证
-    updateOne(req, res, data = {}) {
+    updateOne(req, res) {
         let obj = {obtained_time, remarks, id} = req.body
         let img_url = `${domain}/${req.file.destination}/${req.file.filename}`
         obj.img_urls = img_url

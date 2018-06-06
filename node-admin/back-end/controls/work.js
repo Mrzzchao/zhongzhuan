@@ -32,6 +32,30 @@ module.exports = {
         })
     },
 
+    fetchById(req, res) {
+        const id = req.body.id
+        SQLHandler.queryById(id).then((rows) => {
+            rows = formatData(rows)
+            res.json({
+                code: 100,
+                msg: 'success',
+                data: rows[0] || {}
+            })
+        })
+    },
+
+    fetchByIds(req, res) {
+        const id = req.body.id
+        SQLHandler.queryByIds(id).then((rows) => {
+            rows = formatData(rows)
+            res.json({
+                code: 100,
+                msg: 'success',
+                data: rows
+            })
+        })
+    },
+
     // 添加工作经历
     addOne(req, res) {
         let obj = {company_name, title, service_time, work_intro, remarks, id} = req.body

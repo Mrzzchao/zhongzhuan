@@ -23,8 +23,9 @@ Page({
     skillList: [],
     workStr: '27,28,29,30',
     workList: [],
+
     sexList: ['保密', '男', '女'],
-    eduList: ['大专', '本科', '硕士', '博士', '其他'],
+    eduHisList: ['大专', '本科', '硕士', '博士', '其他'],
     sex: '',
     date: '',
     education: ''
@@ -39,24 +40,28 @@ Page({
   // 编辑教育经历
   editEdu(e) {
     console.log('edit-edu')
+    const id = e.currentTarget.dataset.id
     wx.navigateTo({
-      url: '/pages/mine/education/add/add',
+      url: `/pages/mine/education/add/add?id=${id}`,
     })
   },
 
   // 编辑工作经历
   editWork(e) {
     console.log('edit-work')
+    console.log(e)
+    const id = e.currentTarget.dataset.id
     wx.navigateTo({
-      url: '/pages/mine/work/add/add',
+      url: `/pages/mine/work/add/add?id=${id}`,
     })
   },
 
   // 编辑技能正式
   editSkill(e) {
     console.log('edit-skill')
+    const id = e.currentTarget.dataset.id
     wx.navigateTo({
-      url: '/pages/mine/skill/add/add',
+      url: `/pages/mine/skill/add/add?id=${id}`,
     })
   },
 
