@@ -1,4 +1,5 @@
 const upload = require('../utils/upload')
+const domain = 'http://193.112.122.181:9999'
 
 module.exports = {
     uploadImgOne(req, res, next) {
@@ -36,5 +37,16 @@ module.exports = {
             }
             return
         })
+    },
+    
+    handleRes(req, res) {
+        const url = `${domain}/${req.file.destination}/${req.file.filename}`
+        if(url) {
+            res.json({
+                code: 100,
+                msg: 'success',
+                url
+            })
+        }
     }
 }

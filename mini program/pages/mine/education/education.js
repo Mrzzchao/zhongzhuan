@@ -26,9 +26,10 @@ Page({
   },
 
   editEdu(e) {
-    console.log('edit')
+    console.log('edit-edu')
+    const id = e.currentTarget.dataset.id
     wx.navigateTo({
-      url: '/pages/mine/education/add/add',
+      url: `/pages/mine/education/add/add?id=${id}`,
     })
-  }
+  },
 })

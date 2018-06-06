@@ -152,7 +152,7 @@ function uploadFile({url, filePath, name, formData = {}}) {
   }).then((res) => {
     res = JSON.parse(res)
     if(res.code === 100) {
-      return true
+      return res.url
     } else {
       return false
     }
@@ -166,7 +166,9 @@ function uploadFile({url, filePath, name, formData = {}}) {
 /**
  * 多图片上传
  */
-function uploadFiles({ url, filePathArr, name = 'file', formData = {} }) {
+function uploadFiles({ url, filePathArr = [], name = 'file', formData = {} }){
+  console.log(filePathArr)
+  console.log(url)
   let uploadArr = filePathArr.map((filePath) => {
     return uploadFile({url, filePath, name, formData})
   })

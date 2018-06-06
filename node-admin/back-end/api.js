@@ -74,4 +74,8 @@ module.exports = {
     downloadDeleteMulti: path + '/download/delete-multi',
     downloadUpdate: path + '/download/update',
 
+    // upload
+    uploadImg: path + '/upload/img',
+    uploadExcel: path + '/upload/excel'
+
 };

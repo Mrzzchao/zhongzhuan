@@ -1,4 +1,6 @@
 // page/mine/work/work.js
+
+const app = getApp()
 Page({
 
   /**
@@ -19,15 +21,26 @@ Page({
   fetchData() {
     app.utils.Ajax.getWorkList(this.data.worklStr).then((data) => {
       this.setData({
-        workList: data
+        workList: this.formatWork(data)
       })
     })
   },
 
-  editWork(e) {
-    console.log('edit')
-    wx.navigateTo({
-      url: '/pages/mine/work/add/add',
+  formatWork(data) {
+    return data.map((item) => {
+      let work_intro = decodeURIComponent(item.work_intro)
+      item.work_intro = work_intro.split('\n')
+      return item
     })
-  }
+  },
+
+  // 编辑工作经历
+  editWork(e) {
+    console.log('edit-work')
+    console.log(e)
+    const id = e.currentTarget.dataset.id
+    wx.navigateTo({
+      url: `/pages/mine/work/add/add?id=${id}`,
+    })
+  },
 })

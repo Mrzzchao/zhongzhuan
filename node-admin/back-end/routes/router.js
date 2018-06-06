@@ -59,7 +59,7 @@ router.post(api.workUpdate, work.updateOne);
 // skill
 router.post(api.skillList, skill.fetchAll);
 router.post(api.skillItem, skill.fetchById);
-router.post(api.skillAdd, upload.uploadImgOne, skill.addOne);
+router.post(api.skillAdd,  skill.addOne);
 router.post(api.skillDelete, skill.deleteOne);
 router.post(api.skillDeleteMulti, skill.deleteMulti);
 router.post(api.skillUpdate, skill.updateOne);
@@ -98,5 +98,8 @@ router.post(api.downloadUpdate, download.updateOne);
 
 
 // upload
+router.post(api.uploadImg, upload.uploadImgOne, upload.handleRes);
+router.post(api.uploadExcel, upload.uploadExcelOne, upload.handleRes);
+
 
 module.exports = router;

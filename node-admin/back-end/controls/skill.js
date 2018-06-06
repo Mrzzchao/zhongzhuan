@@ -2,7 +2,6 @@ let moment = require('moment');     // 数据处理
 const table = require('../configs/table');
 let {SQL} = require('../sql/sql')
 
-const domain = 'http://193.112.122.181:9999'
 
 let SQLHandler = new SQL(table.SKILL_CERTIFICATION)
 
@@ -58,25 +57,18 @@ let exportObj = {
     
     // 添加技能认证
     addOne(req, res) {
-        let {obtained_time, remarks, id, timestamp} = req.body
-        let obj = {obtained_time, remarks, id, timestamp}
-        obj.img_urls = `${domain}/${req.file.destination}/${req.file.filename}`
-        SQLHandler.queryByType('timestamp', timestamp).then((rows) => {
-            if(rows.length) {
-                exportObj.updateImg(req, res, rows[0])
+        let {name, obtained_time, remarks, img_urls, student_id} = req.body
+        let obj = {name, obtained_time, remarks, img_urls, student_id}
+        SQLHandler.insert(obj).then((rows) => {
+            if(rows.affectedRows) {
+                res.json({
+                    code: 100,
+                    msg: 'success'
+                })
             } else {
-                SQLHandler.insert(obj).then((rows) => {
-                    if(rows.affectedRows) {
-                        res.json({
-                            code: 100,
-                            msg: 'success'
-                        })
-                    } else {
-                        res.json({
-                            code: 102,
-                            msg: 'fail'
-                        })
-                    }
+                res.json({
+                    code: 102,
+                    msg: 'fail'
                 })
             }
         })
@@ -125,9 +117,8 @@ let exportObj = {
 
      // 修改技能认证
     updateOne(req, res) {
-        let obj = {obtained_time, remarks, id} = req.body
-        let img_url = `${domain}/${req.file.destination}/${req.file.filename}`
-        obj.img_urls = img_url
+        let {name, obtained_time, remarks, img_urls, student_id, id} = req.body
+        let obj = {name, obtained_time, remarks, img_urls, student_id, id}
         SQLHandler.update(obj).then((rows) => {
             if(rows.affectedRows) {
                 res.json({
@@ -146,7 +137,9 @@ let exportObj = {
     // 处理多张图片上传
     updateImg(req, res, data) {
         let img_url = `${domain}/${req.file.destination}/${req.file.filename}`
-        data.img_urls = data.img_urls + ";" + img_url
+        let imgArr = data.img_urls.split(';')
+        imgArr.push(img_url)
+        data.img_urls = imgArr.join(";")
         SQLHandler.update(data).then((rows) => {
             if(rows.affectedRows) {
                 res.json({

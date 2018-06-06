@@ -19,15 +19,24 @@ Page({
     major: '',
     date_start: '',
     date_end: '',
-    education: ''
+    education: '',
+
+    isNew: true,
+    id: ''
   },
 
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad(options) {
-    console.log(options)
-    this.fetchData(options.id)
+    if(options.id) {
+      this.setData({
+        isNew: false,
+        id: options.id
+      })
+
+      this.fetchData(options.id)
+    }
   },
 
   fetchData(id) {
@@ -45,7 +54,7 @@ Page({
       date_start,
       date_end,
       school_name: data.school_name,
-      major: data.educational_history,
+      major: data.college_major,
       education: data.educational_history
     })
   },
@@ -87,7 +96,10 @@ Page({
 
   formSubmit(e) {
     const data = this.formatSubmit(e.detail.value)
-    app.utils.Ajax.submitEdu(data).then((flag) => {
+    const isNew = this.data.isNew
+    isNew || (data.id = this.data.id)
+    
+    app.utils.Ajax.submitEdu(data, isNew).then((flag) => {
       if(flag) {
         wx.navigateTo({
           url: '/pages/mine/education/education',

@@ -27,9 +27,10 @@ Page({
   },
 
   editSkill(e) {
-    console.log('edit')
+    console.log('edit-skill')
+    const id = e.currentTarget.dataset.id
     wx.navigateTo({
-      url: '/pages/mine/skill/add/add',
+      url: `/pages/mine/skill/add/add?id=${id}`,
     })
-  }
+  },
 })

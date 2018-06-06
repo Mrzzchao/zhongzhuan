@@ -96,8 +96,16 @@ Page({
 
     app.utils.Ajax.getWorkList(this.data.workStr).then((data) => {
       this.setData({
-        workList: data
+        workList: this.formatWork(data)
       })
+    })
+  },
+
+  formatWork(data) {
+    return data.map((item) => {
+      let work_intro = decodeURIComponent(item.work_intro)
+      item.work_intro = work_intro.split('\n')
+      return item
     })
   },
 
