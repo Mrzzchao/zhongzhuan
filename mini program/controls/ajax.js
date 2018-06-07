@@ -150,6 +150,30 @@ function submitSkill(obj, isNew) {
 }
 
 /**
+ * 提交学生信息
+ */
+function submitStu(obj, isNew) {
+  const url = isNew ? Api.studentAdd : Api.studentUpdate
+  return WxFunc.requestPost(url, obj).then((res) => {
+    if (res.code === 100) {
+      return true
+    }
+  })
+}
+
+/**
+ * 获取学生信息
+ */
+function submitStu(obj, isNew) {
+  
+  return WxFunc.requestPost(url, obj).then((res) => {
+    if (res.code === 100) {
+      return true
+    }
+  })
+}
+
+/**
  * 上传多张图片
  */
 function uploadFiles(obj) {
@@ -171,5 +195,6 @@ module.exports = {
   getJobDetail,
   submitEdu,
   submitWork,
-  submitSkill
+  submitSkill,
+  submitStu
 }

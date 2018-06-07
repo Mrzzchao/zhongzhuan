@@ -32,4 +32,11 @@ Page({
       url: `/pages/mine/education/add/add?id=${id}`,
     })
   },
+
+  save(e) {
+    console.log(e)
+    wx.switchTab({
+      url: '/pages/mine/mine',
+    })
+  }
 })

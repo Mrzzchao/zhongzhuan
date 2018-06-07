@@ -93,6 +93,7 @@ function login() {
   return new Promise((resolve, reject) => {
     wx.login({
       success: (res) => {
+        console.log(res)
         if (res.code) {
           resolve(res)
         } else {
@@ -122,6 +123,7 @@ function checkSession() {
     console.log('请求错误:', e)
   })
 }
+
 
 /**
  * 封装微信的uploadFile
@@ -214,5 +216,8 @@ module.exports = {
   requestPayment,
   chooseImage,
   uploadFile,
-  uploadFiles
+  uploadFiles,
+
+  login,
+  checkSession
 }

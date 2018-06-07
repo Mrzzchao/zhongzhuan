@@ -1,4 +1,5 @@
 <form bindsubmit='formSubmit'>
+
   <view class="page-body l-full l-flex-column">
     <!-- 职位列表 start-->
     <view class=" l-flex-1 l-relative">
@@ -12,10 +13,10 @@
             </view>
             <view class="info-mine ">
               <view class="info-mine-icon">
-                <image src="/images/user.jpeg" alt="user-icon" class="mine-icon-img"></image>
+                <image src="{{userInfo.avatarUrl}}" alt="user-icon" class="mine-icon-img"></image>
               </view>
               <view class="info-mine-name">
-                李子琪
+                {{userInfo.nickName}}
               </view>
             </view>
           </view>
@@ -57,6 +58,17 @@
               </view>
             </view>
             <!-- /出生日期 -->
+
+            <!-- 中专班级 -->
+            <view class="info-item l-flex-row">
+              <view class="info-item-name">中专班级</view>
+              <view class="info-list-detail l-flex-1">
+                <picker mode="multiSelector" range='{{classList}}' bindchange='bindClass'>
+                  <input type="text" placeholder="请选择" class="{{classStr ? '' : 'input-bor'}}" value='{{classStr}}' name="classStr" />
+                </picker>
+              </view>
+            </view>
+            <!-- /中专班级 -->
 
             <!-- 最高学历 -->
             <view class="info-item l-flex-row">
@@ -153,5 +165,14 @@
     <view class="footer-wrap footer-btn l-box-center">
       <button class="btn-blue but-send" formType="submit">保存</button>
     </view>
+
+
+
+      <!-- 需要使用 button 来授权登录 -->
+    <view class="footer-wrap footer-btn l-box-center">
+      <button wx:if="{{canIUse}}" open-type="getUserInfo" bindgetuserinfo="bindGetUserInfo">授权登录</button>
+      <view wx:else>请升级微信版本</view>
+    </view>
+
   </view>
 </form>

@@ -34,7 +34,10 @@ module.exports = {
 
     // 添加学生信息
     addOne(req, res) {
-        let obj = {wx_openid, wx_img, real_name, sexuality, born_date, highest_education, mobile, email, education_experience, work_experience, skill_certification, student_id, id} = req.body
+        let {wx_openid, wx_img, real_name, sexuality, classStr, born_date, highest_education, mobile, email, education_experience, work_experience, skill_certification} = req.body
+        let [grade, major, className] = classStr.split(' ')
+        let student_id = '2222'
+        let obj = {wx_openid, wx_img, real_name, sexuality, grade, major, className, born_date, highest_education, mobile, email, education_experience, work_experience, skill_certification, student_id}
         SQLHandler.insert(obj).then((rows) => {
             if(rows.affectedRows) {
                 res.json({

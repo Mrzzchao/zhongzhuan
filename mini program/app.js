@@ -1,9 +1,15 @@
 const Ajax = require('./controls/ajax.js')
 const WxFunc = require('./common/wxFunc.js')
+const user = require('./controls/user.js')
+const schoolInfo = require('./config/schoolInfo.js')
 
 App({
   onLaunch: function () {
     console.log('App Launch')
+    user.login().then((data) => {
+      Object.assign(this.globalData.userInfo, data)
+      console.log(this.globalData.userInfo)
+    })
   },
   onShow: function () {
     console.log('App Show')
@@ -13,7 +19,9 @@ App({
   },
   globalData: {
     hasLogin: false,
-    openid: null
+    openid: null,
+    userInfo: {},
+    schoolInfo: schoolInfo
   },
   utils: {
     Ajax,

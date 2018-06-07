@@ -32,6 +32,6 @@
 	<!-- 如果页面有编辑操作，这里就用保存按钮 -->
 	<!-- 保存按钮 start -->
 	<view class="footer-wrap footer-btn l-box-center">
-		<view class="btn-blue but-send">保存</view>
+		<button class="btn-blue but-send" bindtap='save'>保存</button>
 	</view>
 </view>

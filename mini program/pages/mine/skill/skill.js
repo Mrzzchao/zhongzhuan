@@ -21,8 +21,16 @@ Page({
   fetchData() {
     app.utils.Ajax.getSkillList(this.data.skillStr).then((data) => {
       this.setData({
-        skillList: data
+        skillList: this.formatData(data)
       })
+    })
+  },
+
+  formatData(data) {
+    return data.map((item) => {
+      item.obtained_time = item.obtained_time.replace('-', '.')
+
+      return item
     })
   },
 
@@ -33,4 +41,11 @@ Page({
       url: `/pages/mine/skill/add/add?id=${id}`,
     })
   },
+
+  save(e) {
+    console.log(e)
+    wx.switchTab({
+      url: '/pages/mine/mine',
+    })
+  }
 })

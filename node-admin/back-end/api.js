@@ -76,6 +76,9 @@ module.exports = {
 
     // upload
     uploadImg: path + '/upload/img',
-    uploadExcel: path + '/upload/excel'
+    uploadExcel: path + '/upload/excel',
+
+    //wechat
+    wxSession: path + '/wechat/session'
 
 };
