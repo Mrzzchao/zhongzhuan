@@ -6,15 +6,19 @@ Page({
    * 页面的初始数据
    */
   data: {
-    name: '',
-    obtained_time: '',
-    img_urls: '',
+
+    info: {
+      name: '',
+      obtained_time: '',
+      img_urls: '',
+
+    },
+
 
     uploadImgUrls: [],
     isUploaded: false,
 
     isNew: true,
-    id: ''
   },
 
   /**
@@ -23,8 +27,7 @@ Page({
   onLoad(options) {
     if (options.id) {
       this.setData({
-        isNew: false,
-        id: options.id
+        isNew: false
       })
 
       this.fetchData(options.id)
@@ -39,16 +42,27 @@ Page({
   },
 
   dataHandler(data) {
+    this.changeInfo(data)
     this.setData({
-      name: data.name,
-      obtained_time: data.obtained_time,
       uploadImgUrls: []
     })
   },
 
+  bindName(e) {
+    const name = e.detail.value
+    this.changeInfo({ name })
+  },
   bindDate(e) {
+    const obtained_time = e.detail.value
+    this.changeInfo({ obtained_time })
+  },
+
+  changeInfo(obj) {
+    let info = this.data.info
+    info = Object.assign({}, info, obj)
+
     this.setData({
-      obtained_time: e.detail.value
+      info: info
     })
   },
 
@@ -75,9 +89,8 @@ Page({
     app.utils.Ajax.uploadFiles(uploadConfig).then((res) => {
       console.log(res)
 
-      this.setData({
-        img_urls: res.join(';')
-      })
+      const img_urls = res.join(';')
+      this.changeInfo({ img_urls })
 
       this.setData({
         isUploaded: true
@@ -90,14 +103,10 @@ Page({
 
   formSubmit(e) {
     if(this.data.isUploaded) {  // 图片上传成功才能提交
-      let formData = e.detail.value
-      formData.img_urls = this.data.img_urls
+      let formData = this.data.info
       formData.student_id = '22'
-
       const isNew = this.data.isNew
-      isNew || (formData.id = this.data.id)
-      
-
+      console.log(formData)
       app.utils.Ajax.submitSkill(formData, isNew).then((flag) => {
         console.log(flag)
         if(flag) {

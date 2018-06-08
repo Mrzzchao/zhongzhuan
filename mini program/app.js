@@ -1,12 +1,12 @@
 const Ajax = require('./controls/ajax.js')
+const User = require('./controls/user.js')
 const WxFunc = require('./common/wxFunc.js')
-const user = require('./controls/user.js')
 const schoolInfo = require('./config/schoolInfo.js')
 
 App({
   onLaunch: function () {
     console.log('App Launch')
-    user.login().then((data) => {
+    User.login().then((data) => {
       Object.assign(this.globalData.userInfo, data)
       console.log(this.globalData.userInfo)
     })
@@ -25,7 +25,8 @@ App({
   },
   utils: {
     Ajax,
-    WxFunc
+    WxFunc,
+    User,
   },
 
   // lazy loading openid

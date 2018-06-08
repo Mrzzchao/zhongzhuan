@@ -10,9 +10,10 @@ function formatData(rows) {
     return rows.map(row => {
         let date = moment(row.create_time).format('YYYY-MM-DD');
         let obj = {};
-
+        let classStr = row.grade + ' ' + row.major + ' ' + row.className
         return Object.assign({}, row, {
-            create_time: date
+            create_time: date,
+            classStr
         }, obj);
     });
 }
@@ -28,6 +29,18 @@ module.exports = {
                 code: 100,
                 msg: 'success',
                 data: rows
+            })
+        })
+    },
+
+    fetchByWxId(req, res) {
+        const wx_openid = req.body.wx_openid
+        SQLHandler.queryByType('wx_openid', wx_openid).then((rows) => {
+            rows = formatData(rows)
+            res.json({
+                code: 100,
+                msg: 'success',
+                data: rows[0] || {}
             })
         })
     },
@@ -55,7 +68,6 @@ module.exports = {
 
     // 删除学生信息
     deleteOne(req, res) {
-
         const id = req.body.id;
 
         SQLHandler.deleteOne(id).then((rows) => {
@@ -96,7 +108,9 @@ module.exports = {
 
      // 修改学生信息
     updateOne(req, res) {
-        let obj = {wx_openid, wx_img, real_name, sexuality, born_date, highest_education, mobile, email, education_experience, work_experience, skill_certification, student_id, id} = req.body
+        let {wx_openid, wx_img, real_name, sexuality, classStr, born_date, highest_education, mobile, email, education_experience, work_experience, skill_certification, student_id, id} = req.body
+        let [grade, major, className] = classStr.split(' ')
+        let obj = {wx_openid, wx_img, real_name, sexuality, grade, major, className, born_date, highest_education, mobile, email, education_experience, work_experience, skill_certification, student_id, id}
         SQLHandler.update(obj).then((rows) => {
             if(rows.affectedRows) {
                 res.json({

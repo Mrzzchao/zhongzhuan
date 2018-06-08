@@ -6,14 +6,16 @@ Page({
    * 页面的初始数据
    */
   data: {
-    company_name: '',
-    title: '',
-    work_intro: '',
-    date_start: '',
-    date_end: '',
+    info: {
+      company_name: '',
+      title: '',
+      work_intro: '',
+      date_start: '',
+      date_end: '',
+      id: ''
+    },
 
-    isNew: true,
-    id: ''
+    isNew: true
   },
 
   /**
@@ -22,8 +24,7 @@ Page({
   onLoad(options) {
     if (options.id) {
       this.setData({
-        isNew: false,
-        id: options.id
+        isNew: false
       })
 
       this.fetchData(options.id)
@@ -33,7 +34,6 @@ Page({
   fetchData(id) {
     app.utils.Ajax.getWorkItem(id).then((data) => {
       this.dataHandler(data)
-      console.log(data)
     })
   },
 
@@ -41,26 +41,44 @@ Page({
     const times = data.service_time.split('-')
     const date_start = times[0].replace('.', '-')
     const date_end = times[1].replace('.', '-')
-    this.setData({
-      date_start,
-      date_end,
-      title: data.title,
-      company_name: data.company_name,
-      work_intro: decodeURIComponent(data.work_intro),
-      major: data.college_major,
-      education: data.educational_history
-    })
+    
+    data.date_start = date_start
+    data.date_end = date_end
+
+    data.work_intro = decodeURIComponent(data.work_intro)
+
+    this.changeInfo(data)
   },
 
+
+  bindName(e) {
+    console.log(e)
+    const company_name = e.detail.value
+    this.changeInfo({ company_name })
+  },
+  bindTitle(e) {
+    const title = e.detail.value
+    this.changeInfo({ title })
+  },
+  bindIntro(e) {
+    const work_intro = e.detail.value
+    this.changeInfo({ work_intro })
+  },
   bindDateStart(e) {
-    this.setData({
-      date_start: e.detail.value
-    })
+    const date_start = e.detail.value
+    this.changeInfo({date_start})
+  },
+  bindDateEnd(e) {
+    const date_end = e.detail.value
+    this.changeInfo({ date_end })
   },
 
-  bindDateEnd(e) {
+  changeInfo(obj) {
+    let info = this.data.info
+    info = Object.assign({}, info, obj)
+
     this.setData({
-      date_end: e.detail.value
+      info: info
     })
   },
 
@@ -78,9 +96,10 @@ Page({
   },
 
   formSubmit(e) {
-    const data = this.formatSubmit(e.detail.value)
+    console.log(this.data.info)
     const isNew = this.data.isNew
-    isNew || (data.id = this.data.id)
+    let data = JSON.parse(JSON.stringify(this.data.info))
+    data = this.formatSubmit(data)
 
     app.utils.Ajax.submitWork(data, isNew).then((flag) => {
       if (flag) {

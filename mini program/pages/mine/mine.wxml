@@ -32,7 +32,7 @@
             <view class="info-item l-flex-row">
               <view class="info-item-name">姓名</view>
               <view class="info-list-detail l-flex-1">
-                <input type="text" name="real_name" placeholder="请输入姓名" />
+                <input type="text" name="real_name" value="{{info.real_name}}" bindinput="bindName" placeholder="请输入姓名" />
               </view>
             </view>
             <!-- /姓名 -->
@@ -42,7 +42,7 @@
               <view class="info-item-name">性别</view>
               <view class="info-list-detail l-flex-1">
                 <picker range='{{sexList}}' bindchange='bindSex'>
-                  <input type="text" placeholder="请选择" class="{{sex ? '' : 'input-bor'}}" value='{{sex}}' name="sexuality" />
+                  <input type="text" placeholder="请选择" class="{{info.sexuality ? '' : 'input-bor'}}" value='{{info.sexuality}}' name="sexuality" />
                 </picker>
               </view>
             </view>
@@ -53,7 +53,7 @@
               <view class="info-item-name">出生日期</view>
               <view class="info-list-detail l-flex-1">
                 <picker mode="date" bindchange='bindDate'>
-                  <input type="text" placeholder="请选择" class="{{date ? '' : 'input-bor'}}" value="{{date}}" name="born_date" />
+                  <input type="text" placeholder="请选择" class="{{info.born_date ? '' : 'input-bor'}}" value="{{info.born_date}}" name="born_date" />
                 </picker>
               </view>
             </view>
@@ -64,7 +64,7 @@
               <view class="info-item-name">中专班级</view>
               <view class="info-list-detail l-flex-1">
                 <picker mode="multiSelector" range='{{classList}}' bindchange='bindClass'>
-                  <input type="text" placeholder="请选择" class="{{classStr ? '' : 'input-bor'}}" value='{{classStr}}' name="classStr" />
+                  <input type="text" placeholder="请选择" class="{{info.classStr ? '' : 'input-bor'}}" value='{{info.classStr}}' name="classStr" />
                 </picker>
               </view>
             </view>
@@ -75,7 +75,7 @@
               <view class="info-item-name">最高学历</view>
               <view class="info-list-detail l-flex-1">
                 <picker range='{{eduHisList}}' bindchange='bindEdu'>
-                  <input type="text" placeholder="请选择" class="{{education ? '' : 'input-bor'}}" value='{{education}}' name="highest_education" />
+                  <input type="text" placeholder="请选择" class="{{info.highest_education ? '' : 'input-bor'}}" value='{{info.highest_education}}' name="highest_education" />
                 </picker>
               </view>
             </view>
@@ -85,7 +85,7 @@
             <view class="info-item l-flex-row">
               <view class="info-item-name">联系电话</view>
               <view class="info-list-detail l-flex-1">
-                <input type="number" placeholder="请输入联系电话" name="mobile" />
+                <input type="number" placeholder="请输入联系电话" name="mobile" value="{{info.mobile}}" bindinput="bindMobile"/>
               </view>
             </view>
             <!-- /联系电话 -->
@@ -94,7 +94,7 @@
             <view class="info-item l-flex-row">
               <view class="info-item-name">邮箱</view>
               <view class="info-list-detail l-flex-1">
-                <input type="text" placeholder="请输入邮箱" name="email" />
+                <input type="text" placeholder="请输入邮箱" name="email" value='{{info.email}}' bindinput="bindEmail"/>
               </view>
             </view>
             <!-- /邮箱 -->
@@ -169,7 +169,7 @@
 
 
       <!-- 需要使用 button 来授权登录 -->
-    <view class="footer-wrap footer-btn l-box-center">
+    <view class="footer-wrap footer-btn l-box-center" wx:if="{{!hasLogin}}">
       <button wx:if="{{canIUse}}" open-type="getUserInfo" bindgetuserinfo="bindGetUserInfo">授权登录</button>
       <view wx:else>请升级微信版本</view>
     </view>

@@ -34,7 +34,8 @@ module.exports = {
 
     // 添加学习资料
     addOne(req, res) {
-        let obj = {title, video_url, remarks, operator, status, id} = req.body
+        let {title, video_url, remarks, operator, status} = req.body
+        let obj = {title, video_url, remarks, operator, status}
         SQLHandler.insert(obj).then((rows) => {
             if(rows.affectedRows) {
                 res.json({
@@ -93,7 +94,8 @@ module.exports = {
 
      // 修改学习资料
     updateOne(req, res) {
-        let obj = {title, video_url, remarks, operator, status, id} = req.body
+        let {title, video_url, remarks, operator, status, id} = req.body
+        let obj = {title, video_url, remarks, operator, status, id}
         SQLHandler.update(obj).then((rows) => {
             if(rows.affectedRows) {
                 res.json({

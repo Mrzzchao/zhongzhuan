@@ -34,7 +34,8 @@ module.exports = {
 
     // 添加教育经历
     addOne(req, res) {
-        let obj = {title, download_url, remarks, operator, status, id} = req.body
+        let {title, download_url, remarks, operator, status} = req.body
+        let obj = {title, download_url, remarks, operator, status}
         SQLHandler.insert(obj).then((rows) => {
             if(rows.affectedRows) {
                 res.json({
@@ -93,7 +94,8 @@ module.exports = {
 
      // 修改教育经历
     updateOne(req, res) {
-        let obj = {school_name, college_major, educated_time, educational_history, id} = req.body
+        let {school_name, college_major, educated_time, educational_history, id} = req.body
+        let obj = {school_name, college_major, educated_time, educational_history, id}
         SQLHandler.update(obj).then((rows) => {
             if(rows.affectedRows) {
                 res.json({

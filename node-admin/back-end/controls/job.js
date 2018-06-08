@@ -46,7 +46,8 @@ module.exports = {
 
     // 添加工作
     addOne(req, res) {
-        let obj = {job_name, company, tags, salary, company_logo, job_detail, remarks, operator} = req.body
+        let {job_name, company, tags, salary, company_logo, job_detail, remarks, operator} = req.body
+        let obj = {job_name, company, tags, salary, company_logo, job_detail, remarks, operator}
         SQLHandler.insert(obj).then((rows) => {
             if(rows.affectedRows) {
                 res.json({
@@ -105,7 +106,8 @@ module.exports = {
 
      // 修改工作
     updateOne(req, res) {
-        let obj = {job_name, company, tags, salary, company_logo, job_detail, remarks, operator, id} = req.body
+        let {job_name, company, tags, salary, company_logo, job_detail, remarks, operator, id} = req.body
+        let obj = {job_name, company, tags, salary, company_logo, job_detail, remarks, operator, id}
         SQLHandler.update(obj).then((rows) => {
             if(rows.affectedRows) {
                 res.json({

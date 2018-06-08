@@ -67,6 +67,7 @@ router.post(api.skillUpdate, skill.updateOne);
 
 // student
 router.post(api.studentList, student.fetchAll);
+router.post(api.studentItem, student.fetchByWxId);
 router.post(api.studentAdd, student.addOne);
 router.post(api.studentDelete, student.deleteOne);
 router.post(api.studentDeleteMulti, student.deleteMulti);

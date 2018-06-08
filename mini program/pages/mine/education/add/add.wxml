@@ -14,7 +14,7 @@
             <view class="info-item l-flex-row">
               <view class="info-item-name">学校名称</view>
               <view class="info-list-detail l-flex-1">
-                <input type="text" placeholder="请输入学校名称" name="school_name" value="{{school_name}}" />
+                <input type="text" placeholder="请输入学校名称" name="school_name" value="{{info.school_name}}" bindinput='bindName'/>
               </view>
             </view>
             <!-- /学校名称 -->
@@ -24,7 +24,7 @@
               <view class="info-item-name">所学专业</view>
               <view class="info-list-detail l-flex-1">
                 <picker range="{{majorList}}" bindchange='bindMajor'>
-                  <input type="text" value="{{major}}" name="college_major" placeholder="请选择" class="{{major ? '' : 'input-bor'}} l-flex-1" />
+                  <input type="text" value="{{info.college_major}}" name="college_major" placeholder="请选择" class="{{info.college_major ? '' : 'input-bor'}} l-flex-1" />
                 </picker>
               </view>
             </view>
@@ -35,12 +35,12 @@
               <view class="info-item-name">在校时间</view>
               <view class="info-list-detail l-flex-1 l-flex-row">
                 <picker mode="date" fields="month" bindchange='bindDateStart'>
-                  <input type="text" value="{{date_start}}" name="date_start" placeholder="请选择" class="{{date_start ? '' : 'input-bor'}} l-flex-1" />
+                  <input type="text" value="{{info.date_start}}" name="date_start" placeholder="请选择" class="{{info.date_start ? '' : 'input-bor'}} l-flex-1" />
 
                 </picker>
                 <view> 一 </view>
                 <picker mode="date" fields="month" bindchange='bindDateEnd'>
-                  <input type="text" value="{{date_end}}" name="date_end" placeholder="请选择" class="{{date_end ? '' : 'input-bor'}} l-flex-1" />
+                  <input type="text" value="{{info.date_end}}" name="date_end" placeholder="请选择" class="{{info.date_end ? '' : 'input-bor'}} l-flex-1" />
                 </picker>
               </view>
             </view>
@@ -51,7 +51,7 @@
               <view class="info-item-name">学历</view>
               <view class="info-list-detail l-flex-1">
                 <picker range='{{eduList}}' bindchange='bindEdu'>
-                  <input type="text" placeholder="请选择" class="{{education ? '' : 'input-bor'}}" value='{{education}}' name="educational_history" />
+                  <input type="text" placeholder="请选择" class="{{info.educational_history ? '' : 'input-bor'}}" value='{{info.educational_history}}' name="educational_history" />
                 </picker>
               </view>
             </view>

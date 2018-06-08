@@ -18,8 +18,18 @@ Page({
   },
   formatData(data) {
     data.tags = data.tags.split(',')
+    // let job_detail = decodeURIComponent(data.job_detail)
+    let job_detail = 'sdfsadfsaf&&&&sdfsdf\nsdfsdf\nsdfkj'
+    console.log(data)
+    let detailArr = job_detail.split('&&&&')
+    let intros = detailArr[0].split('\n')
+    let requirements = detailArr[1].split('\n')
+
+    data.intros = intros
+    data.requirements = requirements
     return data
   },
+  
   fetchData(id) {
     app.utils.Ajax.getJobDetail(id).then((data) => {
       data = this.formatData(data)

@@ -34,7 +34,8 @@ module.exports = {
 
     // 添加权限组
     addOne(req, res) {
-        let obj = {role, privilegeid, privilegeid, remark, id} = req.body
+        let {role, privilegeid, privilegeid, remark} = req.body
+        let obj = {role, privilegeid, privilegeid, remark}
         SQLHandler.insert(obj).then((rows) => {
             if(rows.affectedRows) {
                 res.json({
@@ -93,7 +94,8 @@ module.exports = {
 
      // 修改权限组
     updateOne(req, res) {
-        let obj = {role, privilegeid, privilegeid, remark, id} = req.body
+        let {role, privilegeid, privilegeid, remark, id} = req.body
+        let obj = {role, privilegeid, privilegeid, remark, id}
         SQLHandler.update(obj).then((rows) => {
             if(rows.affectedRows) {
                 res.json({

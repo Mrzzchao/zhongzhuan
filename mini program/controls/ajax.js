@@ -150,6 +150,16 @@ function submitSkill(obj, isNew) {
 }
 
 /**
+ * 上传多张图片
+ */
+function uploadFiles(obj) {
+  return WxFunc.uploadFiles({ url: Api.uploadImg, ...obj }).then((res) => {
+    console.log(res)
+    return res
+  })
+}
+
+/**
  * 提交学生信息
  */
 function submitStu(obj, isNew) {
@@ -164,22 +174,12 @@ function submitStu(obj, isNew) {
 /**
  * 获取学生信息
  */
-function submitStu(obj, isNew) {
-  
-  return WxFunc.requestPost(url, obj).then((res) => {
+function getStuInfo(wx_openid) {
+  console.log(wx_openid)
+  return WxFunc.requestPost(Api.studentItem, {wx_openid}).then((res) => {
     if (res.code === 100) {
-      return true
+      return res.data
     }
-  })
-}
-
-/**
- * 上传多张图片
- */
-function uploadFiles(obj) {
-  return WxFunc.uploadFiles({ url: Api.uploadImg, ...obj }).then((res) => {
-    console.log(res)
-    return res
   })
 }
 
@@ -196,5 +196,7 @@ module.exports = {
   submitEdu,
   submitWork,
   submitSkill,
-  submitStu
+
+  submitStu,
+  getStuInfo
 }

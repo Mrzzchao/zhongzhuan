@@ -209,6 +209,42 @@ function downloadFile({ url}) {
 
 }
 
+/**
+ * 封装微信的getSetting
+ */
+function getSetting() {
+  return new Promise((resolve, reject) => {
+    wx.getSetting({
+      success: (res) => {
+        resolve(res)
+      },
+      fail: (res) => {
+        reject(res)
+      }
+    });
+  }).catch((e) => {
+    console.log('请求错误:', e)
+  })
+}
+
+/**
+ * 封装微信的getUserInfo
+ */
+function getUserInfo() {
+  return new Promise((resolve, reject) => {
+    wx.getUserInfo({
+      success: (res) => {
+        resolve(res)
+      },
+      fail: (res) => {
+        reject(res)
+      }
+    });
+  }).catch((e) => {
+    console.log('请求错误:', e)
+  })
+}
+
 
 module.exports = {
   request,
@@ -219,5 +255,8 @@ module.exports = {
   uploadFiles,
 
   login,
-  checkSession
+  checkSession,
+
+  getSetting,
+  getUserInfo
 }

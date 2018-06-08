@@ -45,6 +45,7 @@ module.exports = {
 
     // student
     studentList: path + '/student/list',
+    studentItem: path + '/student/one',
     studentAdd: path + '/student/add',
     studentDelete: path + '/student/delete',
     studentDeleteMulti: path + '/student/delete-multi',
