@@ -8,10 +8,10 @@
   <!-- 信息详情 -->
   <view class="edu-exper-cont l-flex-row">
     <view class="edu-exper-detail">{{item.educated_time}}</view>
-    <view class="edu-exper-detail">{{item.college_major}}</view>
+    <view class="edu-exper-detail">{{item.educational_history}}</view>
   </view>
   <view class="edu-exper-cont l-flex-row">
     <view class="edu-exper-detail">{{item.school_name}}</view>
-    <view class="edu-exper-detail">{{item.educational_history}}</view>
+    <view class="edu-exper-detail">{{item.college_major}}</view>
   </view>
 </view>

@@ -19,6 +19,14 @@ Page({
     isUploaded: false,
 
     isNew: true,
+
+    checkKeyMap: {
+        name: 'required',
+        obtained_time: 'required',
+        img_urls: 'required',
+    },
+
+    errorList: [] // 错误列表
   },
 
   /**
@@ -101,21 +109,46 @@ Page({
     })
   },
 
+  // 检查提交表单
+  checkSubmit(data, checkKeyMap) {
+    let errList = []
+    Object.keys(checkKeyMap).forEach((key) => {
+      let name = checkKeyMap[key]
+      let value = data[key]
+      let result = app.utils.FormCheck.check(name, value)
+
+      result && errList.push(result)
+      console.log(errList)
+    })
+    return errList
+  },
+
   formSubmit(e) {
     if(this.data.isUploaded) {  // 图片上传成功才能提交
       let formData = this.data.info
-      formData.student_id = '22'
+      formData.student_id = app.globalData.student_id
       const isNew = this.data.isNew
-      console.log(formData)
-      app.utils.Ajax.submitSkill(formData, isNew).then((flag) => {
-        console.log(flag)
-        if(flag) {
-          wx.navigateTo({
-            url: '/pages/mine/skill/skill',
-          })
-        }
+      const checkKeyMap = this.data.checkKeyMap
+      const errList = app.utils.FormCheck.checkSubmit(formData, checkKeyMap)
+      this.setData({
+        errList
       })
+      
+      if(errList.length === 0) {
+          app.utils.Ajax.submitSkill(formData, isNew).then((flag) => {
+              console.log(flag)
+              if(flag) {
+                  wx.navigateTo({
+                      url: '/pages/mine/skill/skill',
+                  })
+              }
+          })
+      }
 
+    } else {
+      this.setData({
+        errList: ['图片未上传']
+      })
     }
   }
 

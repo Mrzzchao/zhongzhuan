@@ -7,7 +7,6 @@ Page({
    * 页面的初始数据
    */
   data: {
-    skillStr: '27,28,29,30',
     skillList: []
   },
 
@@ -19,7 +18,8 @@ Page({
   },
 
   fetchData() {
-    app.utils.Ajax.getSkillList(this.data.skillStr).then((data) => {
+    const student_id = app.globalData.student_id
+    app.utils.Ajax.getSkillList(student_id).then((data) => {
       this.setData({
         skillList: this.formatData(data)
       })
@@ -44,8 +44,9 @@ Page({
 
   save(e) {
     console.log(e)
+    app.globalData.fromPage = 'skill'
     wx.switchTab({
-      url: '/pages/mine/mine',
+      url: '/pages/mine/mine?type=skill',
     })
   }
 })

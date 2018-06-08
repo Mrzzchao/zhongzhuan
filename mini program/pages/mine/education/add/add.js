@@ -11,12 +11,24 @@ Page({
       school_name: '',
       college_major: '',
       educated_time: '',
+      date_start: '',
+      date_end: '',
       educational_history: ''
     },
     majorList: ['网络工程', '计算机'],
     eduList: ['大专', '本科', '硕士', '博士', '其他'],
 
     isNew: true,
+
+    checkKeyMap: {
+        school_name: 'required',
+        college_major: 'required',
+        date_start: 'required',
+        date_end: 'required',
+        educational_history: 'required'
+    },
+
+    errorList: [] // 错误列表
   },
 
   /**
@@ -46,7 +58,7 @@ Page({
 
     data.date_start = date_start
     data.date_end = date_end
-
+    console.log(data)
     this.changeInfo(data)
   },
 
@@ -82,7 +94,7 @@ Page({
     const educational_history = this.data.eduList[e.detail.value]
     this.changeInfo({ educational_history })
   },
-  
+
   changeInfo(obj) {
     let info = this.data.info
     info = Object.assign({}, info, obj)
@@ -93,9 +105,9 @@ Page({
   },
 
   formatSubmit(data) {
-    data.educated_time = 
-    data.date_start.replace('-', '.') + 
-    '-' + 
+    data.educated_time =
+    data.date_start.replace('-', '.') +
+    '-' +
     data.date_end.replace('-', '.')
 
     delete data.date_start
@@ -104,17 +116,24 @@ Page({
   },
 
   formSubmit(e) {
-    console.log(this.data.info)
     const isNew = this.data.isNew
-    let data = JSON.parse(JSON.stringify(this.data.info))
-    data = this.formatSubmit(data)
-    
-    app.utils.Ajax.submitEdu(data, isNew).then((flag) => {
-      if(flag) {
-        wx.navigateTo({
-          url: '/pages/mine/education/education',
-        })
-      }
+    let data = this.data.info
+    const checkKeyMap = this.data.checkKeyMap
+    const errList = app.utils.FormCheck.checkSubmit(data, checkKeyMap)
+    this.setData({
+      errList
     })
+    
+    if(errList.length === 0) {
+        data = this.formatSubmit(data)
+        data.student_id = app.globalData.student_id
+        app.utils.Ajax.submitEdu(data, isNew).then((flag) => {
+            if(flag) {
+                wx.navigateTo({
+                    url: '/pages/mine/education/education',
+                })
+            }
+        })
+    }
   }
 })

@@ -7,7 +7,6 @@ Page({
    * 页面的初始数据
    */
   data: {
-    workStr: '27,28,29,30',
     workList: []
   },
 
@@ -19,7 +18,8 @@ Page({
   },
 
   fetchData() {
-    app.utils.Ajax.getWorkList(this.data.worklStr).then((data) => {
+    const student_id = app.globalData.student_id
+    app.utils.Ajax.getWorkList(student_id).then((data) => {
       this.setData({
         workList: this.formatWork(data)
       })
@@ -46,8 +46,9 @@ Page({
 
   save(e) {
     console.log(e)
+    app.globalData.fromPage = 'work'
     wx.switchTab({
-      url: '/pages/mine/mine',
+      url: '/pages/mine/mine?type=work',
     })
   }
 })

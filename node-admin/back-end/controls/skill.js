@@ -54,6 +54,18 @@ let exportObj = {
             })
         })
     },
+
+    fetchByStuId(req, res) {
+        const student_id = req.body.student_id
+        SQLHandler.queryByType('student_id', student_id).then((rows) => {
+            rows = formatData(rows)
+            res.json({
+                code: 100,
+                msg: 'success',
+                data: rows
+            })
+        })
+    },
     
     // 添加技能认证
     addOne(req, res) {

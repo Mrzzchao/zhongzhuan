@@ -25,6 +25,7 @@ module.exports = {
     // education
     educationList: path + '/education/list',
     educationItem: path + '/education/one',
+    educationOfStu: path + '/education/student',
     educationAdd: path + '/education/add',
     educationDelete: path + '/education/delete',
     educationDeleteMulti: path + '/education/delete-multi',
@@ -33,6 +34,7 @@ module.exports = {
     // skill
     skillList: path + '/skill/list',
     skillItem: path + '/skill/one',
+    skillOfStu: path + '/skill/student',
     skillAdd: path + '/skill/add',
     skillDelete: path + '/skill/delete',
     skillDeleteMulti: path + '/skill/delete-multi',
@@ -41,6 +43,7 @@ module.exports = {
     // work
     workList: path + '/work/list',
     workItem: path + '/work/one',
+    workOfStu: path + '/work/student',
     workAdd: path + '/work/add',
     workDelete: path + '/work/delete',
     workDeleteMulti: path + '/work/delete-multi',
