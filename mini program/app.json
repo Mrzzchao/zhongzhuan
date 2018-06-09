@@ -11,7 +11,8 @@
     "pages/mine/education/add/add",
     "pages/job/detail/detail",
     "pages/resource/resource",
-    "pages/resource/ppt/ppt"
+    "pages/resource/ppt/ppt",
+    "pages/webview/webview"
   ],
   "window": {
     "navigationBarTextStyle": "black",

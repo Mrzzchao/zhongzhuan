@@ -103,9 +103,6 @@ Page({
       this.setData({
         isUploaded: true
       })
-      wx.showToast({
-        title: '上传成功',
-      })
     })
   },
 

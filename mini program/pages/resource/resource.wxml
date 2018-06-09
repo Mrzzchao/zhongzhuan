@@ -5,36 +5,19 @@
       <view class="l-scroll-y">
         <view class="vedio-list l-flex-row">
 
-          <navigator url='/pages/resource/ppt/ppt'>
-            <view class="vedio-item l-flex-column">
-              <view class="vedio-item-img">
-                <image class="vi-pic" src="/images/1.png"></image>
+          <block wx:for="{{resourceList}}" wx:key="{{item.id}}">
+              <view class="vedio-item l-flex-column">
+            <navigator url='/pages/resource/ppt/ppt?id={{item.id}}'>
+                <view class="vedio-item-img">
+                  <image class="vi-pic" src="{{item.img_url}}"></image>
+                </view>
+                <view class="vedio-item-tit">
+                  {{item.title}}
+                </view>
+            </navigator>
               </view>
-              <view class="vedio-item-tit">
-                求职指导：职业规划和简历书写
-              </view>
-            </view>
 
-          </navigator>
-
-          <view class="vedio-item l-flex-column">
-            <view class="vedio-item-img">
-              <image class="vi-pic" src="/images/zs2.jpeg"></image>
-            </view>
-            <view class="vedio-item-tit">
-              求职指导：职业规划
-            </view>
-          </view>
-
-          <view class="vedio-item l-flex-column">
-            <view class="vedio-item-img">
-              <image class="vi-pic" src="/images/zs3.jpeg"></image>
-            </view>
-            <view class="vedio-item-tit">
-              求职指导：职业规划和简历书写,你不知道的那些事儿
-            </view>
-          </view>
-
+          </block>
         </view>
       </view>
     </view>

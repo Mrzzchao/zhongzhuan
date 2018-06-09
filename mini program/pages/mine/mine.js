@@ -177,6 +177,9 @@ Page({
   },
 
   fetchData(wx_openid) {
+    wx.showLoading({
+      title: '加载中'
+    })
     app.utils.Ajax.getStuInfo(wx_openid).then((data) => {
       if(!Object.keys(data).length) {  // 假如无该学生信息
         this.setData({
@@ -188,9 +191,11 @@ Page({
       const student_id = data.student_id
       app.globalData.student_id = student_id
 
-      this.fetchWork()
-      this.fetchSkill()
-      this.fetchEdu()
+      const requestList = [this.fetchWork(), this.fetchSkill(), this.fetchEdu()]
+      Promise.all(requestList).then((results) => {
+        console.log(results)
+        wx.hideLoading()
+      })
     })
 
   },
@@ -198,7 +203,7 @@ Page({
   fetchWork() {
     const student_id = app.globalData.student_id
 
-    app.utils.Ajax.getWorkList(student_id).then((data) => {
+    return app.utils.Ajax.getWorkList(student_id).then((data) => {
       console.log(data)
       this.setData({
         workList: this.formatWork(data)
@@ -209,7 +214,7 @@ Page({
   fetchEdu() {
     const student_id = app.globalData.student_id
 
-    app.utils.Ajax.getEduList(student_id).then((data) => {
+    return app.utils.Ajax.getEduList(student_id).then((data) => {
       console.log(data)
       this.setData({
         eduList: data
@@ -220,7 +225,7 @@ Page({
   fetchSkill() {
     const student_id = app.globalData.student_id
 
-    app.utils.Ajax.getSkillList(student_id).then((data) => {
+    return app.utils.Ajax.getSkillList(student_id).then((data) => {
       this.setData({
         skillList: this.formatWork(data)
       })

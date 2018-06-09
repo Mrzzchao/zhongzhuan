@@ -1,0 +1,3 @@
+<!--pages/webview/webview.wxml-->
+<web-view url="{{url}}"></web-view>
+<view wx:if="{{canIUse}}">微信版本过低，请升级</view>

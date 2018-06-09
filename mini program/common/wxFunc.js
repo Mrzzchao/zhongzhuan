@@ -11,11 +11,12 @@ function request(url, data = {}, method = 'GET') {
         resolve(res.data)
       },
       fail: (res) => {
-        reject(res.data)
+        const err = new Error('请求错误')
+        reject(err)
       }
     })
-  }).catch((e) => {
-    console.log('请求错误:', e)
+}).catch((err) => {
+    console.error(err)
   })
 }
 
@@ -32,11 +33,12 @@ function requestPost(url, data = {}) {
         resolve(res.data)
       },
       fail: (res) => {
-        reject(res.data)
+        const err = new Error('请求错误')
+        reject(err)
       }
     })
-  }).catch((e) => {
-    console.log('请求错误:', e)
+}).catch((err) => {
+    console.error(err)
   })
 }
 
@@ -57,11 +59,12 @@ function requestPayment(obj) {
         resolve(res.data)
       },
       fail: (res) => {
-        reject(res.data)
+        const err = new Error('请求错误')
+        reject(err)
       }
     })
-  }).catch((e) => {
-    console.log('请求错误:', e)
+}).catch((err) => {
+    console.error(err)
   })
 }
 
@@ -81,8 +84,8 @@ function chooseImage(type) {
         reject(e)
       }
     })
-  }).catch((e) => {
-    console.log('请求错误:', e)
+}).catch((err) => {
+    console.error(err)
   })
 }
 
@@ -101,8 +104,8 @@ function login() {
         }
       }
     });
-  }).catch((e) => {
-    console.log('请求错误:', e)
+}).catch((err) => {
+    console.error(err)
   })
 }
 
@@ -116,11 +119,12 @@ function checkSession() {
         resolve(res)
       },
       fail: (res) => {
-        reject(res)
+        const err = new Error('请求错误')
+        reject(err)
       }
     });
-  }).catch((e) => {
-    console.log('请求错误:', e)
+}).catch((err) => {
+    console.error(err)
   })
 }
 
@@ -140,7 +144,8 @@ function uploadFile({url, filePath, name, formData = {}}) {
         resolve(res.data)
       },
       fail: (res) => {
-        reject(res.data)
+        const err = new Error('请求错误')
+        reject(err)
         uploadTask.abort() // 取消上传任务
       }
     })
@@ -158,8 +163,8 @@ function uploadFile({url, filePath, name, formData = {}}) {
     } else {
       return false
     }
-  }).catch((e) => {
-    console.log('请求错误:', e)
+}).catch((err) => {
+    console.error(err)
     uploadTask.abort() // 取消上传任务
   })
 
@@ -182,7 +187,8 @@ function uploadFiles({ url, filePathArr = [], name = 'file', formData = {} }){
 /**
  * 封装微信的downloadFile
  */
-function downloadFile({ url}) {
+function downloadFile({url}) {
+  console.log(url)
   let downloadTask = null
   return new Promise((resolve, reject) => {
     downloadTask = wx.downloadFile({
@@ -191,7 +197,8 @@ function downloadFile({ url}) {
         resolve(res)
       },
       fail: (res) => {
-        reject(res)
+        const err = new Error('请求错误')
+        reject(err)
         downloadFile.abort() // 取消下载任务
       }
     })
@@ -202,11 +209,33 @@ function downloadFile({ url}) {
       console.log('预期需要下载的数据总长度', res.totalBytesExpectedToWrite)
       console.log('--------------------------------')
     })
-  }).catch((e) => {
-    console.log('请求错误:', e)
+}).catch((err) => {
+    console.error(err)
     downloadFile.abort() // 取消下载任务
   })
 
+}
+
+
+/**
+ * 封装微信的saveFile
+ */
+function saveFile(url) {
+  return new Promise((resolve, reject) => {
+    console.log(url)
+    wx.saveFile({
+      tempFilePath: url,
+      success: (res) => {
+        resolve(res)
+      },
+      fail: (res) => {
+        const err = new Error('请求错误')
+        reject(err)
+      }
+    })
+  }).catch((err) => {
+    console.error(err)
+  })
 }
 
 /**
@@ -219,11 +248,12 @@ function getSetting() {
         resolve(res)
       },
       fail: (res) => {
-        reject(res)
+        const err = new Error('请求错误')
+        reject(err)
       }
     });
-  }).catch((e) => {
-    console.log('请求错误:', e)
+}).catch((err) => {
+    console.error(err)
   })
 }
 
@@ -237,11 +267,12 @@ function getUserInfo() {
         resolve(res)
       },
       fail: (res) => {
-        reject(res)
+        const err = new Error('请求错误')
+        reject(err)
       }
     });
-  }).catch((e) => {
-    console.log('请求错误:', e)
+}).catch((err) => {
+    console.error(err)
   })
 }
 
@@ -250,9 +281,12 @@ module.exports = {
   request,
   requestPost,
   requestPayment,
+
   chooseImage,
   uploadFile,
   uploadFiles,
+  downloadFile,
+  saveFile,
 
   login,
   checkSession,
