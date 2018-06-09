@@ -7,7 +7,7 @@ let salt = '$%^&%^644r63SDFGYHGFSfamk;lbk;';
 
 let {SQL} = require('../sql/sql')
 
-let SQLHandler = new SQL(table.JOB_OFFERS)
+let SQLHandler = new SQL(table.USER)
 
 function formatData(rows) {
 	return rows.map(row => {
@@ -126,8 +126,8 @@ module.exports = {
 
 			const passwordConfirm = rows[0].password;
 			password = md5.md5Encrypt(password + salt);
-
-			if(bcrypt.compareSync(passwordConfirm, password)) {  // 密码匹配成功
+			console.log(password)
+			if(password === passwordConfirm) {  // 密码匹配成功
 				let user = {
 					user_id: rows[0].id,
 					username: rows[0].username,

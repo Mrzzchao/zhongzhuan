@@ -5,7 +5,7 @@
                 img(src='../../assets/imgs/logo.png')
             .header-links
                 li
-                    button.btn(@click='login') {{ user ? user.user_name : '登录' }}
+                    button.btn(@click='login') {{ user ? user.username : '登录' }}
                 li
                     button.btn(@click='logout') 注销
 </template>

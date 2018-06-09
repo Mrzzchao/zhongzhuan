@@ -11,6 +11,7 @@
 
         created () {
             this.func.ajaxGet(this.api.userAutoLogin, res => {
+                console.log(res)
                 if (res.data.code === 200) {
                     this.$store.commit('user', res.data.user);
                 } else {

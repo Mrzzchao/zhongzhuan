@@ -45,6 +45,21 @@ module.exports = {
         })
     },
 
+    fetchByName(req, res) {
+        const real_name = req.body.real_name
+        const pageNo = req.body.pageNo || 1
+        const pageSize = req.body.pageSize || 10
+
+        SQLHandler.queryByType('real_name', real_name, pageNo, pageSize).then((rows) => {
+            rows = formatData(rows)
+            res.json({
+                code: 100,
+                msg: 'success',
+                data: rows
+            })
+        })
+    },
+
     // 添加学生信息
     addOne(req, res) {
         let {wx_openid, wx_img, real_name, sexuality, classStr, born_date, highest_education, mobile, email} = req.body

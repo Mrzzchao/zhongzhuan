@@ -1,11 +1,11 @@
 <template>
     <div class="login">
         <el-form :model="loginForm" :rules="rules" ref="loginForm" label-width="100px" class="login-form">
-            <el-form-item label="账号" prop="user_name">
-                <el-input type="text" v-model="loginForm.user_name" auto-complete="off"></el-input>
+            <el-form-item label="账号" prop="username">
+                <el-input type="text" v-model="loginForm.username" auto-complete="off"></el-input>
             </el-form-item>
 
-            <el-form-item label="密码" prop="pass">
+            <el-form-item label="密码" prop="password">
                 <el-input type="password" v-model="loginForm.password" auto-complete="off"></el-input>
             </el-form-item>
 
@@ -21,20 +21,20 @@
 
     export default {
         name: 'login',
-        
+
         data() {
             return {
                 loginForm: {
-                    user_name: '',
+                    username: '',
                     password: '',
                 },
                 rules: {
-                    user_name: [{required: true, message: '请输入用户名', trigger: 'blur'}],
+                    username: [{required: true, message: '请输入用户名', trigger: 'blur'}],
                     password: [{required: true, message: '请输入密码', trigger: 'blur'}],
                 }
             };
         },
-        
+
         methods: {
             submitForm(formName) {
                 this.$refs[formName].validate((valid) => {
@@ -53,7 +53,7 @@
                     }
                 });
             },
-            
+
             resetForm(formName) {
                 this.$refs[formName].resetFields();
             }
@@ -63,7 +63,7 @@
             if (this.$store.state.user) {
                 this.$router.push('/admin');
             }
-        },
+        }
 
     }
 </script>

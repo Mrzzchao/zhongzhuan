@@ -17,6 +17,7 @@ module.exports = {
     // job
     jobList: path + '/job/list',
     jobDetail: path + '/job/detail',
+    jobByName: path + '/job/oneByName',
     jobAdd: path + '/job/add',
     jobDelete: path + '/job/delete',
     jobDeleteMulti: path + '/job/delete-multi',
@@ -52,6 +53,7 @@ module.exports = {
     // student
     studentList: path + '/student/list',
     studentItem: path + '/student/one',
+    studentByName: path + '/student/oneByName',
     studentAdd: path + '/student/add',
     studentDelete: path + '/student/delete',
     studentDeleteMulti: path + '/student/delete-multi',
@@ -73,6 +75,7 @@ module.exports = {
 
     // download
     downloadList: path + '/download/list',
+    downloadByName: path + '/download/oneByName',
     downloadAdd: path + '/download/add',
     downloadDelete: path + '/download/delete',
     downloadDeleteMulti: path + '/download/delete-multi',

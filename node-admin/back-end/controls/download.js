@@ -32,6 +32,21 @@ module.exports = {
         })
     },
 
+    fetchByName(req, res) {
+        const title = req.body.title
+        const pageNo = req.body.pageNo || 1
+        const pageSize = req.body.pageSize || 10
+
+        SQLHandler.queryByType('title', title, pageNo, pageSize).then((rows) => {
+            rows = formatData(rows)
+            res.json({
+                code: 100,
+                msg: 'success',
+                data: rows
+            })
+        })
+    },
+
     // 添加教育经历
     addOne(req, res) {
         let {title, download_url, remarks, operator, status} = req.body
