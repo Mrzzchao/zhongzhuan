@@ -28,8 +28,14 @@ Page({
 
   download() {
     const url = this.data.resource.download_url
-    app.utils.Ajax.downloadFile(url).then((res) => {
-      console.log(res)
+    app.utils.Ajax.downloadFile(url).then((filePath) => {
+      console.log(filePath)
+      wx.openDocument({
+        filePath: filePath,
+        success: function (res) {
+          console.log('打开文档成功')
+        }
+      })
     })
   }
 })

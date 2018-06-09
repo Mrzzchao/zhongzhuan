@@ -13,7 +13,7 @@
 					<!-- /填好的信息详情 -->
 					<view class="edu-exper-tit ">
 						<view class="info-list-detail l-box-center l-flex-row">
-                <navigator url="/pages/mine/skill/add/add">
+                <navigator url="/pages/mine/skill/add/add" class="info-list-detail l-box-center l-flex-row">
                   <view class="info-list-add"></view>
                   <view class="info-add-click">点击添加</view>
                 </navigator>
