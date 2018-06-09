@@ -6,7 +6,6 @@ Page({
    * 页面的初始数据
    */
   data: {
-    eduStr: '27,28,29,30',
     eduList: []
   },
 
@@ -18,7 +17,8 @@ Page({
   },
 
   fetchData() {
-    app.utils.Ajax.getEduList(this.data.eduStr).then((data) => {
+    const student_id = app.globalData.student_id
+    app.utils.Ajax.getEduList(student_id).then((data) => {
       this.setData({
         eduList: data
       })
@@ -35,8 +35,9 @@ Page({
 
   save(e) {
     console.log(e)
+    app.globalData.fromPage = 'education'
     wx.switchTab({
-      url: '/pages/mine/mine',
+      url: '/pages/mine/mine?type=education',
     })
   }
 })

@@ -13,10 +13,7 @@ Page({
       highest_education: '',
       classStr: '',
       mobile: '',
-      email: '',
-      education_experience: '',
-      work_experience: '',
-      skill_certification: ''
+      email: ''
     },
 
     eduList: [],
@@ -25,7 +22,7 @@ Page({
 
     sexList: ['保密', '男', '女'],
     eduHisList: ['大专', '本科', '硕士', '博士', '其他'],
-    classList:[ 
+    classList:[
       [...app.globalData.schoolInfo.grades],
       [...app.globalData.schoolInfo.majors],
       [...app.globalData.schoolInfo.className]
@@ -33,26 +30,52 @@ Page({
 
     isNew: false,
     canIUse: wx.canIUse('button.open-type.getUserInfo'),
-    hasLogin: true
+    hasLogin: false,
+
+    checkKeyMap: {
+        real_name: 'xingming',
+        sexuality: 'required',
+        born_date: 'required',
+        highest_education: 'required',
+        classStr: 'required',
+        mobile: 'phone',
+        email: 'email'
+    },
+
+    errList: [] // 错误列表
   },
 
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad(options) {
-    app.utils.User.checkAuth().then((res) => {
-        console.log(res.userInfo)
-        Object.assign(app.globalData.userInfo, res.userInfo)
+    this.checkAuth()
+  },
 
-        this.setData({
-          userInfo: app.globalData.userInfo
-        })
-        // 设置登录态
-        app.globalData.hasLogin = true
-        this.setData({
-          hasLogin: true
-        })
-        this.fetchData(this.data.userInfo.openid)
+  onShow() {
+    if (app.globalData.hasLogin) {
+      switch (app.globalData.fromPage) {
+        case 'work': this.fetchWork(); break;
+        case 'skill': this.fetchSkill(); break;
+        case 'education': this.fetchEdu(); break;
+      }
+    }
+  },
+
+  checkAuth() {
+    app.utils.User.checkAuth().then((res) => {
+      console.log(res.userInfo)
+      Object.assign(app.globalData.userInfo, res.userInfo)
+
+      this.setData({
+        userInfo: app.globalData.userInfo
+      })
+      // 设置登录态
+      app.globalData.hasLogin = true
+      this.setData({
+        hasLogin: true
+      })
+      this.fetchData(this.data.userInfo.openid)
     })
   },
 
@@ -63,6 +86,8 @@ Page({
       userInfo: app.globalData.userInfo,
       hasLogin: true
     })
+
+    this.fetchData(this.data.userInfo.openid)
   },
 
   // 编辑教育经历
@@ -154,36 +179,61 @@ Page({
   fetchData(wx_openid) {
     app.utils.Ajax.getStuInfo(wx_openid).then((data) => {
       if(!Object.keys(data).length) {  // 假如无该学生信息
-        this.isNew = true
+        this.setData({
+          isNew: true
+        })
         return
       }
       this.changeInfo(data)
-      app.utils.Ajax.getEduList().then((data) => {
-        this.setData({
-          eduList: data
-        })
-      })
+      const student_id = data.student_id
+      app.globalData.student_id = student_id
 
-      app.utils.Ajax.getSkillList(this.data.skillStr).then((data) => {
-        this.setData({
-          skillList: this.formatSkill(data)
-        })
-      })
-
-      app.utils.Ajax.getWorkList(this.data.workStr).then((data) => {
-        this.setData({
-          workList: this.formatWork(data)
-        })
-      })
+      this.fetchWork()
+      this.fetchSkill()
+      this.fetchEdu()
     })
 
   },
+
+  fetchWork() {
+    const student_id = app.globalData.student_id
+
+    app.utils.Ajax.getWorkList(student_id).then((data) => {
+      console.log(data)
+      this.setData({
+        workList: this.formatWork(data)
+      })
+    })
+  },
+
+  fetchEdu() {
+    const student_id = app.globalData.student_id
+
+    app.utils.Ajax.getEduList(student_id).then((data) => {
+      console.log(data)
+      this.setData({
+        eduList: data
+      })
+    })
+  },
+
+  fetchSkill() {
+    const student_id = app.globalData.student_id
+
+    app.utils.Ajax.getSkillList(student_id).then((data) => {
+      this.setData({
+        skillList: this.formatWork(data)
+      })
+    })
+  },
+
+  
 
   formatWork(data) {
     return data.map((item) => {
       let work_intro = decodeURIComponent(item.work_intro)
       item.work_intro = work_intro.split('\n')
-      
+
       return item
     })
   },
@@ -196,14 +246,43 @@ Page({
     })
   },
 
+  // 检查提交表单
+  checkSubmit(data, checkKeyMap) {
+    let errList = []
+    Object.keys(checkKeyMap).forEach((key) => {
+      let name = checkKeyMap[key]
+      let value = data[key]
+      let result = app.utils.FormCheck.check(name, value)
+      console.log(result)
+      console.log('===========')
+
+      result && errList.push(result)
+      console.log(errList)
+    })
+    return errList
+  },
+
   // 提交表单
   formSubmit(e) {
     const data = this.data.info
-    data.wx_openid = this.data.userInfo.openid
-    console.log(data)
     const isNew = this.data.isNew
-    app.utils.Ajax.submitStu(data, isNew).then((flag) => {
-      console.log(flag)
+    const checkKeyMap = this.data.checkKeyMap
+    const errList = app.utils.FormCheck.checkSubmit(data, checkKeyMap)
+    this.setData({
+      errList
     })
+
+    if(errList.length === 0) {
+      data.wx_openid = this.data.userInfo.openid
+      data.wx_img = this.data.userInfo.avatarUrl
+      console.log(data)
+
+      app.utils.Ajax.submitStu(data, isNew).then((flag) => {
+        console.log(flag)
+        wx.showToast({
+          title: '保存成功'
+        })
+      })
+    }
   }
 })

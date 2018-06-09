@@ -41,6 +41,7 @@ router.post(api.jobUpdate, job.updateOne);
 // education
 router.post(api.educationList, education.fetchAll);
 router.post(api.educationItem, education.fetchById);
+router.post(api.educationOfStu, education.fetchByStuId);
 router.post(api.educationAdd, education.addOne);
 router.post(api.educationDelete, education.deleteOne);
 router.post(api.educationDeleteMulti, education.deleteMulti);
@@ -50,6 +51,7 @@ router.post(api.educationUpdate, education.updateOne);
 // work
 router.post(api.workList, work.fetchAll);
 router.post(api.workItem, work.fetchById);
+router.post(api.workOfStu, work.fetchByStuId);
 router.post(api.workAdd, work.addOne);
 router.post(api.workDelete, work.deleteOne);
 router.post(api.workDeleteMulti, work.deleteMulti);
@@ -59,6 +61,7 @@ router.post(api.workUpdate, work.updateOne);
 // skill
 router.post(api.skillList, skill.fetchAll);
 router.post(api.skillItem, skill.fetchById);
+router.post(api.skillOfStu, skill.fetchByStuId);
 router.post(api.skillAdd,  skill.addOne);
 router.post(api.skillDelete, skill.deleteOne);
 router.post(api.skillDeleteMulti, skill.deleteMulti);

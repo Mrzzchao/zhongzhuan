@@ -56,10 +56,22 @@ module.exports = {
         })
     },
 
+    fetchByStuId(req, res) {
+        const student_id = req.body.student_id
+        SQLHandler.queryByType('student_id', student_id).then((rows) => {
+            rows = formatData(rows)
+            res.json({
+                code: 100,
+                msg: 'success',
+                data: rows
+            })
+        })
+    },
+
     // 添加工作经历
     addOne(req, res) {
-        let {company_name, title, service_time, work_intro, remarks} = req.body
-        let obj = {company_name, title, service_time, work_intro, remarks}
+        let {company_name, title, service_time, work_intro, remarks, student_id} = req.body
+        let obj = {company_name, title, service_time, work_intro, remarks, student_id}
         SQLHandler.insert(obj).then((rows) => {
             if(rows.affectedRows) {
                 res.json({
@@ -118,8 +130,8 @@ module.exports = {
 
      // 修改工作经历
     updateOne(req, res) {
-        let {company_name, title, service_time, work_intro, remarks, id} = req.body
-        let obj = {company_name, title, service_time, work_intro, remarks, id}
+        let {company_name, title, service_time, work_intro, remarks, id, student_id} = req.body
+        let obj = {company_name, title, service_time, work_intro, remarks, id, student_id}
         SQLHandler.update(obj).then((rows) => {
             if(rows.affectedRows) {
                 res.json({

@@ -7,8 +7,8 @@
           <!-- 信息列表 start -->
           <view class="info-list-cont work-exp-editing">
             <!-- 报错 -->
-            <view class="if-wrong-input hide">
-              联系电话有误
+            <view class="if-wrong-input" wx:if="{{errList.length}}">
+              {{errList[0]}}
             </view>
             <!-- 公司名称 -->
             <view class="info-item l-flex-row">
@@ -32,12 +32,12 @@
               <view class="info-item-name">在职时间</view>
               <view class="info-list-detail l-flex-1 l-flex-row">
                 <picker mode="date" fields="month" bindchange='bindDateStart'>
-                  <input type="text" value="{{info.date_start}}" name="date_start" placeholder="请选择" class="{{info.date_start ? '' : 'input-bor'}} l-flex-1" />
+                  <input disabled type="text" value="{{info.date_start}}" name="date_start" placeholder="请选择" class="{{info.date_start ? '' : 'input-bor'}} l-flex-1" />
 
                 </picker>
                 <view> 一 </view>
                 <picker mode="date" fields="month" bindchange='bindDateEnd'>
-                  <input type="text" value="{{info.date_end}}" name="date_end" placeholder="请选择" class="{{info.date_end ? '' : 'input-bor'}} l-flex-1" />
+                  <input disabled type="text" value="{{info.date_end}}" name="date_end" placeholder="请选择" class="{{info.date_end ? '' : 'input-bor'}} l-flex-1" />
                 </picker>
               </view>
             </view>

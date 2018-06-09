@@ -7,8 +7,8 @@
           <!-- 信息列表 start -->
           <view class="info-list-cont work-exp-editing">
             <!-- 报错 -->
-            <view class="if-wrong-input hide">
-              联系电话有误
+            <view class="if-wrong-input" wx:if="{{errList.length}}">
+              {{errList[0]}}
             </view>
             <!-- 证书名称 -->
             <view class="info-item l-flex-row">
@@ -24,7 +24,7 @@
               <view class="info-item-name">获得时间</view>
               <view class="info-list-detail l-flex-1">
                 <picker mode="date" fields="month" bindchange='bindDate'>
-                  <input type="text" value="{{info.obtained_time}}" name="obtained_time"  placeholder="请选择" class="{{info.obtained_time ? '' : 'input-bor'}} l-flex-1" />
+                  <input disabled type="text" value="{{info.obtained_time}}" name="obtained_time"  placeholder="请选择" class="{{info.obtained_time ? '' : 'input-bor'}} l-flex-1" />
                 </picker>
               </view>
             </view>

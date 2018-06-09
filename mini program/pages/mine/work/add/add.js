@@ -15,7 +15,17 @@ Page({
       id: ''
     },
 
-    isNew: true
+    isNew: true,
+
+    checkKeyMap: {
+      company_name: 'required',
+      title: 'required',
+      work_intro: 'required',
+      date_start: 'required',
+      date_end: 'required'
+    },
+
+    errorList: [] // 错误列表
   },
 
   /**
@@ -82,6 +92,22 @@ Page({
     })
   },
 
+  // 检查提交表单
+  checkSubmit(data, checkKeyMap) {
+    let errList = []
+    Object.keys(checkKeyMap).forEach((key) => {
+      let name = checkKeyMap[key]
+      let value = data[key]
+      let result = app.utils.FormCheck.check(name, value)
+      console.log(result)
+      console.log('===========')
+
+      result && errList.push(result)
+      console.log(errList)
+    })
+    return errList
+  },
+
   formatSubmit(data) {
     data.service_time =
       data.date_start.replace('-', '.') +
@@ -96,17 +122,24 @@ Page({
   },
 
   formSubmit(e) {
-    console.log(this.data.info)
     const isNew = this.data.isNew
-    let data = JSON.parse(JSON.stringify(this.data.info))
-    data = this.formatSubmit(data)
-
-    app.utils.Ajax.submitWork(data, isNew).then((flag) => {
-      if (flag) {
-        wx.navigateTo({
-          url: '/pages/mine/work/work',
-        })
-      }
+    let data = this.data.info
+    const checkKeyMap = this.data.checkKeyMap
+    const errList = this.checkSubmit(data, checkKeyMap)
+    this.setData({
+      errList
     })
+
+    if(errList.length === 0) {
+      data = this.formatSubmit(data)
+      data.student_id = app.globalData.student_id
+      app.utils.Ajax.submitWork(data, isNew).then((flag) => {
+        if (flag) {
+          wx.navigateTo({
+            url: '/pages/mine/work/work',
+          })
+        }
+      })
+    }
   }
 })
