@@ -46,4 +46,5 @@ let sendEmail = {
     }
 }
 
+module.exports = sendEmail;
 
