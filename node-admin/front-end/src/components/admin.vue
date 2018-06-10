@@ -4,7 +4,7 @@
 
         <div class='admin-main'>
             <div class='admin-main-right'>
-                <el-menu theme="dark" class="top-menu">
+                <el-menu theme="dark" class="top-menu el-menu--dark">
 
 					  <el-submenu index="1">
                         <template slot="title">用户管理</template>
