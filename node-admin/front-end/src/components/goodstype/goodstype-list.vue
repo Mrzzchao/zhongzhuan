@@ -49,6 +49,20 @@
             >
             </el-table-column>
 
+            <el-table-column
+                label="职位描述"
+                width="150"
+                >
+                <template scope="scope">
+
+                    <el-button
+                            size="small"
+                            type="info"
+                            @click="openJob(scope.row)">查看
+                    </el-button>
+                </template>
+            </el-table-column>
+
 
             <el-table-column
                 label="操作"
@@ -72,6 +86,34 @@
 
         </el-table>
 
+        <el-dialog title="职位描述" :visible.sync="dialogVisible" v-if="dialogData">
+            <!-- 职位详情简介  start -->
+            <div class="offer-info-cont">
+                <!-- <div class="offer-info-tit">
+                    职位详情
+                    <div class="offer-tit-before"></div>
+                </div> -->
+                <div class="offer-info-desc">
+                    <div class="oid-detail" v-for="item, index in dialogData.job_intros">
+                        {{index + 1}}、{{item}}
+                    </div>
+                    <div class="oid-tit" v-if="dialogData.job_require.length">
+                        任职要求：
+                    </div>
+                    <div class="oid-detail" v-for="item, index in dialogData.job_require">
+                        {{index + 1}}、{{item}}
+                    </div>
+                </div>
+            </div>
+
+            <span slot="footer" class="dialog-footer">
+              <el-button @click="dialogVisible = false">取 消</el-button>
+              <el-button type="primary" @click="dialogVisible = false">确 定</el-button>
+            </span>
+
+            <!-- 职位详情简介  end -->
+        </el-dialog>
+
         <div class="pagination">
 
             <el-pagination @current-change="handleCurrentChange" layout="prev, pager, next" :total="countAll">
@@ -88,14 +130,15 @@
         data() {
             return {
                 columns: {
+                    company: '公司',
                     job_name: '职位',
                     salary: '薪资',
-                    company: '公司',
-                    job_detail: '职位描述',
                     tags: '公司标签',
                     create_time: '发布时间',
                     statusMsg: '状态'
                 },
+
+                job_detail: '职位描述',
                 tableData: [],
 
                 searchObj: {
@@ -112,6 +155,9 @@
                 multipleSelection: [],
 
                 load: false, // loading
+
+                dialogVisible: false,
+                dialogData: null
             }
         },
 
@@ -132,20 +178,23 @@
             },
 
             fetchItem() {
-                this.load = true;
-                const searchObj = this.searchObj
-                const params = {}
-                params[searchObj.key] = searchObj.value
+                if(this.searchObj.value) {
+                    this.load = true;
+                    const searchObj = this.searchObj
+                    const params = {}
+                    params[searchObj.key] = searchObj.value
 
-                params.pageNo = this.cur_page
-                params.pageSize = this.pageSize
+                    params.pageNo = this.cur_page
+                    params.pageSize = this.pageSize
 
-                this.ajax.post(this.api.jobByName, params).then((data) => {
-                    this.tableData = this.formatData(data.list)
-                    this.countAll = data.countAll
-                    this.load = false
-                })
-
+                    this.ajax.post(this.api.jobByName, params).then((data) => {
+                        this.tableData = this.formatData(data.list)
+                        this.countAll = data.countAll
+                        this.load = false
+                    })
+                } else {
+                    this.fetchList()
+                }
 
             },
 
@@ -184,6 +233,12 @@
                 this.$router.push({path: '/admin/goodstype-form', query: {id: row.id}});
             },
 
+            // 查看
+            openJob(row) {
+                this.dialogVisible = true
+                this.dialogData = row
+            },
+
 
             handleSelectionChange(val) {
                 this.multipleSelection = val;
@@ -193,6 +248,14 @@
                 return data.map((item) => {
                     const status = item.status
                     item.statusMsg = status == '1' ? '已发布' : '未发布'
+                    let job_detail = decodeURIComponent(item.job_detail)
+                    console.log(job_detail);
+                    let detailArr = job_detail.split('&&&&')
+                    let intros = detailArr[0] && detailArr[0].split('\n') || ''
+                    let requirements = detailArr[1] && detailArr[1].split('\n') || ''
+
+                    item.job_intros = intros
+                    item.job_require = requirements
                     return item
                 })
             }
@@ -206,3 +269,7 @@
 
     }
 </script>
+
+<style>
+    .offer-info-cont{padding:15px;background:#fff}.offer-info-tit{color:rgba(36,44,53,0.8);font-size:14px;position:relative;padding-bottom:10px;padding-left:13px;line-height:23px;border-bottom:1px solid #f0f0f0}.offer-info-tit .offer-tit-before{width:5px;height:20px;background:#7398f5;position:absolute;left:0;top:0}.offer-info-desc{padding-top:5px}.oid-detail{font-family:PingFang SC-Light;font-size:13px;color:#838999;line-height:20px}.oid-tit{font-size:13px;color:#838999;line-height:20px;margin:10px 0 5px 0}
+</style>

@@ -52,9 +52,12 @@ module.exports = {
 
     // student
     studentList: path + '/student/list',
+    studentListWithWork: path + '/student/listWithWork',
     studentItem: path + '/student/one',
     studentDetail: path + '/student/detail',
     studentByName: path + '/student/oneByName',
+    studentByTypes: path + '/student/multiByTyps',
+    studentByTypesWithWork: path + '/student/multiByTypsWithWork',
     studentAdd: path + '/student/add',
     studentDelete: path + '/student/delete',
     studentDeleteMulti: path + '/student/delete-multi',
@@ -87,7 +90,6 @@ module.exports = {
     uploadImg: path + '/upload/img',
     uploadExcel: path + '/upload/excel',
     uploadStudy: path + '/upload/study',
-
 
     //wechat
     wxSession: path + '/wechat/session'

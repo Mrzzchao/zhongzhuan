@@ -21,11 +21,31 @@
                 <el-button type="primary" @click="search">查询</el-button>
             </el-form-item>
 
-            <router-link to="/admin/goodstype-form">
+            <!-- <router-link to="/admin/goodstype-form">
                 <el-button type="success">新增类型</el-button>
-            </router-link>
+            </router-link> -->
 
 
+        </el-form>
+
+        <el-form :inline="true" class="demo-form-inline">
+            <el-select v-model="searchObj.value2" clearable placeholder="请选择">
+              <el-option
+                v-for="item, idx in schoolInfo.grades"
+                :key="idx"
+                :label="item"
+                :value="item">
+              </el-option>
+            </el-select>
+
+            <el-select v-model="searchObj.value3" clearable placeholder="请选择">
+              <el-option
+                v-for="item, idx in schoolInfo.className"
+                :key="idx"
+                :label="item"
+                :value="item">
+              </el-option>
+            </el-select>
         </el-form>
 
         <el-table
@@ -46,6 +66,7 @@
                     :prop="type"
                     :label="name"
                     :key="name"
+
             >
             </el-table-column>
 
@@ -97,15 +118,21 @@
                     grade: '年级',
                     major: '专业',
                     className: '班级',
+                    company_name: '单位',
+                    title: '职位',
+                    service_time: '入职时间'
                 },
                 tableData: [],
 
                 searchObj: {
                     value: '',
+                    value2: '',
+                    value3: '',
                     tip: '根据姓名查询',
                     key: 'real_name'
                 },
 
+                schoolInfo: this.schoolInfo,
 
                 cur_page: 1,
                 pageSize: 10,
@@ -124,7 +151,7 @@
                     pageNo: this.cur_page,
                     pageSize: this.pageSize
                 }
-                this.ajax.post(this.api.studentList, params).then((data) => {
+                this.ajax.post(this.api.studentListWithWork, params).then((data) => {
                     this.tableData = this.formatData(data.list)
                     this.countAll = data.countAll
                     this.load = false
@@ -134,19 +161,26 @@
             },
 
             fetchItem() {
-                this.load = true;
-                const searchObj = this.searchObj
-                const params = {}
-                params[searchObj.key] = searchObj.value
+                if(this.searchObj.value || this.searchObj.value2 || this.searchObj.value3) {
+                    this.load = true;
+                    const searchObj = this.searchObj
+                    const params = {}
+                    params[searchObj.key] = searchObj.value
 
-                params.pageNo = this.cur_page
-                params.pageSize = this.pageSize
+                    params.grade = searchObj.value2
+                    params.className = searchObj.value3
 
-                this.ajax.post(this.api.studentByName, params).then((data) => {
-                    this.tableData = this.formatData(data.list)
-                    this.countAll = data.countAll
-                    this.load = false
-                })
+                    params.pageNo = this.cur_page
+                    params.pageSize = this.pageSize
+
+                    this.ajax.post(this.api.studentByTypesWithWork, params).then((data) => {
+                        this.tableData = this.formatData(data.list)
+                        this.countAll = data.countAll
+                        this.load = false
+                    })
+                } else {
+                    this.fetchList()
+                }
 
 
             },

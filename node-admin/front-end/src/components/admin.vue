@@ -23,9 +23,9 @@
 		<el-menu-item index="2-1">学生列表</el-menu-item>
 	</router-link>
 
-	<router-link to="/admin/member-form">
+	<!-- <router-link to="/admin/member-form">
 		<el-menu-item index="2-2">新增学生</el-menu-item>
-	</router-link>
+	</router-link> -->
 </el-submenu>
 
 

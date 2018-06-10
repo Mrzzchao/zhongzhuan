@@ -39,7 +39,9 @@
                     grade: '年级',
                     major:'专业',
                     className:'班级',
-                }
+                },
+
+                isNew: 1
 			}
 		},
 		methods: {

@@ -129,19 +129,23 @@
             },
 
             fetchItem() {
-                this.load = true;
-                const searchObj = this.searchObj
-                const params = {}
-                params[searchObj.key] = searchObj.value
+                if(this.searchObj.value) {
+                    this.load = true;
+                    const searchObj = this.searchObj
+                    const params = {}
+                    params[searchObj.key] = searchObj.value
 
-                params.pageNo = this.cur_page
-                params.pageSize = this.pageSize
+                    params.pageNo = this.cur_page
+                    params.pageSize = this.pageSize
 
-                this.ajax.post(this.api.downloadByName, params).then((data) => {
-                    this.tableData = this.formatData(data.list)
-                    this.countAll = data.countAll
-                    this.load = false
-                })
+                    this.ajax.post(this.api.downloadByName, params).then((data) => {
+                        this.tableData = this.formatData(data.list)
+                        this.countAll = data.countAll
+                        this.load = false
+                    })
+                } else {
+                    this.fetchList()
+                }
 
 
             },

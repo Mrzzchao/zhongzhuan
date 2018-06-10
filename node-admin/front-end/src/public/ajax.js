@@ -29,7 +29,7 @@ const ajax = function (url, config = {}) {
 
 ajax.get = function (url, config = {ignore: true}) {
     // config.withCredentials = true
-    config.timeout = config.timeout || 5000
+    // config.timeout = config.timeout || 5000
     return _axios.get(url, config).then((response) => {
         if (response.status === 200) {
             return response.data
@@ -54,7 +54,7 @@ ajax.get = function (url, config = {ignore: true}) {
 
 ajax.post = function (url, param, config = {ignore: true}) {
     // config.withCredentials = true
-    config.timeout = config.timeout || 5000
+    // config.timeout = config.timeout || 5000
     return _axios.post(url, param, config).then((response) => {
         if (response.status === 200) {
             return response.data
