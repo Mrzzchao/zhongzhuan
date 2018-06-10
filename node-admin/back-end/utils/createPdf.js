@@ -1,6 +1,7 @@
 let pdf = require('html-pdf'); // html-pdf
 let fs = require('fs');
-let html = fs.readFileSync('./tempplate/resume.html', 'utf8'); // 引入html模板
+let moment = require('moment');     // 数据处理
+let html = fs.readFileSync('./template/resume.html', 'utf8'); // 引入html模板
 var swig  = require('swig');
 const table = require('../configs/table');
 let {SQL} = require('../sql/sql')
@@ -8,9 +9,19 @@ let SQLHandlerStudent = new SQL(table.STUDENT);
 let SQLHandlerEducation = new SQL(table.EDUCATION_EXPERIENCE);
 let SQLHandlerWork = new SQL(table.WORK_EXPERIENCE);
 let SQLHandlerSkill = new SQL(table.SKILL_CERTIFICATION);
+let SQLHandlerJob = new SQL(table.JOB_OFFERS);
 
 
+function formatData(rows) {
+    return rows.map(row => {
+        let date = moment(row.create_time).format('YYYY-MM-DD');
+        let obj = {};
 
+        return Object.assign({}, row, {
+            create_time: date
+        }, obj);
+    });
+}
 
 
 let createPdf = {
@@ -19,7 +30,7 @@ let createPdf = {
 
 //这里去数据库捞数据
     fetchBaseData(student_id) {
-        SQLHandlerStudent.queryByStudentId(student_id).then((rows) => {
+        return SQLHandlerStudent.queryByStudentId(student_id).then((rows) => {
             rows = formatData(rows)
             return rows[0];
         })
@@ -27,6 +38,13 @@ let createPdf = {
 
     fetchEducationData(student_id) {
         SQLHandlerEducation.queryByStudentId(student_id).then((rows) => {
+            rows = formatData(rows)
+            return rows;
+        })
+    },
+
+    fetchJobDataById(id) {
+        return SQLHandlerJob.queryById(id).then((rows) => {
             rows = formatData(rows)
             return rows;
         })
@@ -48,9 +66,9 @@ let createPdf = {
 
 
     createResumeData(student_id) {
-        let baseInfo = fetchBaseData(student_id);
-        let educationInfo = fetchEducationData(student_id);
-        let workInfo = fetchWorkData(student_id);
+        let baseInfo = createPdf.fetchBaseData(student_id);
+        let educationInfo = createPdf.fetchEducationData(student_id);
+        let workInfo = createPdf.fetchWorkData(student_id);
         workInfo.forEach((work) =>{
             var temp = work.work_intro.split('%0A');
            /* temp.forEach((item) => {
@@ -58,7 +76,7 @@ let createPdf = {
             });*/
             work.work_intro = temp;
         })
-        let skillInfo = fetchSkillData(student_id);
+        let skillInfo = createPdf.fetchSkillData(student_id);
         skillInfo.forEach((skill) => {
             var temp = skill.img_urls.split(';');
             skill.img_urls = temp;
@@ -89,18 +107,21 @@ let createPdf = {
             }
         };// 一些配置
         let filename = '../resume/'+ student_id + '.pdf';
-        let resumeData = createResumeData(student_id)
+        let resumeData = createPdf.createResumeData(student_id)
         html = swig.renderFile(html, resumeData);
 
-        pdf.create(html, options).toFile(filename, function (err, res) {
-            if (err) {
-                return console.log(err);
-            }
-            console.log(res);
-        });
+        return new Promise((resolve, reject) => {
+            pdf.create(html, options).toFile(filename, function (err, res) {
+                if (err) {
+                    throw new Error(err)
+                    return console.log(err);
+                }
+                resolve(res)
+            });
+        }).catch((err) => {
+            console.error(error);
+        })
     }
 }
 
 module.exports = createPdf;
-
-

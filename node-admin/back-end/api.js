@@ -95,6 +95,9 @@ module.exports = {
     uploadStudy: path + '/upload/study',
 
     //wechat
-    wxSession: path + '/wechat/session'
+    wxSession: path + '/wechat/session',
+
+    // resume
+    resumeSend: path + '/resume/send'
 
 };

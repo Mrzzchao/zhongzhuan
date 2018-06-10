@@ -40,7 +40,7 @@ module.exports = {
     },
 
     uploadStudyOne(req, res, next) {
-        let uploadObj = upload.imgUpload.single('file')
+        let uploadObj = upload.studyUpload.single('file')
         return uploadObj(req, res, function (err) {
             if(err) {
                 console.error('上传错误', err)

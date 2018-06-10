@@ -9,8 +9,9 @@ let skill = require('../controls/skill')
 let student = require('../controls/student')
 let study = require('../controls/study')
 let work = require('../controls/work')
-let upload = require(('../controls/upload'))
-let wechat = require(('../controls/wechat'))
+let upload = require('../controls/upload')
+let wechat = require('../controls/wechat')
+let resume = require('../controls/resume')
 
 let api = require('../api');
 
@@ -120,6 +121,9 @@ router.post(api.uploadStudy, upload.uploadStudyOne, upload.handleRes);
 
 // wechat
 router.post(api.wxSession, wechat.requestSessionKey);
+
+// resume
+router.post(api.resumeSend, resume.sendResume);
 
 
 module.exports = router;

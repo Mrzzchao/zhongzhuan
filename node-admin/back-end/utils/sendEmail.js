@@ -32,19 +32,18 @@ let sendEmail = {
                     },*/
                 ]
         };
-
-        mailTransport.sendMail(options, function(err, msg){
-            if(err){
-                console.log(err);
-                // res.render('index', { title: err });
-            }
-            else {
-                console.log(msg);
-                // res.render('index', { title: "已接收："+msg.accepted});
-            }
-        });
+        new Promise((resolve, reject) => {
+            mailTransport.sendMail(options, function(err, msg){
+                if (err) {
+                    throw new Error(err)
+                    return console.log(err);
+                }
+                resolve(msg)
+            });
+        }).catch((err) => {
+            console.error(error);
+        })
     }
 }
 
 module.exports = sendEmail;
-
