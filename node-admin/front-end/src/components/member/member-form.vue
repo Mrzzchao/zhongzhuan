@@ -1,6 +1,6 @@
 <template>
     <el-form ref="form" :model="form" label-width="80px" class="form-contain">
-        <el-form-item :label="name" v-for="name, type in formMap">
+        <el-form-item :label="name" v-for="name, type in formMap" :key="type">
             <el-input :model="form[type]"></el-input>
         </el-form-item>
 

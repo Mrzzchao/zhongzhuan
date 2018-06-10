@@ -50,11 +50,15 @@
             </el-table-column>
 
 
-            <el-table-column label="操作">
+            <el-table-column
+                label="操作"
+                width="150"
+                >
                 <template scope="scope">
 
                     <el-button
                             size="small"
+                            type="info"
                             @click="editGoods(scope.row)">修改
                     </el-button>
 
@@ -70,7 +74,7 @@
 
         <div class="pagination">
 
-            <el-pagination @current-change="handleCurrentChange" layout="prev, pager, next" :total="500">
+            <el-pagination @current-change="handleCurrentChange" layout="prev, pager, next" :total="countAll">
             </el-pagination>
         </div>
 
@@ -103,6 +107,7 @@
 
                 cur_page: 1,
                 pageSize: 10,
+                countAll: 50,
 
                 multipleSelection: [],
 
@@ -118,9 +123,9 @@
                     pageSize: this.pageSize
                 }
                 this.ajax.post(this.api.jobList, params).then((data) => {
-                    this.tableData = this.formatData(data)
+                    this.tableData = this.formatData(data.list)
+                    this.countAll = data.countAll
                     this.load = false
-                    console.log(data)
                 })
 
 
@@ -136,9 +141,9 @@
                 params.pageSize = this.pageSize
 
                 this.ajax.post(this.api.jobByName, params).then((data) => {
-                    this.tableData = this.formatData(data)
+                    this.tableData = this.formatData(data.list)
+                    this.countAll = data.countAll
                     this.load = false
-                    console.log(data)
                 })
 
 
@@ -167,7 +172,6 @@
                 }
 
                 this.ajax.post(this.api.jobDelete, params).then((data) => {
-                    console.log(data)
                     let index = this.tableData.indexOf(row);
                     this.tableData.splice(index, 1);
                     this.$message.success('删除成功');

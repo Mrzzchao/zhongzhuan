@@ -15,7 +15,10 @@ const ajax = function (url, config = {}) {
         }
     }).then((res) => {
         if(res.code === 100) {
-            return res.data
+            return {
+                list: res.data,
+                countAll: res.count
+            }
         } else {
             throw new Error(res.msg)
         }
@@ -37,7 +40,10 @@ ajax.get = function (url, config = {ignore: true}) {
         }
     }).then((res) => {
         if(res.code === 100) {
-            return res.data
+            return {
+                list: res.data,
+                countAll: res.count
+            }
         } else {
             throw new Error(res.msg)
         }
@@ -59,7 +65,10 @@ ajax.post = function (url, param, config = {ignore: true}) {
         }
     }).then((res) => {
         if(res.code === 100) {
-            return res.data
+            return {
+                list: res.data,
+                countAll: res.count
+            }
         } else {
             throw new Error(res.msg)
         }

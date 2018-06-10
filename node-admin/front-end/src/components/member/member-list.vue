@@ -50,18 +50,22 @@
             </el-table-column>
 
 
-            <el-table-column label="操作">
+            <el-table-column
+                label="操作"
+                width="150"
+                >
                 <template scope="scope">
 
                     <el-button
                             size="small"
-                            @click="editGoods(scope.row)">修改类型
+                            type="info"
+                            @click="editGoods(scope.row)">修改
                     </el-button>
 
                     <el-button
                             size="small"
                             type="danger"
-                            @click="handleDelete(scope.row)">删除类型
+                            @click="handleDelete(scope.row)">删除
                     </el-button>
                 </template>
             </el-table-column>
@@ -70,7 +74,7 @@
 
         <div class="pagination">
 
-            <el-pagination @current-change="handleCurrentChange" layout="prev, pager, next" :total="500">
+            <el-pagination @current-change="handleCurrentChange" layout="prev, pager, next" :total="countAll">
             </el-pagination>
         </div>
 
@@ -105,6 +109,7 @@
 
                 cur_page: 1,
                 pageSize: 10,
+                countAll: 50,
 
                 multipleSelection: [],
 
@@ -120,9 +125,9 @@
                     pageSize: this.pageSize
                 }
                 this.ajax.post(this.api.studentList, params).then((data) => {
-                    this.tableData = data
+                    this.tableData = this.formatData(data.list)
+                    this.countAll = data.countAll
                     this.load = false
-                    console.log(data)
                 })
 
 
@@ -138,9 +143,9 @@
                 params.pageSize = this.pageSize
 
                 this.ajax.post(this.api.studentByName, params).then((data) => {
-                    this.tableData = [data]
+                    this.tableData = this.formatData(data.list)
+                    this.countAll = data.countAll
                     this.load = false
-                    console.log(data)
                 })
 
 
@@ -185,6 +190,10 @@
 
             handleSelectionChange(val) {
                 this.multipleSelection = val;
+            },
+
+            formatData(data) {
+                return data
             }
         },
 

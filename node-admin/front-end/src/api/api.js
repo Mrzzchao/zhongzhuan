@@ -53,6 +53,7 @@ module.exports = {
     // student
     studentList: path + '/student/list',
     studentItem: path + '/student/one',
+    studentDetail: path + '/student/detail',
     studentByName: path + '/student/oneByName',
     studentAdd: path + '/student/add',
     studentDelete: path + '/student/delete',
@@ -75,6 +76,7 @@ module.exports = {
 
     // download
     downloadList: path + '/download/list',
+    downloadDetail: path + '/download/detail',
     downloadByName: path + '/download/oneByName',
     downloadAdd: path + '/download/add',
     downloadDelete: path + '/download/delete',
@@ -84,6 +86,8 @@ module.exports = {
     // upload
     uploadImg: path + '/upload/img',
     uploadExcel: path + '/upload/excel',
+    uploadStudy: path + '/upload/study',
+
 
     //wechat
     wxSession: path + '/wechat/session'

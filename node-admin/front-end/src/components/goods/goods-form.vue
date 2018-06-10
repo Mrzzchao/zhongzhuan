@@ -1,172 +1,125 @@
 <template>
-    <el-form ref="form" :model="form" label-width="80px" class="form-contain">
-
-        <el-form-item label="商品名称">
-            <el-input v-model="form.goods_name"></el-input>
+    <el-form ref="form" :model="form" :rules="rules" label-width="80px" class="form-contain" >
+        <el-form-item :label="name" :prop="type" v-for="name, type in formMap" :key="type">
+            <el-input v-model="form[type]"></el-input>
         </el-form-item>
 
-        <el-form-item label="商品价格">
-            <el-input placeholder="请输入内容" v-model="form.goods_price" type='number'>
-                <template slot="append">元</template>
-</el-input>
-</el-form-item>
+        <el-upload
+          class="upload-demo"
+          name="file"
+          multiple
+          :action="uploadUrl"
+          :on-preview="handlePreview"
+          :on-remove="handleRemove"
+          :before-remove="beforeRemove"
+          :on-success="handleSuccess"
+          :limit="3"
+          :on-exceed="handleExceed"
+          :file-list="fileList"
+          >
+          <el-button size="small" type="primary">点击上传</el-button>
+          <div slot="tip" class="el-upload__tip">只能上传jpg/png文件，且不超过500kb</div>
+        </el-upload>
 
-
-<el-form-item label="商品库存">
-	<el-input-number v-model="form.inventory" :min="0"></el-input-number>
-</el-form-item>
-
-  <el-form-item label="商品类型">	  
-	 <el-select v-model="form.goods_typename"     placeholder="请选择商品类型">
-    <el-option
-      v-for="item in goodsTpyeList"
-      :key="item.goods_typename"
-      :label="item.goods_typename"
-      :value="item.goods_typename">
-    </el-option>
-  </el-select>    
-  </el-form-item>
-	  
-
-
-
-
-
-
-
-<el-form-item label="商品状态">
-	<el-radio-group v-model="form.onsale">
-		<el-radio :label="0">下架</el-radio>
-		<el-radio :label="1">上架</el-radio>
-
-	</el-radio-group>
-</el-form-item>
-
-
-<el-form-item label="商品详情">
-	<el-input type="textarea" :rows="3" placeholder="请输入内容" v-model="form.goods_details">
-	</el-input>
-
-</el-form-item>
-
-
-
-<el-form-item label="上传图片">
-<el-upload
-  action="https://jsonplaceholder.typicode.com/posts/"
-  list-type="picture-card"
-  :on-preview="handlePictureCardPreview"
-  :on-remove="handleRemove">
-  <i class="el-icon-plus"></i>
-</el-upload>
-<el-dialog v-model="dialogVisible" size="tiny">
-  <img width="100%" :src="dialogImageUrl" alt="">
-</el-dialog>
-
-</el-form-item>
-
-
-<el-form-item>
-	<el-button type="primary" @click="onSubmit">{{isNew ? '添加商品' : '修改商品'}}</el-button>
-	<el-button @click="onCancel">取消</el-button>
-</el-form-item>
-
-</el-form>
+        <el-form-item>
+            <el-button type="primary" @click="onSubmit">添加</el-button>
+            <el-button @click="onCancel">取消</el-button>
+        </el-form-item>
+    </el-form>
 </template>
 
 <script>
 	export default {
 		name: 'form',
-
 		data() {
 			return {
-				isNew: 1, // 是否是添加
 				form: {
-					goods_id: undefined,
-					goods_name: '',
-					goods_price: 0,
-					onsale: '',
-					inventory: 0,
-					imgs: '',
-					goods_type: '',
-					goods_typename:'',
-
+                    title: '',
+                    download_url: ''
 				},
-                 goodsTpyeList:"",
-				 dialogImageUrl: '',
-				dialogVisible: false
+
+                formMap: {
+                    title: '课件名称',
+                    download_url: '上传课件'
+                },
+
+                rules: {
+                    title: [{required: true, message: '请输入课件名称', trigger: 'blur'}],
+                    download_url: [{required: true, message: '请上传课件', trigger: 'blur'}]
+                },
+
+                fileList: [],
+                uploadUrl: this.api.uploadStudy
 			}
 		},
-		
-		
-		
 		methods: {
 			onSubmit() {
-				if (!this.form.goods_name) {
-					this.$message.warning('请填写完整信息');
-					return;
-				}
-
-				this.func.ajaxPost(this.api.goodsAdd, this.form, res => {
-					if (res.data.code === 200) {
-						this.$message.success('操作成功');
-						this.$router.push('/admin/goods-list');
-					}
-				});
+                this.validate()
 			},
 
-			
-			goodsType(){
-				
-				this.func.ajaxPost(this.api.goodsType, this.form, res => {
-					if (res.data.code === 200) {
-						this.goodsTpyeList =res.data.resultList;
-						console.log(res.data.resultList);
-					
-					}
-				});
-				
-			},
-			
-			
-			
 			onCancel() {
 				this.$router.push('/admin/goods-list');
 			},
 
+            validate() {
+                console.log(this.$refs.form)
+                this.$refs.form.validate((valid) => {
+                    if (valid) {
+                        this.submitItem()
+                    }
+                });
+            },
 
+            fetchItem() {
+                this.load = true;
+                let params = {
+                    id: this.$route.query.id
+                }
+                this.ajax.post(this.api.downloadDetail, params).then((data) => {
+                    console.log(data);
+                    this.form = data.list
+                    this.load = false
+                })
+            },
 
-		handleRemove(file, fileList) {
-        console.log(file, fileList);
-      },
-      handlePictureCardPreview(file) {
-        this.dialogImageUrl = file.url;
-		 this.form.imgs = file.url;
-//       this.dialogVisible = true;
-      }
+            submitItem() {
+                const api = this.isNew ? this.api.downloadAdd : this.api.downloadUpdate
+                this.ajax.post(api, this.form).then((data) => {
+                    this.$message.success('操作成功');
+                    this.$router.push('/admin/goods-list');
+                })
+            },
 
+            handleRemove(file, fileList) {
+              console.log(file, fileList);
+            },
+            handlePreview(file) {
+              console.log(file);
+            },
+            handleExceed(files, fileList) {
+                console.log(fileList)
+              this.$message.warning(`当前限制选择 1 个文件，本次选择了 ${files.length} 个文件，共选择了 ${files.length + fileList.length} 个文件`);
+            },
+            handleSuccess(files, fileList) {
+                console.log(files)
+                console.log(fileList)
+                // this.fileList.push(fileList)
+            },
+            beforeRemove(file, fileList) {
+              return this.$confirm(`确定移除 ${ file.name }？`);
+            }
 
 		},
-
-
 
 
 		created() {
-			let goods_id = this.$route.query.goods_id;
-
-			if (goods_id) {
+            const id = this.$route.query.id
+			if (id) {
 				this.isNew = 0;
-
-				this.func.ajaxPost(this.api.goodsDetail, {
-					goods_id
-				}, res => {
-					this.form = res.data.resultList;
-					this.form.goods_id = res.data.resultList.goods_id;
-				});
+                this.fetchItem()
 			}
-			
-			this.goodsType();
-		},
+		}
+
 
 	}
 
