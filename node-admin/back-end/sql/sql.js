@@ -40,6 +40,23 @@ SQL.prototype.queryById = function (id, pageNo = 1, pageSize = 10) {
     return DBHandler(sql, arr)
 }
 
+// 根据学生id查询
+SQL.prototype.queryByStudentId = function (student_id) {
+    let sql, arr
+    sql = `select * from ${this.table} where student_id = ?`
+    arr = [student_id];
+    return DBHandler(sql, arr)
+}
+
+// 根据学生id查询技能证书，需要group by
+SQL.prototype.querySkillByStudentIdGroupBySkillid = function (student_id) {
+    let sql, arr
+    sql = `select * from t_skill_certification where student_id = ? group by skill_id`;
+    arr = [student_id];
+    return DBHandler(sql, arr)
+}
+
+
 // 根据id字符串查询
 SQL.prototype.queryByIds = function (id, pageNo = 1, pageSize = 10) {
     let startLimit, endLimit, sql, arr;

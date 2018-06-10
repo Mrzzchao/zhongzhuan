@@ -46,41 +46,5 @@ let sendEmail = {
     }
 }
 
-
-exports.sendEmail =  function () {
-    var options = {
-        from        : '"龙岗中专" <84930537@qq.com>',
-        to          : '"周立钊" <437153171@qq.com>',
-        // cc         : ''  //抄送
-        // bcc      : ''    //密送
-        subject        : '一封来自测试的邮件',
-        text          : '一封来自测试的邮件',
-        html           : '<h1>你好，这是一封来自测试的邮件！</h1><p>图片你大爷，刚才填错了</p>',
-        attachments :
-            [
-                {
-                    filename: 'test.pdf',            // 改成你的附件名
-                    path: 'C:\\\\Users\\\\monitor\\\\WebstormProjects\\\\untitled3\\\\test.pdf',  // 改成你的附件路径
-                    cid : '00000001'                 // cid可被邮件使用
-                },
-                /*{
-                    filename: 'img2.png',            // 改成你的附件名
-                    path: 'public/images/img2.png',  // 改成你的附件路径
-                    cid : '00000002'                 // cid可被邮件使用
-                },*/
-            ]
-    };
-
-    mailTransport.sendMail(options, function(err, msg){
-        if(err){
-            console.log(err);
-            // res.render('index', { title: err });
-        }
-        else {
-            console.log(msg);
-            // res.render('index', { title: "已接收："+msg.accepted});
-        }
-    });
-
-}
+module.exports = sendEmail;
 
