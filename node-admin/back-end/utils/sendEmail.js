@@ -12,7 +12,7 @@ let sendEmail = {
     sendEmail(hr_email, job_name,student_name, student_id){
         var options = {
             from        : '"龙岗中专" <84930537@qq.com>',
-            to          : '"周立钊" <437153171@qq.com>',
+            to          : '"周立钊" <43¬7153171@qq.com>',
             // cc         : ''  //抄送
             // bcc      : ''    //密送
             subject        : '一封来自龙岗中专的求职邮件',

@@ -29,10 +29,10 @@ export default new Router({
     routes: [
         {
             path: '/admin',
-            redirect: '/admin/goods-list',
+            redirect: '/admin/goodstype-list',
             component: Admin,
             children: [
-				
+
 				  {
                     path: '/admin/user-list',
                     component: UserList,
@@ -41,7 +41,7 @@ export default new Router({
                     path: '/admin/user-form',
                     component: UserForm,
                 },
-				
+
 				  {
                     path: '/admin/member-list',
                     component: MemberList,
@@ -50,12 +50,12 @@ export default new Router({
                     path: '/admin/member-form',
                     component: MemberForm,
                 },
-				
+
 				  {
                     path: '/admin/goodstype-list',
                     component: GoodstypeList,
                 },
-				
+
                 {
                     path: '/admin/goodstype-form',
                     component: GoodstypeForm,
@@ -76,9 +76,9 @@ export default new Router({
                     path: '/admin/order-form',
                     component: orderForm,
                 }
-               
-              
-				
+
+
+
             ]
         },
         {

@@ -44,6 +44,21 @@ module.exports = {
         })
     },
 
+    fetchByName(req, res) {
+        const job_name = req.body.job_name
+        const pageNo = req.body.pageNo || 1
+        const pageSize = req.body.pageSize || 10
+
+        SQLHandler.queryByType('job_name', job_name, pageNo, pageSize).then((rows) => {
+            rows = formatData(rows)
+            res.json({
+                code: 100,
+                msg: 'success',
+                data: rows
+            })
+        })
+    },
+
     // 添加工作
     addOne(req, res) {
         let {job_name, company, tags, salary, company_logo, job_detail, remarks, operator} = req.body

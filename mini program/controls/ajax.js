@@ -18,6 +18,15 @@ function hideLoading() {
   wx.hideLoading()
 }
 
+/**
+ * 打开微信提示弹窗
+ */
+function showToast(msg) {
+  wx.showToast({
+    title: msg
+  })
+}
+
 
 /**
  * 获取岗位列表
@@ -169,8 +178,24 @@ function submitSkill(obj, isNew) {
  */
 function uploadFiles(obj) {
   return WxFunc.uploadFiles({ url: Api.uploadImg, ...obj }).then((res) => {
+    showToast('上传成功')
     console.log(res)
     return res
+  })
+}
+
+/**
+ * 下载学习资源
+ */
+function downloadFile(url) {
+  console.log(url)
+  return WxFunc.downloadFile({ url}).then((res) => {
+    const url = res.tempFilePath
+    return WxFunc.saveFile(url).then((res) => {
+      console.log(res)
+      showToast('下载成功')
+      return res.savedFilePath
+    })
   })
 }
 
@@ -198,20 +223,50 @@ function getStuInfo(wx_openid) {
   })
 }
 
+/**
+ * 获取学习资料列表
+ */
+function getResourceList() {
+  return WxFunc.requestPost(Api.downloadList).then((res) => {
+    if (res.code === 100) {
+      return res.data
+    }
+  })
+}
+
+/**
+ * 获取学习资料单项
+ */
+function getResourceItem(id) {
+  return WxFunc.requestPost(Api.downloadItem, {id}).then((res) => {
+    if (res.code === 100) {
+      return res.data
+    }
+  })
+}
+
+
+
 module.exports = {
-  uploadFiles,
   getJobList,
+  getJobDetail,
   getEduList,
   getWorkList,
   getSkillList,
+  getResourceList,
+
+  getResourceItem,
   getEduItem,
   getWorkItem,
   getSkillItem,
-  getJobDetail,
+
   submitEdu,
   submitWork,
   submitSkill,
 
+  uploadFiles,
+  downloadFile,
+  
   submitStu,
   getStuInfo
 }

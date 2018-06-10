@@ -31,6 +31,7 @@ router.post(api.userChangeRole, user.controlVisit, user.changeRole); // 更改�
 
 // job
 router.post(api.jobList, job.fetchAll);
+router.post(api.jobByName, job.fetchByName);
 router.post(api.jobDetail, job.fetchById);
 router.post(api.jobAdd, job.addOne);
 router.post(api.jobDelete, job.deleteOne);
@@ -71,6 +72,7 @@ router.post(api.skillUpdate, skill.updateOne);
 // student
 router.post(api.studentList, student.fetchAll);
 router.post(api.studentItem, student.fetchByWxId);
+router.post(api.studentByName, student.fetchByName);
 router.post(api.studentAdd, student.addOne);
 router.post(api.studentDelete, student.deleteOne);
 router.post(api.studentDeleteMulti, student.deleteMulti);
@@ -95,6 +97,7 @@ router.post(api.privilegeUpdate, privilege.updateOne);
 
 // download
 router.post(api.downloadList, download.fetchAll);
+router.post(api.downloadByName, download.fetchByName);
 router.post(api.downloadAdd, download.addOne);
 router.post(api.downloadDelete, download.deleteOne);
 router.post(api.downloadDeleteMulti, download.deleteMulti);

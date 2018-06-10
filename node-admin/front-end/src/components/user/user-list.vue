@@ -1,29 +1,29 @@
 <template>
     <div class="admin-list">
-		
-		
-<div class="crumbs">	
-	<el-breadcrumb separator="/">
+
+
+<div class="crumbs">
+  <el-breadcrumb separator="/">
   <el-breadcrumb-item :to="{ path: '/' }">首页</el-breadcrumb-item>
   <el-breadcrumb-item>用户管理</el-breadcrumb-item>
   <el-breadcrumb-item>用户列表</el-breadcrumb-item>
- 
-</el-breadcrumb>	
-		
-</div>	
-		
 
-		
+</el-breadcrumb>
+
+</div>
+
+
+
 <el-form :inline="true"  class="demo-form-inline">
- 
-		
-		<router-link to="/admin/user-form">
+
+
+	<router-link to="/admin/user-form">
 		<el-button type="success">新增用户</el-button>
 	</router-link>
-			
+
 <!--			  <el-button type="danger" @click="deleteMulti">批量删除</el-button>-->
 </el-form>
-		
+
         <el-table
             v-loading='load'
             ref="multipleTable"
@@ -85,7 +85,7 @@
 
 </el-table>
 <div class="pagination">
-	
+
 	<el-pagination @current-change="handleCurrentChange" layout="prev, pager, next" :total="500">
 	</el-pagination>
 </div>
@@ -101,7 +101,7 @@
 				tableData: [],
 				cur_page: 1,
 				multipleSelection: [],
-				
+
 				roles: [{
 						val: '1',
 						txt: '普通用户'
@@ -123,27 +123,27 @@
 		},
 
 		methods: {
-		
-			
-			
+
+
+
 		fetchList() {
-		
+
 			 this.load = true;
 				var reqParams ={
-					
+
 					cur_page :this.cur_page,
-				
+
 				};
-		
+
             this.func.ajaxPost(this.api.userList,reqParams,res => {
                 this.tableData = res.data.resultList;
                 this.load = false;
             });
-				
-		
+
+
 			},
-			
-			
+
+
 
 			//分页
 			handleCurrentChange(val) {

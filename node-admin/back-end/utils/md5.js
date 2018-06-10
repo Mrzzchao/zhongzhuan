@@ -3,7 +3,7 @@ let crypto = require('crypto');
 module.exports  = {
     md5Encrypt (encryptString) {
         const hasher = crypto.createHash("md5");
-        hasher.update();
+        hasher.update(encryptString);
         encryptString = hasher.digest('hex');
         return encryptString;
     },
