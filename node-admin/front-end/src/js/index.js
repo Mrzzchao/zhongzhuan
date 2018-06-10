@@ -11,8 +11,11 @@ import func from "../public/func";
 import ajax from "../public/ajax"
 import schoolInfo from '../public/schoolInfo'
 import api from "../api/api";
+// import JsonExcel from 'json-to-excel';
 
 Vue.use(ElementUI);
+// Vue.component('downloadExcel', JsonExcel);
+
 Vue.prototype.$http = axios;
 Vue.prototype.api = api;
 Vue.prototype.ajax = ajax;

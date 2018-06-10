@@ -5,9 +5,12 @@ module.exports = {
 
     // user
     userList: path + '/user/list',
+    userDetail: path + '/user/detail',
+    userByName: path + '/user/oneByName',
     userAdd: path + '/user/add',
     userDelete: path + '/user/delete',
     userDeleteMulti: path + '/user/delete-multi',
+    userUpdate: path + '/user/update',
     userLogin: path + '/user/login',
     userLogout: path + '/user/logout',
     userAutoLogin: path + '/user/auto-login',

@@ -11,7 +11,7 @@ let SQLHandler = new SQL(table.USER)
 
 function formatData(rows) {
 	return rows.map(row => {
-		let date = moment(row.create_time).format('YYYY-MM-DD');
+		let date = moment(row.create_time || Date.now()).format('YYYY-MM-DD');
 		let obj = {};
 
 		switch (row.role) {
@@ -50,6 +50,36 @@ module.exports = {
             })
         })
 	},
+
+	fetchById(req, res) {
+		const id = req.body.id
+		SQLHandler.queryById(id).then((rows) => {
+			rows = formatData(rows)
+			res.json({
+				code: 100,
+				msg: 'success',
+				data: rows[0]
+			})
+		})
+	},
+
+    fetchByName(req, res) {
+        const username = req.body.username
+        const pageNo = req.body.pageNo || 1
+        const pageSize = req.body.pageSize || 10
+
+        SQLHandler.queryByType('username', username, pageNo, pageSize).then((rows) => {
+            rows = formatData(rows)
+            SQLHandler.countByType('username', username).then((columns) => {
+                res.json({
+                    code: 100,
+                    msg: 'success',
+                    data: rows,
+                    count: columns[0].COUNT
+                })
+            })
+        })
+    },
 
 	// 添加用户
 	addOne(req, res) {
@@ -112,6 +142,24 @@ module.exports = {
         })
 	},
 
+    updateOne(req, res) {
+        let {id, username, password, role, remark, create_time, login_time} = req.body
+        let obj = {id, username, password, role, remark, create_time, login_time}
+        SQLHandler.update(obj).then((rows) => {
+            if(rows.affectedRows) {
+                res.json({
+                    code: 100,
+                    msg: 'success'
+                })
+            } else {
+                res.json({
+                    code: 102,
+                    msg: 'fail'
+                })
+            }
+        })
+    },
+
 	// 登录
 	login(req, res) {
 		let username = req.body.username;
@@ -132,7 +180,7 @@ module.exports = {
 			console.log(password)
 			if(password === passwordConfirm) {  // 密码匹配成功
 				let user = {
-					user_id: rows[0].id,
+					id: rows[0].id,
 					username: rows[0].username,
 					role: rows[0].role,
 					remark: rows[0].remark

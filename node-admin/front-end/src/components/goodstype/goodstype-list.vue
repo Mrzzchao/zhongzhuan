@@ -22,7 +22,7 @@
             </el-form-item>
 
             <router-link to="/admin/goodstype-form">
-                <el-button type="success">新增职位</el-button>
+                <el-button type="success">新增</el-button>
             </router-link>
 
 
@@ -46,12 +46,13 @@
                     :prop="type"
                     :label="name"
                     :key="name"
+                    :width="columnConfig[type]"
             >
             </el-table-column>
 
             <el-table-column
                 label="职位描述"
-                width="150"
+                :width="columnConfig.job_detail.width"
                 >
                 <template scope="scope">
 
@@ -66,7 +67,8 @@
 
             <el-table-column
                 label="操作"
-                width="150"
+                :width="columnConfig.handler.width"
+                fixed="right"
                 >
                 <template scope="scope">
 
@@ -77,10 +79,17 @@
                     </el-button>
 
                     <el-button
+                        size="small"
+                        type="info"
+                        @click="hanlePublish(scope.row)">{{scope.row.btnWord}}
+                    </el-button>
+
+                    <el-button
                             size="small"
                             type="danger"
                             @click="handleDelete(scope.row)">删除
                     </el-button>
+
                 </template>
             </el-table-column>
 
@@ -138,6 +147,34 @@
                     statusMsg: '状态'
                 },
 
+                columnConfig: {
+                    company: {
+                        width: '100'
+                    },
+                    job_name: {
+                        width: '100'
+                    },
+                    salary: {
+                        width: '100'
+                    },
+                    tags: {
+                        width: '100'
+                    },
+                    create_time: {
+                        width: '100'
+                    },
+                    statusMsg: {
+                        width: '100'
+                    },
+                    job_detail: {
+                        width: '100'
+                    },
+
+                    handler: {
+                        width: '200'
+                    }
+                },
+
                 job_detail: '职位描述',
                 tableData: [],
 
@@ -158,6 +195,12 @@
 
                 dialogVisible: false,
                 dialogData: null
+            }
+        },
+
+        computed: {
+            searchVal() {
+                return this.searchObj.value
             }
         },
 
@@ -227,6 +270,15 @@
                 })
             },
 
+            // 发布
+            hanlePublish(row) {
+                row.status = +(!row.status)
+                this.ajax.post(this.api.jobUpdate, row).then((data) => {
+                    this.fetchItem()
+                    this.$message.success('更新成功');
+                })
+            },
+
 
             // 修改
             editGoods(row) {
@@ -248,6 +300,7 @@
                 return data.map((item) => {
                     const status = item.status
                     item.statusMsg = status == '1' ? '已发布' : '未发布'
+                    item.btnWord = status == '1' ? '下架' : '发布'
                     let job_detail = decodeURIComponent(item.job_detail)
                     console.log(job_detail);
                     let detailArr = job_detail.split('&&&&')
@@ -264,6 +317,14 @@
 
         created() {
             this.fetchList();
+        },
+
+        watch: {
+            searchVal(newVal) {
+                if(!newVal) {
+                    this.fetchList()
+                }
+            }
         }
 
 

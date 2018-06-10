@@ -12,22 +12,26 @@
 
         </div>
 
-
         <el-form :inline="true" class="demo-form-inline">
             <el-form-item>
-                <el-input v-model="searchObj.value" :placeholder="searchObj.tip"></el-input>
+                <el-input v-model="searchObj.value" :placeholder="searchObj.tip" ></el-input>
             </el-form-item>
             <el-form-item>
                 <el-button type="primary" @click="search">查询</el-button>
             </el-form-item>
+            <el-form-item>
+                <download-excel
+                    class   = "btn btn-default"
+                    :data   = "json_data"
+                    :fields = "json_fields"
+                    :meta   = "json_meta"
+                    name    = "student.xls">
 
-            <!-- <router-link to="/admin/goodstype-form">
-                <el-button type="success">新增类型</el-button>
-            </router-link> -->
 
-
+                    <el-button type="success" >导出表格</el-button>
+                </download-excel>
+            </el-form-item>
         </el-form>
-
         <el-form :inline="true" class="demo-form-inline">
             <el-select v-model="searchObj.value2" clearable placeholder="请选择">
               <el-option
@@ -48,6 +52,7 @@
             </el-select>
         </el-form>
 
+
         <el-table
                 :loading='load'
                 ref="multipleTable"
@@ -56,7 +61,9 @@
                 border
                 height="450"
                 tooltip-effect="dark"
-                style="width: 100%">
+                style="width: 100%"
+                id="stuTable"
+                >
             <el-table-column
                     type="selection">
             </el-table-column>
@@ -66,6 +73,7 @@
                     :prop="type"
                     :label="name"
                     :key="name"
+                    :width="columnConfig[type].width"
 
             >
             </el-table-column>
@@ -74,6 +82,7 @@
             <el-table-column
                 label="操作"
                 width="150"
+                fixed="right"
                 >
                 <template scope="scope">
 
@@ -103,9 +112,13 @@
 </template>
 
 <script>
+    import downloadExcel from '../common/JsonExcel.vue';
 
     export default {
         name: 'list',
+        components: {
+            downloadExcel
+        },
         data() {
             return {
                 columns: {
@@ -120,8 +133,48 @@
                     className: '班级',
                     company_name: '单位',
                     title: '职位',
-                    service_time: '入职时间'
+                    service_time: '在职时间'
                 },
+
+                columnConfig: {
+                    real_name: {
+                        width: '100'
+                    },
+                    sexuality: {
+                        width: '100'
+                    },
+                    born_date: {
+                        width: '150'
+                    },
+                    highest_education: {
+                        width: '100'
+                    },
+                    mobile: {
+                        width: '150'
+                    },
+                    email: {
+                        width: '180'
+                    },
+                    grade: {
+                        width: '100'
+                    },
+                    major: {
+                        width: '100'
+                    },
+                    className: {
+                        width: '100'
+                    },
+                    company_name: {
+                        width: '100'
+                    },
+                    title: {
+                        width: '100'
+                    },
+                    service_time: {
+                        width: '160'
+                    }
+                },
+
                 tableData: [],
 
                 searchObj: {
@@ -141,6 +194,51 @@
                 multipleSelection: [],
 
                 load: false, // loading
+
+                // 导出表格配置
+                json_fields : {
+                    real_name: 'String',
+                    sexuality: 'String',
+                    born_date: 'String',
+                    highest_education: 'String',
+                    mobile: 'String',
+                    email: 'String',
+                    grade: 'String',
+                    major: 'String',
+                    className: 'String',
+                    company_name: 'String',
+                    title: 'String',
+                    service_time: 'String'
+                },
+
+                // json_data: [],
+
+                json_meta: [
+                    [{
+                        "key": "charset",
+                        "value": "utf-8"
+                    }]
+                ]
+            }
+        },
+
+        computed: {
+            json_data() {
+                const json_fields = this.json_fields
+                let arr = []
+                this.tableData.map((item) => {
+                    let obj = {}
+                    Object.keys(json_fields).forEach((key) => {
+                        obj[key] = item[key]
+                    })
+                    arr.push(obj)
+                })
+                arr.unshift(this.columns)
+                return arr
+            },
+
+            searchVal() {
+                return this.searchObj.value || this.searchObj.value2 || this.searchObj.value3
             }
         },
 
@@ -152,6 +250,7 @@
                     pageSize: this.pageSize
                 }
                 this.ajax.post(this.api.studentListWithWork, params).then((data) => {
+                    console.log(data);
                     this.tableData = this.formatData(data.list)
                     this.countAll = data.countAll
                     this.load = false
@@ -234,6 +333,14 @@
 
         created() {
             this.fetchList();
+        },
+
+        watch: {
+            searchVal(newVal) {
+                if(!newVal) {
+                    this.fetchList()
+                }
+            }
         }
 
 

@@ -42,6 +42,7 @@
                         this.func.ajaxPost(this.api.userLogin, this.loginForm, res => {
 
                             if (res.data.code === 200) {
+                                console.log(res.data.user);
                                 this.$store.commit('user', res.data.user);
                                 this.$message.success('登陆成功');
                                 this.$router.push('/admin');
@@ -60,7 +61,7 @@
         },
 
         created () {
-            if (this.$store.state.user || true) {
+            if (this.$store.state.user) {
                 this.$router.push('/admin');
             }
         }

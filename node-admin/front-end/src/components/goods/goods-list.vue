@@ -22,7 +22,7 @@
             </el-form-item>
 
             <router-link to="/admin/goods-form">
-                <el-button type="success">新增类型</el-button>
+                <el-button type="success">新增</el-button>
             </router-link>
 
 
@@ -52,7 +52,7 @@
 
             <el-table-column
                 label="操作"
-                width="150"
+                width="200"
                 >
                 <template scope="scope">
 
@@ -60,6 +60,12 @@
                             size="small"
                             type="info"
                             @click="editGoods(scope.row)">修改
+                    </el-button>
+
+                    <el-button
+                        size="small"
+                        type="info"
+                        @click="hanlePublish(scope.row)">{{scope.row.btnWord}}
                     </el-button>
 
                     <el-button
@@ -112,6 +118,12 @@
             }
         },
 
+        computed: {
+            searchVal() {
+                return this.searchObj.value
+            }
+        },
+
         methods: {
             fetchList() {
                 this.load = true;
@@ -161,6 +173,15 @@
                 }
             },
 
+            // 发布
+            hanlePublish(row) {
+                row.status = +(!row.status)
+                this.ajax.post(this.api.downloadUpdate, row).then((data) => {
+                    this.fetchItem()
+                    this.$message.success('更新成功');
+                })
+            },
+
             // 搜索
             search() {
                 this.fetchItem();
@@ -198,6 +219,7 @@
 
                     item.resourceType = this.getResourceType(ext)
                     item.statusMsg = status == '1' ? '已发布' : '未发布'
+                    item.btnWord = status == '1' ? '下架' : '发布'
                     return item
                 })
             },
@@ -215,8 +237,15 @@
 
         created() {
             this.fetchList();
-        }
+        },
 
+        watch: {
+            searchVal(newVal) {
+                if(!newVal) {
+                    this.fetchList()
+                }
+            }
+        }
 
     }
 </script>

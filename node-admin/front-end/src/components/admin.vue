@@ -11,7 +11,7 @@
 <el-menu-item index="1-1" @click="controlJump('/admin/user-list')">用户列表
 </el-menu-item>
 
-<el-menu-item index="1-2" @click="controlJump('/admin/user-form')">新增用户
+<el-menu-item index="1-2" @click="controlJump('/admin/user-form', true)">新增用户
 </el-menu-item>
 </el-submenu>
 
@@ -84,13 +84,22 @@
 
 		methods: {
 			// 跳转控制
-			controlJump(target) {
-				if (this.user.role < 10) {
-					this.$message.warning('权限不够，加油打怪升级噢～');
+			controlJump(target, flag) {
+                if(flag) {
+                    if(this.user.role < 1000) {
+    					this.$message.warning('权限不够，加油打怪升级噢～');
+                    } else {
+                        this.$router.push(target);
+                    }
+                } else {
+                    if (this.user.role <= 10) {
+                        this.$message.warning('权限不够，加油打怪升级噢～');
 
-				} else {
-					this.$router.push(target);
-				}
+                    } else {
+                        this.$router.push(target);
+                    }
+
+                }
 
 			}
 		},

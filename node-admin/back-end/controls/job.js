@@ -52,9 +52,9 @@ module.exports = {
         const pageNo = req.body.pageNo || 1
         const pageSize = req.body.pageSize || 10
 
-        SQLHandler.queryByType('title', title, pageNo, pageSize).then((rows) => {
+        SQLHandler.queryByType('job_name', job_name, pageNo, pageSize).then((rows) => {
             rows = formatData(rows)
-            SQLHandler.countByType('title', job_name).then((columns) => {
+            SQLHandler.countByType('job_name', job_name).then((columns) => {
                 res.json({
                     code: 100,
                     msg: 'success',
@@ -127,8 +127,8 @@ module.exports = {
 
      // 修改工作
     updateOne(req, res) {
-        let {job_name, company, tags, salary, company_logo, job_detail, remarks, operator, hr_email, id} = req.body
-        let obj = {job_name, company, tags, salary, company_logo, job_detail, remarks, operator, hr_email, id}
+        let {job_name, company, tags, salary, company_logo, job_detail, remarks, operator, hr_email, id, status} = req.body
+        let obj = {job_name, company, tags, salary, company_logo, job_detail, remarks, operator, hr_email, id, status}
         SQLHandler.update(obj).then((rows) => {
             if(rows.affectedRows) {
                 res.json({

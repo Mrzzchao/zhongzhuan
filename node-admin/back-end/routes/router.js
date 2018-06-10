@@ -19,6 +19,9 @@ let router = express.Router();
 
 // user
 router.post(api.userList, user.fetchAll);
+router.post(api.userDetail, user.fetchById);
+router.post(api.userByName, user.fetchByName);
+router.post(api.userUpdate, user.updateOne);
 router.get(api.userLogout, user.logout);
 router.get(api.userAutoLogin, user.autoLogin); // 自动登录
 
