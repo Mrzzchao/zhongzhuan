@@ -40,10 +40,13 @@ module.exports = {
         const pageSize = req.body.pageSize || 10
         SQLHandler.queryAll(pageNo, pageSize).then((rows) => {
             rows = formatData(rows)
-            res.json({
-                code: 100,
-                msg: 'success',
-                data: rows
+            SQLHandler.countAll().then((columns) => {
+                res.json({
+                    code: 100,
+                    msg: 'success',
+                    data: rows,
+                    count: columns[0].COUNT
+                })
             })
         })
 	},

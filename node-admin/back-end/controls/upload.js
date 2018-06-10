@@ -6,7 +6,7 @@ module.exports = {
         let uploadObj = upload.imgUpload.single('file')
         return uploadObj(req, res, function (err) {
             if(err) {
-                console.log('上传错误', err)
+                console.error('上传错误', err)
             }
             next()
         })
@@ -15,7 +15,7 @@ module.exports = {
         const upload = upload.imgUpload.array('file', 10)
         return upload(req, res, function (err) {
             if(err) {
-                console.log('上传错误', err)
+                console.error('上传错误', err)
             }
             return
         })
@@ -24,7 +24,7 @@ module.exports = {
         const upload = upload.excelUpload.single('file')
         return upload(req, res, function (err) {
             if(err) {
-                console.log('上传错误', err)
+                console.error('上传错误', err)
             }
             return
         })
@@ -33,12 +33,22 @@ module.exports = {
         const upload = upload.excelUpload.array('file', 10)
         return upload(req, res, function (err) {
             if(err) {
-                console.log('上传错误', err)
+                console.error('上传错误', err)
             }
             return
         })
     },
-    
+
+    uploadStudyOne(req, res, next) {
+        let uploadObj = upload.imgUpload.single('file')
+        return uploadObj(req, res, function (err) {
+            if(err) {
+                console.error('上传错误', err)
+            }
+            next()
+        })
+    },
+
     handleRes(req, res) {
         const url = `${domain}/${req.file.destination}/${req.file.filename}`
         if(url) {

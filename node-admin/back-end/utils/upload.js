@@ -50,9 +50,10 @@ const uploadFactory = function (type) {
 
 const imgUpload = uploadFactory('images')
 const excelUpload = uploadFactory('excels')
+const studyUpload = uploadFactory('study')
 
 module.exports = {
     imgUpload,
-    excelUpload
+    excelUpload,
+    studyUpload
 }
-

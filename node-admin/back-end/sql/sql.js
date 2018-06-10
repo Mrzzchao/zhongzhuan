@@ -20,7 +20,7 @@ function DBHandler (sql, arr) {
 // 查询全部
 SQL.prototype.queryAll = function (pageNo = 1, pageSize = 10) {
 
-    let startLimit, endLimit, sql;
+    let startLimit, endLimit, sql, arr;
     endLimit = pageNo * pageSize;
     startLimit = endLimit - pageSize;
 
@@ -73,8 +73,8 @@ SQL.prototype.queryByTypes = function (obj, pageNo = 1, pageSize = 10) {
         return `${key} = ?`
     }).join(' and ')
 
-    sql = `select * from ${this.table} where  ? limit ?, ?`
-    arr = [[...Object.values(obj)], startLimit , endLimit];
+    sql = `select * from ${this.table} where ${backStr} limit ?, ?`
+    arr = [...Object.values(obj), startLimit , endLimit];
     return DBHandler(sql, arr)
 }
 
@@ -121,6 +121,38 @@ SQL.prototype.update = function (obj) {
     sql = `UPDATE ${this.table} SET ${proStr} WHERE id = ?`
     arr = [...Object.values(obj), obj.id]
 
+    return DBHandler(sql, arr)
+}
+
+// 查询总条目数目
+SQL.prototype.countAll = function () {
+    let sql, arr = [];
+
+    sql = `SELECT COUNT(*) AS COUNT FROM ${this.table}`
+    return DBHandler(sql, arr)
+}
+
+// 查询单类型条目数目
+SQL.prototype.countByType = function (type, val) {
+    let sql, arr = [];
+
+    sql = `SELECT COUNT(*) AS COUNT FROM ${this.table} WHERE ${type} = ?`
+    arr = [val]
+
+    return DBHandler(sql, arr)
+}
+
+// 查询单类型条目数目
+SQL.prototype.countByTypes = function (obj) {
+    let sql, arr = [];
+
+    const keys = Object.keys(obj)
+    const backStr = keys.map((key) => {
+        return `${key} = ?`
+    }).join(' and ')
+
+    sql = `SELECT COUNT(*) AS COUNT FROM ${this.table} WHERE ${backStr}`
+    arr = [...Object.values(obj)];
     return DBHandler(sql, arr)
 }
 

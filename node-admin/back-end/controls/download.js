@@ -24,10 +24,25 @@ module.exports = {
         const pageSize = req.body.pageSize || 10
         SQLHandler.queryAll(pageNo, pageSize).then((rows) => {
             rows = formatData(rows)
+            SQLHandler.countAll().then((columns) => {
+                res.json({
+                    code: 100,
+                    msg: 'success',
+                    data: rows,
+                    count: columns[0].COUNT
+                })
+            })
+        })
+    },
+
+    fetchById(req, res) {
+        const id = req.body.id
+        SQLHandler.queryById(id).then((rows) => {
+            rows = formatData(rows)
             res.json({
                 code: 100,
                 msg: 'success',
-                data: rows
+                data: rows[0]
             })
         })
     },
@@ -39,10 +54,13 @@ module.exports = {
 
         SQLHandler.queryByType('title', title, pageNo, pageSize).then((rows) => {
             rows = formatData(rows)
-            res.json({
-                code: 100,
-                msg: 'success',
-                data: rows
+            SQLHandler.countByType('title', title).then((columns) => {
+                res.json({
+                    code: 100,
+                    msg: 'success',
+                    data: rows,
+                    count: columns[0].COUNT
+                })
             })
         })
     },
@@ -109,8 +127,8 @@ module.exports = {
 
      // 修改教育经历
     updateOne(req, res) {
-        let {school_name, college_major, educated_time, educational_history, id} = req.body
-        let obj = {school_name, college_major, educated_time, educational_history, id}
+        let {title, download_url, remarks, operator, status, id} = req.body
+        let obj = {title, download_url, remarks, operator, status, id}
         SQLHandler.update(obj).then((rows) => {
             if(rows.affectedRows) {
                 res.json({

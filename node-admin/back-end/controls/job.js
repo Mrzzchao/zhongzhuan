@@ -24,10 +24,13 @@ module.exports = {
         const pageSize = req.body.pageSize || 10
         SQLHandler.queryAll(pageNo, pageSize).then((rows) => {
             rows = formatData(rows)
-            res.json({
-                code: 100,
-                msg: 'success',
-                data: rows
+            SQLHandler.countAll().then((columns) => {
+                res.json({
+                    code: 100,
+                    msg: 'success',
+                    data: rows,
+                    count: columns[0].COUNT
+                })
             })
         })
     },
@@ -49,20 +52,23 @@ module.exports = {
         const pageNo = req.body.pageNo || 1
         const pageSize = req.body.pageSize || 10
 
-        SQLHandler.queryByType('job_name', job_name, pageNo, pageSize).then((rows) => {
+        SQLHandler.queryByType('title', title, pageNo, pageSize).then((rows) => {
             rows = formatData(rows)
-            res.json({
-                code: 100,
-                msg: 'success',
-                data: rows
+            SQLHandler.countByType('title', job_name).then((columns) => {
+                res.json({
+                    code: 100,
+                    msg: 'success',
+                    data: rows,
+                    count: columns[0].COUNT
+                })
             })
         })
     },
 
     // 添加工作
     addOne(req, res) {
-        let {job_name, company, tags, salary, company_logo, job_detail, remarks, operator} = req.body
-        let obj = {job_name, company, tags, salary, company_logo, job_detail, remarks, operator}
+        let {job_name, company, tags, salary, company_logo, job_detail, remarks, operator, hr_email} = req.body
+        let obj = {job_name, company, tags, salary, company_logo, job_detail, remarks, operator, hr_email}
         SQLHandler.insert(obj).then((rows) => {
             if(rows.affectedRows) {
                 res.json({
@@ -121,8 +127,8 @@ module.exports = {
 
      // 修改工作
     updateOne(req, res) {
-        let {job_name, company, tags, salary, company_logo, job_detail, remarks, operator, id} = req.body
-        let obj = {job_name, company, tags, salary, company_logo, job_detail, remarks, operator, id}
+        let {job_name, company, tags, salary, company_logo, job_detail, remarks, operator, hr_email, id} = req.body
+        let obj = {job_name, company, tags, salary, company_logo, job_detail, remarks, operator, hr_email, id}
         SQLHandler.update(obj).then((rows) => {
             if(rows.affectedRows) {
                 res.json({

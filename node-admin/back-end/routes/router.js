@@ -71,8 +71,12 @@ router.post(api.skillUpdate, skill.updateOne);
 
 // student
 router.post(api.studentList, student.fetchAll);
+router.post(api.studentListWithWork, student.fetchAllWithWork);
+router.post(api.studentByTypesWithWork, student.fetchByTypesWithWork);
 router.post(api.studentItem, student.fetchByWxId);
 router.post(api.studentByName, student.fetchByName);
+router.post(api.studentByTypes, student.fetchByTypes);
+router.post(api.studentDetail, student.fetchById);
 router.post(api.studentAdd, student.addOne);
 router.post(api.studentDelete, student.deleteOne);
 router.post(api.studentDeleteMulti, student.deleteMulti);
@@ -97,6 +101,7 @@ router.post(api.privilegeUpdate, privilege.updateOne);
 
 // download
 router.post(api.downloadList, download.fetchAll);
+router.post(api.downloadDetail, download.fetchById);
 router.post(api.downloadByName, download.fetchByName);
 router.post(api.downloadAdd, download.addOne);
 router.post(api.downloadDelete, download.deleteOne);
@@ -107,6 +112,7 @@ router.post(api.downloadUpdate, download.updateOne);
 // upload
 router.post(api.uploadImg, upload.uploadImgOne, upload.handleRes);
 router.post(api.uploadExcel, upload.uploadExcelOne, upload.handleRes);
+router.post(api.uploadStudy, upload.uploadStudyOne, upload.handleRes);
 
 
 // wechat
