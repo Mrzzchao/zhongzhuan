@@ -36,5 +36,25 @@ Page({
       data = this.formatData(data)
       this.setData({ job: data })
     })
+  },
+
+  sendResume(e) {
+    console.log(app)
+    const student_id = app.globalData.student_id
+    if(student_id) {
+      const params = {
+        job_id: this.data.job.id,
+        student_id: app.globalData.student_id
+      }
+      app.utils.Ajax.sendResume(params).then((data) => {
+        wx.showToast({
+          title: '投递成功',
+        })
+      })
+    } else {
+      wx.switchTab({
+        url: '/pages/mine/mine',
+      })
+    }
   }
 })

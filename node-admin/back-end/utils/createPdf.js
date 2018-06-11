@@ -49,7 +49,7 @@ let createPdf = {
     fetchJobDataById(id) {
         return SQLHandlerJob.queryById(id).then((rows) => {
             rows = formatData(rows)
-            return rows;
+            return rows[0];
         })
     },
 
@@ -74,7 +74,8 @@ let createPdf = {
             let [baseInfo, educationInfo, workInfo] = result
 
             workInfo.forEach((work) =>{
-                var temp = work.work_intro.split('%0A');
+                var work_intro = decodeURIComponent(work.work_intro)
+                var temp = work_intro.split('\n');
                 /* temp.forEach((item) => {
                      item = "<p class='oid-detail'>" + decodeURIComponent(item) + "</p>";
                  });*/
@@ -107,15 +108,17 @@ let createPdf = {
     createPDFProtocolFile(student_id) {
         let options  =  {
             "format": 'A4',
+            "paginationOffset": 2,
             "header": {
                 "height": "10mm",
                 "contents": ''
             }
         };// 一些配置
-        let filename = '../resume/'+ student_id + '.pdf';
+        let filename = './resume/'+ student_id + '.pdf';
+        let tplPath = './template/index.html'
         return createPdf.createResumeData(student_id).then((resumeData) => {
-            let html = swig.renderFile(resumeTpl, resumeData);
-            html = htmlHandler.insertStr(template, '<!-- insert-resume -->', html)
+            let html = swig.renderFile(tplPath, resumeData);
+            // html = htmlHandler.insertStr(template, '<!-- insert-resume -->', html)
             return new Promise((resolve, reject) => {
                 pdf.create(html, options).toFile(filename, function (err, res) {
                     if (err) {

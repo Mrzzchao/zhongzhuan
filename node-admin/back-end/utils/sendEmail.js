@@ -12,7 +12,7 @@ let sendEmail = {
     sendEmail(hr_email, job_name,student_name, student_id){
         var options = {
             from        : '"龙岗中专" <84930537@qq.com>',
-            to          : '"周立钊" <43¬7153171@qq.com>',
+            to          : `"周立钊" <${hr_email}>`,
             // cc         : ''  //抄送
             // bcc      : ''    //密送
             subject        : '一封来自龙岗中专的求职邮件',
@@ -21,8 +21,8 @@ let sendEmail = {
             attachments :
                 [
                     {
-                        filename: 'student_id.pdf',            // 改成你的附件名
-                        path: '../resume/'+ student_id + '.pdf',  // 改成你的附件路径
+                        filename: `龙岗中专学生${student_name}的简历.pdf`,            // 改成你的附件名
+                        path: './resume/'+ student_id + '.pdf',  // 改成你的附件路径
                         cid : '00000001'                 // cid可被邮件使用
                     },
                     /*{
@@ -32,7 +32,7 @@ let sendEmail = {
                     },*/
                 ]
         };
-        new Promise((resolve, reject) => {
+        return new Promise((resolve, reject) => {
             mailTransport.sendMail(options, function(err, msg){
                 if (err) {
                     throw new Error(err)

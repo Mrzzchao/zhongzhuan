@@ -45,7 +45,7 @@
 
 	<!-- 投递简历按钮 start -->
 	<view class="footer-wrap footer-btn l-box-center">
-		<view class="btn-blue but-send">投递简历</view>
+		<button class="btn-blue but-send" bindtap='sendResume'>投递简历</button>
 	</view>
 	<!-- 投递简历按钮 end -->
 </view>

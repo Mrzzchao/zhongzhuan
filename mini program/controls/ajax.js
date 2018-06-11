@@ -245,6 +245,17 @@ function getResourceItem(id) {
   })
 }
 
+/**
+ * 发送简历
+ */
+function sendResume({student_id, job_id}) {
+  return WxFunc.requestPost(Api.resumeSend, { student_id, job_id }).then((res) => {
+    if (res.code === 100) {
+      return res.data
+    }
+  })
+}
+
 
 
 module.exports = {
@@ -268,5 +279,7 @@ module.exports = {
   downloadFile,
   
   submitStu,
-  getStuInfo
+  getStuInfo,
+
+  sendResume
 }

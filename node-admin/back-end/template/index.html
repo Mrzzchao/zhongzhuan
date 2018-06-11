@@ -11,13 +11,167 @@
     </style>
 </head>
 <body>
-<div class="page-body resume-wrap l-full l-flex-column">
+<div class="resume-wrap">
     <!-- 简历标题 -->
     <div class="resume-tit">
         个人简历
     </div>
 
-    <!-- insert-resume -->
+    <!-- 信息列表 start -->
+    <div class="info-list-cont">
+
+        <!-- 姓名 -->
+        <div class="info-item l-flex-row">
+            <div class="info-item-name">姓名</div>
+            <div class="info-list-detail l-flex-1">
+                {{ baseInfo.name }}
+            </div>
+        </div>
+        <!-- /姓名 -->
+
+        <!-- 性别 -->
+        <div class="info-item l-flex-row">
+            <div class="info-item-name">性别</div>
+            <div class="info-list-detail l-flex-1">
+                {{ baseInfo.sex }}
+            </div>
+        </div>
+        <!-- /性别 -->
+
+        <!-- 出生日期 -->
+        <div class="info-item l-flex-row">
+            <div class="info-item-name">出生日期</div>
+            <div class="info-list-detail l-flex-1">
+                {{ baseInfo.borndate }}
+            </div>
+        </div>
+        <!-- /出生日期 -->
+
+        <!-- 最高学历 -->
+        <div class="info-item l-flex-row">
+            <div class="info-item-name">最高学历</div>
+            <div class="info-list-detail l-flex-1">
+                {{ baseInfo.highesteducation }}
+            </div>
+        </div>
+        <!-- /最高学历 -->
+
+        <!-- 联系电话 -->
+        <div class="info-item l-flex-row">
+            <div class="info-item-name">联系电话</div>
+            <div class="info-list-detail l-flex-1">
+                {{ baseInfo.mobile }}
+            </div>
+        </div>
+        <!-- /联系电话 -->
+
+        <!-- 邮箱 -->
+        <div class="info-item l-flex-row">
+            <div class="info-item-name">邮箱</div>
+            <div class="info-list-detail l-flex-1">
+                {{ baseInfo.email }}
+            </div>
+        </div>
+        <!-- /邮箱 -->
+
+        <!-- 教育经历 -->
+        <!-- 如果已经有填好了的信息，则加上class：edu-exper-comp -->
+        <div class="info-item info-item-h edu-exper-comp ">
+            <div class="edu-exper-tit">
+                <div class="info-item-name">教育经历</div>
+            </div>
+            <!-- 填好的信息详情 -->
+            {% for education in educationInfo %}
+            <div class="edu-exper-wrap">
+                <!-- 信息详情 -->
+                <div class="edu-exper-cont l-flex-row">
+                    <div class="edu-exper-detail">{{ education.educated_time }}</div>
+                    <div class="edu-exper-detail">{{ education.educational_history }}</div>
+                </div>
+                <div class="edu-exper-cont l-flex-row">
+                    <div class="edu-exper-detail">{{ education.school_name }}</div>
+                    <div class="edu-exper-detail">{{ education.college_major }}</div>
+                </div>
+            </div>
+            {% endfor %}
+            <!-- /填好的信息详情 -->
+        </div>
+        <!-- /教育经历 -->
+
+        <!-- 工作经历 -->
+        <div class="info-item info-item-h edu-exper-comp">
+            <div class="edu-exper-tit">
+                <div class="info-item-name">工作经历</div>
+            </div>
+            <!-- 填好的信息详情 -->
+            {% for work in workInfo %}
+
+            <div class="edu-exper-wrap">
+                <!-- 信息详情 -->
+                <div class="edu-exper-cont l-flex-row">
+                    <div class="edu-exper-detail">{{ work.service_time }}</div>
+                </div>
+                <div class="edu-exper-cont l-flex-row">
+                    <div class="edu-exper-detail">{{ work.company_name }}</div>
+                    <div class="edu-exper-detail">{{ work.title }}</div>
+                </div>
+                <div class="offer-info-desc">
+                    {% for index,intro in work.work_intro %}
+                    <p class="oid-detail">
+                        {{index + 1}}、{{intro}}
+                    </p>
+                    {% endfor %}
+                </div>
+            </div>
+            {% endfor %}
+            <!-- /填好的信息详情 -->
+        </div>
+        <!-- /工作经历 -->
+
+        <!-- 技能证书 -->
+        <div class="info-item info-item-h edu-exper-comp">
+            <div class="edu-exper-tit">
+                <div class="info-item-name">技能证书</div>
+            </div>
+            <!-- 填好的信息详情 -->
+            {% for skill in skillInfo %}
+            <div class="edu-exper-wrap">
+                <!-- 信息详情 -->
+                <div class="edu-exper-cont l-flex-row">
+                    <div class="edu-exper-detail">{{ skill.obtained_time }}</div>
+                </div>
+                <div class="edu-exper-cont l-flex-row">
+                    <div class="edu-exper-detail">{{ skill.name }}</div>
+                </div>
+                <!-- 证书图片 -->
+                <div class="certif-pic ">
+                    <div class="certif-pic-img l-flex-column l-box-center">
+                        {% for imgurl in skill.img_urls %}
+                        <img class="certif-imgs" src="{{imgurl}}">
+                        {% endfor %}
+                    </div>
+                </div>
+            </div>
+            {% endfor %}
+            <!-- <div class="edu-exper-wrap">
+                 &lt;!&ndash; 信息详情 &ndash;&gt;
+                 <div class="edu-exper-cont l-flex-row">
+                     <div class="edu-exper-detail">2016.09</div>
+                 </div>
+                 <div class="edu-exper-cont l-flex-row">
+                     <div class="edu-exper-detail">技能证书</div>
+                 </div>
+                 &lt;!&ndash; 证书图片 &ndash;&gt;
+                 <div class="certif-pic ">
+                     <div class="certif-pic-img l-flex-column l-box-center">
+                         <img class="certif-imgs" src="../../src/school/images/zs3.jpeg">
+                     </div>
+                 </div>
+             </div>-->
+            <!-- /填好的信息详情 -->
+        </div>
+        <!-- /技能证书 -->
+    </div>
 
 
 </div>
