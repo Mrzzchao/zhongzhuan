@@ -21,7 +21,7 @@
                 <el-button type="primary" @click="search">查询</el-button>
             </el-form-item>
 
-            <router-link to="/admin/goods-form">
+            <router-link to="/admin/study-form">
                 <el-button type="success">新增</el-button>
             </router-link>
 
@@ -204,7 +204,7 @@
 
             // 修改
             editGoods(row) {
-                this.$router.push({path: '/admin/goods-form', query: {id: row.id}});
+                this.$router.push({path: '/admin/study-form', query: {id: row.id}});
             },
 
 

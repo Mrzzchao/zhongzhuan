@@ -21,7 +21,7 @@
                 <el-button type="primary" @click="search">查询</el-button>
             </el-form-item>
 
-            <router-link to="/admin/goodstype-form">
+            <router-link to="/admin/job-form">
                 <el-button type="success">新增</el-button>
             </router-link>
 
@@ -282,7 +282,7 @@
 
             // 修改
             editGoods(row) {
-                this.$router.push({path: '/admin/goodstype-form', query: {id: row.id}});
+                this.$router.push({path: '/admin/job-form', query: {id: row.id}});
             },
 
             // 查看

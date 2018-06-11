@@ -317,7 +317,7 @@
 
             // 修改
             editGoods(row) {
-                this.$router.push({path: '/admin/goodstype-form', query: {id: row.id}});
+                this.$router.push({path: '/admin/student-form', query: {id: row.id}});
             },
 
 

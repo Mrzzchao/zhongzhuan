@@ -102,7 +102,7 @@
 			},
 
 			onCancel() {
-				this.$router.push('/admin/goods-list');
+				this.$router.push('/admin/study-list');
 			},
 
             validate() {
@@ -133,7 +133,7 @@
 
                 this.ajax.post(api, this.form).then((data) => {
                     this.$message.success('操作成功');
-                    this.$router.push('/admin/goods-list');
+                    this.$router.push('/admin/study-list');
                 })
             },
 

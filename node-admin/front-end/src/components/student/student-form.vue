@@ -46,31 +46,31 @@
 		},
 		methods: {
 			onSubmit() {
-				if (!this.form.member_name) {
+				if (!this.form.student_name) {
 					this.$message.warning('请填写完整信息');
 					return;
 				}
 
 				console.log(this.form);
 
-				this.func.ajaxPost(this.api.memberAdd, this.form, res => {
+				this.func.ajaxPost(this.api.studentAdd, this.form, res => {
 
 					if (res.data.code === 200) {
 						this.$message.success('操作成功');
-						this.$router.push('/admin/member-list');
+						this.$router.push('/admin/student-list');
 					}
 				});
 			},
 
 			onCancel() {
-				this.$router.push('/admin/member-list');
+				this.$router.push('/admin/student-list');
 			},
 
 		},
 
 
 		created() {
-			if (member_id) {
+			if (student_id) {
 				this.isNew = 0;
 
                 this.ajax.post(this.api.studentList).then((data) => {

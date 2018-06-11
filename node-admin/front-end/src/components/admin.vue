@@ -19,11 +19,11 @@
 
 <el-submenu index="2">
 	<template slot="title">学生信息管理</template>
-	<router-link to="/admin/member-list">
+	<router-link to="/admin/student-list">
 		<el-menu-item index="2-1">学生列表</el-menu-item>
 	</router-link>
 
-	<!-- <router-link to="/admin/member-form">
+	<!-- <router-link to="/admin/student-form">
 		<el-menu-item index="2-2">新增学生</el-menu-item>
 	</router-link> -->
 </el-submenu>
@@ -31,11 +31,11 @@
 
 <el-submenu index="3">
 	<template slot="title">招募信息管理</template>
-	<router-link to="/admin/goodstype-list">
+	<router-link to="/admin/job-list">
 		<el-menu-item index="3-1">职位列表</el-menu-item>
 	</router-link>
 
-	<router-link to="/admin/goodstype-form">
+	<router-link to="/admin/job-form">
 		<el-menu-item index="3-2">新增职位</el-menu-item>
 	</router-link>
 </el-submenu>
@@ -45,11 +45,11 @@
 
 <el-submenu index="4">
 	<template slot="title">在线课程管理</template>
-	<router-link to="/admin/goods-list">
+	<router-link to="/admin/study-list">
 		<el-menu-item index="4-1">课程列表</el-menu-item>
 	</router-link>
 
-	<router-link to="/admin/goods-form">
+	<router-link to="/admin/study-form">
 		<el-menu-item index="4-2">新增课程</el-menu-item>
 	</router-link>
 </el-submenu>

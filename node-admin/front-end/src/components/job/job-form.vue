@@ -75,7 +75,7 @@
 			},
 
 			onCancel() {
-				this.$router.push('/admin/goodstype-list');
+				this.$router.push('/admin/job-list');
 			},
 
             validate() {
@@ -124,7 +124,7 @@
                 const api = this.isNew ? this.api.jobAdd : this.api.jobUpdate
                 this.ajax.post(api, this.form).then((data) => {
                     this.$message.success('操作成功');
-                    this.$router.push('/admin/goodstype-list');
+                    this.$router.push('/admin/job-list');
                 })
             }
 
