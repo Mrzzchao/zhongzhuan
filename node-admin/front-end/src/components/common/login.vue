@@ -61,7 +61,7 @@
         },
 
         created () {
-            if (this.$store.state.user) {
+            if (this.$store.state.user.username) {
                 this.$router.push('/admin');
             }
         }

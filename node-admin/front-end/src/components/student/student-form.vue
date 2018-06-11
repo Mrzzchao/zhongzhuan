@@ -6,7 +6,7 @@
 
 
         <el-form-item>
-            <el-button type="primary" @click="onSubmit">添加会员</el-button>
+            <el-button type="primary" @click="onSubmit">{{isNew ? '添加' : '修改'}}</el-button>
             <el-button @click="onCancel">取消</el-button>
         </el-form-item>
     </el-form>

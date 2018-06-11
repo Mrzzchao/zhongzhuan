@@ -6,19 +6,16 @@ import Login from "../components/common/login.vue";
 import UserForm from "../components/user/user-form.vue";
 import UserList from "../components/user/user-list.vue";
 
-import MemberForm from "../components/member/member-form.vue";
-import MemberList from "../components/member/member-list.vue";
+import StudentForm from "../components/student/student-form.vue";
+import StudentList from "../components/student/student-list.vue";
 
-import GoodstypeForm from "../components/goodstype/goodstype-form.vue";
-import GoodstypeList from "../components/goodstype/goodstype-list.vue";
-
-
-import GoodsForm from "../components/goods/goods-form.vue";
-import GoodsList from "../components/goods/goods-list.vue";
+import JobForm from "../components/job/job-form.vue";
+import JobList from "../components/job/job-list.vue";
 
 
-import orderForm from "../components/order/order-form.vue";
-import orderList from "../components/order/order-list.vue";
+import StudyForm from "../components/study/study-form.vue";
+import StudyList from "../components/study/study-list.vue";
+
 
 
 
@@ -29,7 +26,7 @@ export default new Router({
     routes: [
         {
             path: '/admin',
-            redirect: '/admin/goodstype-list',
+            redirect: '/admin/job-list',
             component: Admin,
             children: [
 
@@ -43,41 +40,31 @@ export default new Router({
                 },
 
 				  {
-                    path: '/admin/member-list',
-                    component: MemberList,
+                    path: '/admin/student-list',
+                    component: StudentList,
                 },
                 {
-                    path: '/admin/member-form',
-                    component: MemberForm,
+                    path: '/admin/student-form',
+                    component: StudentForm,
                 },
 
 				  {
-                    path: '/admin/goodstype-list',
-                    component: GoodstypeList,
+                    path: '/admin/job-list',
+                    component: JobList,
                 },
 
                 {
-                    path: '/admin/goodstype-form',
-                    component: GoodstypeForm,
+                    path: '/admin/job-form',
+                    component: JobForm,
                 },
                 {
-                    path: '/admin/goods-list',
-                    component: GoodsList,
+                    path: '/admin/study-list',
+                    component: StudyList,
                 },
                 {
-                    path: '/admin/goods-form',
-                    component: GoodsForm,
-                },
-                {
-                    path: '/admin/order-list',
-                    component: orderList,
-                },
-                {
-                    path: '/admin/order-form',
-                    component: orderForm,
+                    path: '/admin/study-form',
+                    component: StudyForm,
                 }
-
-
 
             ]
         },

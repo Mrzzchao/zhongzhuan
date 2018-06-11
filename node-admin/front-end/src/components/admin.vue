@@ -79,7 +79,7 @@
 		computed: {
 			user() {
 				return this.$store.state.user;
-			},
+			}
 		},
 
 		methods: {
@@ -103,6 +103,14 @@
 
 			}
 		},
+
+        mounted() {
+            if(this.user.username) {
+
+            } else {
+                this.$router.push({path: '/'})
+            }
+        }
 
 	}
 
