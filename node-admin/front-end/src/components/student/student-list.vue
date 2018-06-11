@@ -86,11 +86,11 @@
                 >
                 <template scope="scope">
 
-                    <el-button
-                            size="small"
-                            type="info"
-                            @click="editGoods(scope.row)">修改
-                    </el-button>
+                    <!--<el-button-->
+                            <!--size="small"-->
+                            <!--type="info"-->
+                            <!--@click="editGoods(scope.row)">修改-->
+                    <!--</el-button>-->
 
                     <el-button
                             size="small"

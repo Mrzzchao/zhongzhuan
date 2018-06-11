@@ -86,7 +86,7 @@ module.exports = {
 		}
 	},
 	devServer: {
-		port: 8888,
+		port: 8889,
 		historyApiFallback: true,
 		stats: 'minimal', // 输入精简信息
 		overlay: true, // 将错误显示在html之上

@@ -1,4 +1,4 @@
-let path = 'http://localhost:9999/api';
+let path = 'https://www.yukisa.com/api';
 
 module.exports = {
 
