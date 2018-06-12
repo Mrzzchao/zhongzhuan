@@ -19,8 +19,7 @@ Page({
   },
   formatData(data) {
     data.tags = data.tags.split(',')
-    // let job_detail = decodeURIComponent(data.job_detail)
-    let job_detail = 'sdfsadfsaf&&&&sdfsdf\nsdfsdf\nsdfkj'
+    let job_detail = decodeURIComponent(data.job_detail)
     console.log(data)
     let detailArr = job_detail.split('&&&&')
     let intros = detailArr[0].split('\n')
@@ -47,9 +46,16 @@ Page({
         student_id: app.globalData.student_id
       }
       app.utils.Ajax.sendResume(params).then((data) => {
-        wx.showToast({
-          title: '投递成功',
-        })
+        if(data) {
+          wx.showToast({
+            title: '投递成功',
+          })
+        } else {
+          wx.showToast({
+            title: '投递失败',
+            icon: 'none'
+          })
+        }
       })
     } else {
       wx.switchTab({

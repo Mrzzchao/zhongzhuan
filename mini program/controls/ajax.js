@@ -238,7 +238,7 @@ function getResourceList() {
  * 获取学习资料单项
  */
 function getResourceItem(id) {
-  return WxFunc.requestPost(Api.downloadItem, {id}).then((res) => {
+  return WxFunc.requestPost(Api.downloadDetail, {id}).then((res) => {
     if (res.code === 100) {
       return res.data
     }
