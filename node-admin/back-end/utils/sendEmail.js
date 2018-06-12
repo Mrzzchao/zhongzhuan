@@ -22,7 +22,7 @@ let sendEmail = {
                 [
                     {
                         filename: `龙岗中专学生${student_name}的简历.pdf`,            // 改成你的附件名
-                        path: './resume/'+ student_id + '.pdf',  // 改成你的附件路径
+                        path: 'https://www.yukisa.com/resume/'+ student_id + '.pdf',  // 改成你的附件路径
                         cid : '00000001'                 // cid可被邮件使用
                     },
                     /*{
