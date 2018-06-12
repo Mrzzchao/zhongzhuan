@@ -7,7 +7,7 @@
 
           <block wx:for="{{resourceList}}" wx:key="{{item.id}}">
               <view class="vedio-item l-flex-column">
-            <navigator url='/pages/resource/ppt/ppt?id={{item.id}}'>
+            <navigator url='/pages/resource/ppt/ppt?id={{item.id}}' wx:if="{{item.status === 1}}">
                 <view class="vedio-item-img">
                   <image class="vi-pic" src="{{item.img_url}}"></image>
                 </view>

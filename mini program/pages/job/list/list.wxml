@@ -6,7 +6,7 @@
       <scroll-view class="l-full l-flex-column job-list-cont" scroll-y="true" bindscrolltolower="scrollToEnd" bindscroll="scroll">
         <!-- 一条信息 -->
         <block wx:for="{{jobList}}" wx:key="{{item.id}}">
-          <navigator url='/pages/job/detail/detail?id={{item.id}}'>
+          <navigator url='/pages/job/detail/detail?id={{item.id}}' wx:if="{{item.status === 1}}">
             <view class="job-lister clearfix l-flex-row">
               <view class="company-logo">
                 <image src="{{item.company_logo}}" alt="company's logo"></image>
