@@ -41,7 +41,7 @@ let sendEmail = {
                 resolve(msg)
             });
         }).catch((err) => {
-            console.error(error);
+            console.error(err);
         })
     }
 }

@@ -122,7 +122,7 @@ let createPdf = {
             return new Promise((resolve, reject) => {
                 pdf.create(html, options).toFile(filename, function (err, res) {
                     if (err) {
-                        throw new Error(err)
+                        reject(err)
                         return console.log(err);
                     }
                     resolve(res)
