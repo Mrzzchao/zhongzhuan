@@ -38,6 +38,9 @@ Page({
   formatData(data) {
     return data.map((job) => {
       job.tags = job.tags.split(',')
+      job.create_time = job.create_time.slice(5, 11)
+      job.company_logo = job.company_logo || 'https://www.yukisa.com/asserts/images/company-default.png'
+
       return job
     })
   },

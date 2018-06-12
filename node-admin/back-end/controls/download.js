@@ -67,8 +67,9 @@ module.exports = {
 
     // 添加教育经历
     addOne(req, res) {
-        let {title, download_url, remarks, operator, status} = req.body
-        let obj = {title, download_url, remarks, operator, status}
+        let {title, img_url, download_url, remarks, operator, status} = req.body
+        img_url || (img_url = 'https://www.yukisa.com/asserts/images/file-default.png')
+        let obj = {title, img_url, download_url, remarks, operator, status}
         SQLHandler.insert(obj).then((rows) => {
             if(rows.affectedRows) {
                 res.json({
@@ -127,8 +128,9 @@ module.exports = {
 
      // 修改教育经历
     updateOne(req, res) {
-        let {title, download_url, remarks, operator, status, id} = req.body
-        let obj = {title, download_url, remarks, operator, status, id}
+        let {title, img_url, download_url, remarks, operator, status, id} = req.body
+        img_url || (img_url = 'https://www.yukisa.com/asserts/images/file-default.png')
+        let obj = {title, img_url, download_url, remarks, operator, status, id}
         SQLHandler.update(obj).then((rows) => {
             if(rows.affectedRows) {
                 res.json({

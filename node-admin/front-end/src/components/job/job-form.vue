@@ -10,6 +10,25 @@
             <el-input v-model="form.job_require" type="textarea" placeholder="换行系统自动生成序号"></el-input>
         </el-form-item>
 
+        <el-upload
+                class="upload-demo"
+                name="file"
+                :action="uploadUrl"
+                :on-preview="handlePreview"
+                :on-remove="handleRemove"
+                :file-list="fileList"
+                :on-success="handleImgSuccess"
+                :limit="1"
+                :on-exceed="handleExceed"
+                :accept="imageAccept"
+                list-type="picture">
+            <el-button size="small" type="primary">上传图片</el-button>
+            <div slot="tip" class="el-upload__tip">可选择上传公司logo</div>
+        </el-upload>
+
+        <el-form-item prop="img_url" >
+            <el-input v-model="form.company_logo" style="display:hidden" v-show="false"></el-input>
+        </el-form-item>
 
         <el-form-item>
             <el-button type="primary" @click="onSubmit">{{isNew ? '添加' : '修改'}}</el-button>
@@ -30,6 +49,7 @@
                     job_detail: '',
                     job_require: '',
                     job_intros: '',
+                    company_logo: '',
                     hr_email: '',
                     tags: '',
 				},
@@ -52,6 +72,10 @@
                     tags: '格式为 五险一金,公租房',
                     hr_email: '请输入HR邮箱'
                 },
+
+                imageAccept: "image/*",
+                fileList: [],
+                uploadUrl: this.api.uploadImg,
 
                 job_detail: '职位描述',
 
@@ -126,7 +150,29 @@
                     this.$message.success('操作成功');
                     this.$router.push('/admin/job-list');
                 })
+            },
+            handleRemove(file, fileList) {
+                console.log(file, fileList);
+            },
+            handlePreview(file) {
+                console.log(file);
+            },
+            handleExceed(files, fileList) {
+                console.log(fileList)
+                this.$message.warning(`当前限制选择 1 个文件，本次选择了 ${files.length} 个文件，共选择了 ${files.length + fileList.length} 个文件`);
+            },
+            handleSuccess(files, fileList) {
+                console.log(files);
+                this.$set(this.form, 'download_url', files.url)
+            },
+            handleImgSuccess(files, fileList) {
+                console.log(files);
+                this.$set(this.form, 'company_logo', files.url)
+            },
+            beforeRemove(file, fileList) {
+                return this.$confirm(`确定移除 ${ file.name }？`);
             }
+
 
 		},
 

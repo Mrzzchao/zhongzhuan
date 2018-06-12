@@ -41,8 +41,8 @@
           :on-exceed="handleExceed"
           :accept="imageAccept"
           list-type="picture">
-          <el-button size="small" type="primary">上传课件显示图片</el-button>
-          <div slot="tip" class="el-upload__tip">只能上传jpg/png文件，且不超过500kb</div>
+          <el-button size="small" type="primary">上传图片</el-button>
+          <div slot="tip" class="el-upload__tip">可选择上传课件显示图片</div>
         </el-upload>
 
         <el-form-item prop="img_url" >

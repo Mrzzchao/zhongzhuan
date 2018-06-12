@@ -9,7 +9,7 @@
           <navigator url='/pages/job/detail/detail?id={{item.id}}'>
             <view class="job-lister clearfix l-flex-row">
               <view class="company-logo">
-                <image src="/images/company.png" alt="company's logo"></image>
+                <image src="{{item.company_logo}}" alt="company's logo"></image>
               </view>
               <view class="company-job l-flex-1 l-flex-column">
                 <view class="company-job-name l-flex-row">
@@ -19,7 +19,7 @@
                 <view class="company-name">{{item.company}}</view>
                 <view class="company-welfare l-flex-row">
                   <view class="comp-welfares" wx:key="{{tag}}" wx:for="{{item.tags}}" wx:for-item="tag">{{tag}}</view>
-                  <view class="when-info-update">4-25</view>
+                  <view class="when-info-update">{{item.create_time}}</view>
                 </view>
               </view>
             </view>

@@ -19,8 +19,17 @@ Page({
     app.utils.Ajax.getResourceList().then((data) => {
       console.log(data)
       this.setData({
-        resourceList: data
+        resourceList: this.formatData(data)
       })
     })
+  },
+
+  formatData(data) {
+    return data.map((item) => {
+      item.img_url = item.img_url || 'https://www.yukisa.com/asserts/images/file-default.png'
+      
+      return item
+    })
+
   }
 })

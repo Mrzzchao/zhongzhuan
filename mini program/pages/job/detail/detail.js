@@ -20,13 +20,14 @@ Page({
   formatData(data) {
     data.tags = data.tags.split(',')
     let job_detail = decodeURIComponent(data.job_detail)
-    console.log(data)
+
     let detailArr = job_detail.split('&&&&')
     let intros = detailArr[0].split('\n')
     let requirements = detailArr[1].split('\n')
 
     data.intros = intros
     data.requirements = requirements
+    data.company_logo = data.company_logo || 'https://www.yukisa.com/asserts/images/company-default.png'
     return data
   },
   
