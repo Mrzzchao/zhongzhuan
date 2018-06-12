@@ -17,7 +17,7 @@ let SQLHandlerJob = new SQL(table.JOB_OFFERS);
 
 function formatData(rows) {
     return rows.map(row => {
-        let date = moment(row.create_time).format('YYYY-MM-DD');
+        let date = moment(row.create_time || '2018-06-09 17:49:09.305503').format('YYYY-MM-DD');
         let obj = {};
 
         return Object.assign({}, row, {
