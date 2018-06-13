@@ -1,7 +1,5 @@
 let moment = require('moment');     // 数据处理
-let func = require('../sql/func');
 const table = require('../configs/table');
-
 let {SQL} = require('../sql/sql')
 
 let SQLHandler = new SQL(table.JOB_OFFERS)
