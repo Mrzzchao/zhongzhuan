@@ -15,9 +15,9 @@
     "pages/resource/ppt/ppt"
   ],
   "window": {
-    "navigationBarTextStyle": "black",
-    "navigationBarTitleText": "中专项目",
-    "navigationBarBackgroundColor": "#F8F8F8",
+    "navigationBarTextStyle": "white",
+    "navigationBarTitleText": "深圳市龙岗职业技术学院",
+    "navigationBarBackgroundColor": "#7398f5",
     "backgroundColor": "#F8F8F8"
   },
   "tabBar": {

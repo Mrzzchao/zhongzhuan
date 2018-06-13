@@ -15,7 +15,7 @@ Page({
       date_end: '',
       educational_history: ''
     },
-    majorList: ['网络工程', '计算机'],
+    majorList: ['工科', '理科', '文科'],
     eduList: ['大专', '本科', '硕士', '博士', '其他'],
 
     isNew: true,

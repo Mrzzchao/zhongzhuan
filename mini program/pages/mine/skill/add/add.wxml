@@ -23,7 +23,7 @@
             <view class="info-item l-flex-row">
               <view class="info-item-name">获得时间</view>
               <view class="info-list-detail l-flex-1">
-                <picker mode="date" fields="month" bindchange='bindDate'>
+                <picker mode="date" bindchange='bindDate'>
                   <input disabled type="text" value="{{info.obtained_time}}" name="obtained_time"  placeholder="请选择" class="{{info.obtained_time ? '' : 'input-bor'}} l-flex-1" />
                 </picker>
               </view>

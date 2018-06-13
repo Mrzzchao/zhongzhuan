@@ -258,8 +258,6 @@ Page({
       let name = checkKeyMap[key]
       let value = data[key]
       let result = app.utils.FormCheck.check(name, value)
-      console.log(result)
-      console.log('===========')
 
       result && errList.push(result)
       console.log(errList)

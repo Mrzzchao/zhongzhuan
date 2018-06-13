@@ -1,5 +1,6 @@
 {
     "usingComponents": {
       "normal-picker": "/components/normalPicker/normalPicker"
-    }
+    },
+    "navigationBarTitleText": "个人中心"
 }
