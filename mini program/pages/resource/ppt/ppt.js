@@ -26,14 +26,35 @@ Page({
     })
   },
 
+  showToast(msg) {
+    wx.showToast({
+      title: msg,
+    })
+  },
+
   download() {
     const url = this.data.resource.download_url
     app.utils.Ajax.downloadFile(url).then((filePath) => {
       console.log(filePath)
+      console.log('-------------')
       wx.openDocument({
         filePath: filePath,
         success: function (res) {
-          console.log('打开文档成功')
+          wx.showToast({
+            title: 'success',
+          })
+        },
+        fail: (res) => {
+          wx.showToast({
+            title: 'fail',
+          })
+
+          console.log(res)
+        },
+        complete: (res) => {
+          wx.showToast({
+            title: 'compile',
+          })
         }
       })
     })
