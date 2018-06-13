@@ -1,9 +1,6 @@
 let pdf = require('html-pdf'); // html-pdf
 let fs = require('fs');
 let moment = require('moment');     // 数据处理
-let htmlHandler = require('../utils/htmlHandler')
-let resumeTpl = fs.readFileSync('./template/resume.html', 'utf8'); // 引入html模板
-let template = fs.readFileSync('./template/index.html', 'utf8'); // 引入html模板
 
 var swig  = require('swig');
 const table = require('../configs/table');
@@ -17,11 +14,13 @@ let SQLHandlerJob = new SQL(table.JOB_OFFERS);
 
 function formatData(rows) {
     return rows.map(row => {
-        let date = moment(row.create_time || '2018-06-09 17:49:09.305503').format('YYYY-MM-DD');
+        let dateC = moment(row.create_time || Date.now()).format('YYYY-MM-DD');
+        let dateU = moment(row.update_time || Date.now()).format('YYYY-MM-DD');
         let obj = {};
 
         return Object.assign({}, row, {
-            create_time: date
+            create_time: dateC,
+            update_time: dateU
         }, obj);
     });
 }
@@ -118,7 +117,6 @@ let createPdf = {
         let tplPath = './template/index.html'
         return createPdf.createResumeData(student_id).then((resumeData) => {
             let html = swig.renderFile(tplPath, resumeData);
-            // html = htmlHandler.insertStr(template, '<!-- insert-resume -->', html)
             return new Promise((resolve, reject) => {
                 pdf.create(html, options).toFile(filename, function (err, res) {
                     if (err) {

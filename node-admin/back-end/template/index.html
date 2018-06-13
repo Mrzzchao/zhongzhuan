@@ -77,9 +77,11 @@
         <!-- 教育经历 -->
         <!-- 如果已经有填好了的信息，则加上class：edu-exper-comp -->
         <div class="info-item info-item-h edu-exper-comp ">
+            {% if educationInfo.length %}
             <div class="edu-exper-tit">
                 <div class="info-item-name">教育经历</div>
             </div>
+            {% endif %}
             <!-- 填好的信息详情 -->
             {% for education in educationInfo %}
             <div class="edu-exper-wrap">
@@ -100,9 +102,11 @@
 
         <!-- 工作经历 -->
         <div class="info-item info-item-h edu-exper-comp">
-            <div class="edu-exper-tit">
+            {% if workInfo.length %}
+            <div class="edu-exper-tit" >
                 <div class="info-item-name">工作经历</div>
             </div>
+            {% endif %}
             <!-- 填好的信息详情 -->
             {% for work in workInfo %}
 
@@ -130,9 +134,11 @@
 
         <!-- 技能证书 -->
         <div class="info-item info-item-h edu-exper-comp">
+            {% if skillInfo.length %}
             <div class="edu-exper-tit">
                 <div class="info-item-name">技能证书</div>
             </div>
+            {% endif %}
             <!-- 填好的信息详情 -->
             {% for skill in skillInfo %}
             <div class="edu-exper-wrap">
