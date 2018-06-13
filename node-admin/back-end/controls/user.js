@@ -11,7 +11,8 @@ let SQLHandler = new SQL(table.USER)
 
 function formatData(rows) {
 	return rows.map(row => {
-		let date = moment(row.create_time || Date.now()).format('YYYY-MM-DD');
+        let dateC = moment(row.create_time || Date.now()).format('YYYY-MM-DD');
+        let dateU = moment(row.update_time || Date.now()).format('YYYY-MM-DD');
 		let obj = {};
 
 		switch (row.role) {
@@ -28,11 +29,11 @@ function formatData(rows) {
 		delete row.password;   // 不返回密码给用户
 
 		return Object.assign({}, row, {
-			create_time: date
+            create_time: dateC,
+            update_time: dateU
 		}, obj);
 	});
 }
-
 
 module.exports = {
 	fetchAll(req, res) {

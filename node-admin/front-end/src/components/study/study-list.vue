@@ -216,8 +216,11 @@
                 return data.map((item) => {
                     const status = item.status
                     const ext = item.download_url.split('.')[item.download_url.split('.').length - 1]
-
-                    item.resourceType = this.getResourceType(ext)
+                    if(item.video_url) {
+                        item.resourceType = '教学网站'
+                    } else {
+                        item.resourceType = this.getResourceType(ext)
+                    }
                     item.statusMsg = status == '1' ? '已发布' : '未发布'
                     item.btnWord = status == '1' ? '下架' : '发布'
                     return item
@@ -226,7 +229,8 @@
 
             getResourceType(ext) {
                 switch (ext) {
-                    case 'ppt': return 'PPT'
+                    case 'ppt':
+                    case 'pptx': return 'PPT'
                     case 'doc':
                     case 'docx': return 'WORD'
                     default: return '未知类型'

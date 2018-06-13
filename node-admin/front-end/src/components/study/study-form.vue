@@ -8,6 +8,10 @@
             <el-input v-model="form.title"></el-input>
         </el-form-item>
 
+        <el-form-item :label="formMap.video_url" prop="video_url">
+            <el-input v-model="form.video_url"></el-input>
+        </el-form-item>
+
 
         <el-upload
             class="upload-demo"
@@ -66,6 +70,7 @@
 				form: {
                     title: '',
                     download_url: '',
+                    video_url: '',
                     img_url: '',
                     remark: '',
                     operator: this.$store.state.user,
@@ -75,12 +80,14 @@
                 formMap: {
                     title: '课件名称',
                     download_url: '上传课件',
-                    img_url: '上传课件显示图片'
+                    img_url: '上传课件显示图片',
+                    video_url: '视频地址'
                 },
 
                 rules: {
                     title: [{required: true, message: '请输入课件名称', trigger: 'blur'}],
-                    download_url: [{required: true, message: '请上传课件', trigger: 'blur'}],
+                    // download_url: [{required: true, message: '请上传课件', trigger: 'blur'}],
+                    // video_url: [{required: true, message: '请输入学习视频地址', trigger: 'blur'}],
                     // img_url: [{required: true, message: '请上传课件显示图片', trigger: 'blur'}]
                 },
 
@@ -128,13 +135,17 @@
             },
 
             submitItem() {
-                const api = this.isNew ? this.api.downloadAdd : this.api.downloadUpdate
-                this.form.operator = this.user.username || ''
+                if(this.form.download_url || this.form.video_url) {
+                    const api = this.isNew ? this.api.downloadAdd : this.api.downloadUpdate
+                    this.form.operator = this.user.username || ''
 
-                this.ajax.post(api, this.form).then((data) => {
-                    this.$message.success('操作成功');
-                    this.$router.push('/admin/study-list');
-                })
+                    this.ajax.post(api, this.form).then((data) => {
+                        this.$message.success('操作成功');
+                        this.$router.push('/admin/study-list');
+                    })
+                } else {
+                    alert('请至少提交一种学习资料')
+                }
             },
 
             handleRemove(file, fileList) {

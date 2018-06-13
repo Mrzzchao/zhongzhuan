@@ -7,6 +7,6 @@
 			{{resource.title}}
 		</view>
 		<!-- 下载ppt按钮 start -->
-		<button class="btn-blue but-send" bindtap='download'>下载PPT</button>
+		<button class="btn-blue but-send" bindtap='download'>{{resource.video_url ? '打开视频' : '下载PPT'}}</button>
 	</view>
 </view>

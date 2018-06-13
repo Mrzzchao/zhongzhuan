@@ -27,15 +27,22 @@ Page({
   },
 
   download() {
-    const url = this.data.resource.download_url
-    app.utils.Ajax.downloadFile(url).then((filePath) => {
-      console.log(filePath)
-      wx.openDocument({
-        filePath: filePath,
-        success: function (res) {
-          console.log('打开文档成功')
-        }
+    const download_url = this.data.resource.download_url
+    const video_url = this.data.resource.video_url
+    if(video_url) {
+      wx.navigateTo({
+        url: `/pages/webview/webview?url=${video_url}`,
       })
-    })
+    } else {
+      app.utils.Ajax.downloadFile(download_url).then((filePath) => {
+        console.log(filePath)
+        wx.openDocument({
+          filePath: filePath,
+          success: function (res) {
+            console.log('打开文档成功')
+          }
+        })
+      })
+    }
   }
 })
