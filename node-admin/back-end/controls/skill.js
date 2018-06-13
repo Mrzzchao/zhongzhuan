@@ -7,11 +7,13 @@ let SQLHandler = new SQL(table.SKILL_CERTIFICATION)
 
 function formatData(rows) {
     return rows.map(row => {
-        let date = moment(row.create_time).format('YYYY-MM-DD');
+        let dateC = moment(row.create_time || Date.now()).format('YYYY-MM-DD');
+        let dateU = moment(row.update_time || Date.now()).format('YYYY-MM-DD');
         let obj = {};
 
         return Object.assign({}, row, {
-            create_time: date,
+            create_time: dateC,
+            update_time: dateU,
             img_urls: row.img_urls.split(';')
         }, obj);
     });

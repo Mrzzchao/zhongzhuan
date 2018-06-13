@@ -13,6 +13,7 @@
     "babel-cli": "^6.26.0",
     "bcryptjs": "^2.4.3",
     "body-parser": "^1.17.1",
+    "cross-env": "^5.1.6",
     "crypto": "^1.0.1",
     "express": "^4.15.2",
     "express-session": "^1.15.2",

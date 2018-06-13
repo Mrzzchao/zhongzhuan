@@ -51,7 +51,7 @@ SQL.prototype.queryByStudentId = function (student_id) {
 // 根据学生id查询技能证书，需要group by
 SQL.prototype.querySkillByStudentIdGroupBySkillid = function (student_id) {
     let sql, arr
-    sql = `select * from t_skill_certification where student_id = ? group by skill_id`;
+    sql = `select * from t_skill_certification where student_id = ?`;
     arr = [student_id];
     return DBHandler(sql, arr)
 }

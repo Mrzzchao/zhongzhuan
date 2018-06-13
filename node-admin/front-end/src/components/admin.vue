@@ -86,7 +86,7 @@
 			// 跳转控制
 			controlJump(target, flag) {
                 if(flag) {
-                    if(this.user.role < 1000) {
+                    if(this.user.role < 100) {
     					this.$message.warning('权限不够，加油打怪升级噢～');
                     } else {
                         this.$router.push(target);

@@ -1,6 +1,7 @@
 {
   "pages": [
     "pages/job/list/list",
+    "pages/webview/webview",
     "pages/index/index",
     "pages/mine/mine",
     "pages/mine/education/education",
@@ -11,15 +12,13 @@
     "pages/mine/education/add/add",
     "pages/job/detail/detail",
     "pages/resource/resource",
-    "pages/resource/ppt/ppt",
-    "pages/webview/webview"
+    "pages/resource/ppt/ppt"
   ],
   "window": {
     "navigationBarTextStyle": "black",
     "navigationBarTitleText": "中专项目",
     "navigationBarBackgroundColor": "#F8F8F8",
-    "backgroundColor": "#F8F8F8",
-    "enablePullDownRefresh": true
+    "backgroundColor": "#F8F8F8"
   },
   "tabBar": {
     "backgroundColor": "#ffffff",

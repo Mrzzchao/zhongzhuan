@@ -19,11 +19,13 @@ function getQueryParams(obj) {
 
 function formatData(rows) {
     return rows.map(row => {
-        let date = moment(row.create_time).format('YYYY-MM-DD');
+        let dateC = moment(row.create_time || Date.now()).format('YYYY-MM-DD');
+        let dateU = moment(row.update_time || Date.now()).format('YYYY-MM-DD');
         let obj = {};
         let classStr = row.grade + ' ' + row.major + ' ' + row.className
         return Object.assign({}, row, {
-            create_time: date,
+            create_time: dateC,
+            update_time: dateU,
             classStr
         }, obj);
     });
@@ -123,9 +125,16 @@ module.exports = {
                 const promiseArr = rows.map((row) => {
                     return SQLHandlerWork.queryByType('student_id', row.student_id).then((rowsW) => {
                         const work = rowsW[rowsW.length - 1]
-                        row.company_name = work.company_name
-                        row.title = work.title
-                        row.service_time = work.service_time
+                        if(work) {
+                            console.log(rowsW)
+                            row.company_name = work.company_name
+                            row.title = work.title
+                            row.service_time = work.service_time
+                        } else {
+                            row.company_name = ''
+                            row.title = ''
+                            row.service_time = ''
+                        }
                         return row
                     })
                 })

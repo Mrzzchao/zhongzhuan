@@ -14,7 +14,7 @@ Page({
    */
   onLoad(options) {
     // const url = options.url
-    const url = "http://store/wx93cc364dffcadf74.o6zAJsxwUEApzyvero6uK0FAPGWw.MSKaoChXDseB0b0b436d82f2dff8d492acf88f493143.png"
+    const url ='https://www.baidu.com'
     this.setData({
       url
     })

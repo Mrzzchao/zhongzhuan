@@ -8,11 +8,13 @@ let SQLHandler = new SQL(table.DOWNLOAD)
 
 function formatData(rows) {
     return rows.map(row => {
-        let date = moment(row.create_time).format('YYYY-MM-DD');
+        let dateC = moment(row.create_time || Date.now()).format('YYYY-MM-DD');
+        let dateU = moment(row.update_time || Date.now()).format('YYYY-MM-DD');
         let obj = {};
 
         return Object.assign({}, row, {
-            create_time: date
+            create_time: dateC,
+            update_time: dateU
         }, obj);
     });
 }
@@ -67,9 +69,9 @@ module.exports = {
 
     // 添加教育经历
     addOne(req, res) {
-        let {title, img_url, download_url, remarks, operator, status} = req.body
+        let {title, img_url, download_url, video_url, remarks, operator, status} = req.body
         img_url || (img_url = 'https://www.yukisa.com/asserts/images/file-default.png')
-        let obj = {title, img_url, download_url, remarks, operator, status}
+        let obj = {title, img_url, download_url, video_url, remarks, operator, status}
         SQLHandler.insert(obj).then((rows) => {
             if(rows.affectedRows) {
                 res.json({
@@ -128,9 +130,9 @@ module.exports = {
 
      // 修改教育经历
     updateOne(req, res) {
-        let {title, img_url, download_url, remarks, operator, status, id} = req.body
+        let {title, img_url, download_url, video_url, remarks, operator, status, id} = req.body
         img_url || (img_url = 'https://www.yukisa.com/asserts/images/file-default.png')
-        let obj = {title, img_url, download_url, remarks, operator, status, id}
+        let obj = {title, img_url, download_url, video_url, remarks, operator, status, id}
         SQLHandler.update(obj).then((rows) => {
             if(rows.affectedRows) {
                 res.json({
