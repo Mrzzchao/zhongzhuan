@@ -75,11 +75,13 @@ Page({
     this.changeInfo({ work_intro })
   },
   bindDateStart(e) {
-    const date_start = e.detail.value
+    let date_start = e.detail.value
+    date_start = date_start.slice(0, 7)
     this.changeInfo({date_start})
   },
   bindDateEnd(e) {
-    const date_end = e.detail.value
+    let date_end = e.detail.value
+    date_end = date_end.slice(0, 7)
     this.changeInfo({ date_end })
   },
 
