@@ -7,20 +7,17 @@ let {SQL} = require('../sql/sql')
 let SQLHandler = new SQL(table.EDUCATION_EXPERIENCE)
 
 function formatData(rows) {
-    function formatData(rows) {
-        return rows.map(row => {
-            let dateC = moment(row.create_time || Date.now()).format('YYYY-MM-DD');
-            let dateU = moment(row.update_time || Date.now()).format('YYYY-MM-DD');
-            let obj = {};
+    return rows.map(row => {
+        let dateC = moment(row.create_time || Date.now()).format('YYYY-MM-DD');
+        let dateU = moment(row.update_time || Date.now()).format('YYYY-MM-DD');
+        let obj = {};
 
-            return Object.assign({}, row, {
-                create_time: dateC,
-                update_time: dateU
-            }, obj);
-        });
-    }
+        return Object.assign({}, row, {
+            create_time: dateC,
+            update_time: dateU
+        }, obj);
+    });
 }
-
 
 module.exports = {
     fetchAll(req, res) {

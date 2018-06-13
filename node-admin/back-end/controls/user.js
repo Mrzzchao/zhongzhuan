@@ -145,6 +145,7 @@ module.exports = {
 
     updateOne(req, res) {
         let {id, username, password, role, remark, create_time, login_time} = req.body
+		password = md5.md5Encrypt(password + salt);
         let obj = {id, username, password, role, remark, create_time, login_time}
         SQLHandler.update(obj).then((rows) => {
             if(rows.affectedRows) {
