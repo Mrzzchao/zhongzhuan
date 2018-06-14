@@ -3,7 +3,7 @@
   <view class="job-list-wrap l-flex-1 l-relative">
     <view class="l-full l-flex-column job-list-cont">
       <view class="l-scroll-y">
-      <scroll-view class="l-full l-flex-column job-list-cont" scroll-y="true" bindscrolltolower="scrollToEnd" bindscroll="scroll">
+       <scroll-view class="l-full l-flex-column job-list-cont" scroll-y="true" bindscrolltolower="scrollToEnd" bindscroll="scroll"> 
         <!-- 一条信息 -->
         <block wx:for="{{jobList}}" wx:key="{{item.id}}">
           <navigator url='/pages/job/detail/detail?id={{item.id}}' wx:if="{{item.status === 1}}">
@@ -33,7 +33,7 @@
           <view class="load-more-icon " wx:if="{{loadInfo.status === 'loading'}}"></view>
           {{loadInfo.msg}}
         </view>
-      </scroll-view>
+       </scroll-view> 
       </view>
     </view>
   </view>
