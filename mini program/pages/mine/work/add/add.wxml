@@ -30,14 +30,14 @@
             <!-- 在职时间 -->
             <view class="info-item l-flex-row">
               <view class="info-item-name">在职时间</view>
-              <view class="info-list-detail l-flex-1 l-flex-row">
+              <view class="info-list-detail info-list-time l-flex-1 l-flex-row">
                 <picker mode="date" bindchange='bindDateStart'>
                   <input disabled type="text" value="{{info.date_start}}" name="date_start" placeholder="请选择" class="{{info.date_start ? '' : 'input-bor'}}" />
 
                 </picker>
-                <view style="margin: 0 5px; height: 25px; line-height: 25px;" class="line-choice"> 一 </view>
+                <view class='line-choice'> 一 </view>
                 <picker mode="date" bindchange='bindDateEnd'>
-                  <input disabled type="text" value="{{info.date_end}}" name="date_end" placeholder="请选择" class="{{info.date_end ? '' : 'input-bor'}}" />
+                  <input disabled type="text" value="{{info.date_end}}" name="date_end" placeholder="请选择" class="{{info.date_end ? '' : 'input-bor'}} l-flex-1" />
                 </picker>
               </view>
             </view>

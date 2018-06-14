@@ -17,6 +17,7 @@ module.exports = {
   userAutoLogin: path + '/user/auto-login',
   userChangeRole: path + '/user/change-role',
 
+
   // job
   jobList: path + '/job/list',
   jobDetail: path + '/job/detail',

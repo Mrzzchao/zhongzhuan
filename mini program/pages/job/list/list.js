@@ -48,8 +48,6 @@ Page({
     return app.utils.Ajax.getJobList(page).then((data) => {
       data = this.formatData(data)
       this.setData({jobList: this.data.jobList.concat(data)})
-      console.log('------------------')
-      console.log(data)
       return data
     })
   },
@@ -77,5 +75,7 @@ Page({
         })
       }
     })
+  },
+  scroll(e) {
   }
 })

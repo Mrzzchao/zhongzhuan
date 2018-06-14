@@ -7,7 +7,7 @@
         <view class="l-scroll-y info-list-wrapper">
           <!-- 头部的个人信息 -->
           <view class="header-mine">
-            <view class="send-history l-flex-row">
+            <view class="send-history l-flex-row hide">
               <view class="send-history-icon"></view>
               投递记录
             </view>
