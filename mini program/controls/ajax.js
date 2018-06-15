@@ -219,6 +219,9 @@ function downloadFile(url) {
       console.log(res)
       showToast('下载成功')
       return res.savedFilePath
+    }).catch((res) => {
+        hideLoading()
+        showToast('下载失败')
     })
   })
 }

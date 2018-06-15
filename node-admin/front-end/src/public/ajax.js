@@ -20,6 +20,7 @@ const ajax = function (url, config = {}) {
                 countAll: res.count
             }
         } else {
+
             throw new Error(res.msg)
         }
     }).catch((err) => {
@@ -37,15 +38,6 @@ ajax.get = function (url, config = {ignore: true}) {
             return {data: {}}
         } else {
             throw new Error(response.message)
-        }
-    }).then((res) => {
-        if(res.code === 100) {
-            return {
-                list: res.data,
-                countAll: res.count
-            }
-        } else {
-            throw new Error(res.msg)
         }
     }).catch((err) => {
         console.error(err);

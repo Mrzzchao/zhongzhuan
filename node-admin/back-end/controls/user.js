@@ -190,9 +190,9 @@ module.exports = {
 
 				req.session.login = user;
 				res.json({
-					code: 200,
+					code: 100,
 					msg: '登录成功',
-					user: user
+					data: user
 				});
 			} else {
 				res.json({
@@ -208,9 +208,9 @@ module.exports = {
 		let user = req.session.login;
 		if (user) {
 			res.json({
-				code: 200,
+				code: 100,
 				msg: '自动登录',
-				user: user
+				data: user
 			});
 
 		} else {

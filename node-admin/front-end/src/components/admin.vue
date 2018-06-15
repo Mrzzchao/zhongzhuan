@@ -104,12 +104,14 @@
 			}
 		},
 
-        mounted() {
-            if(this.user.username) {
-
-            } else {
-                this.$router.push({path: '/'})
-            }
+        mounted () {
+            this.ajax.get(this.api.userAutoLogin, {withCredentials: true}).then((res) => {
+                if (res.code === 100) {
+                    this.$store.commit('user', res.data || {});
+                } else {
+                    this.$router.push('/');
+                }
+            })
         }
 
 	}

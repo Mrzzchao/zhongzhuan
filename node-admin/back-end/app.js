@@ -20,9 +20,10 @@ app.use(session({
 
 app.use(function(req, res, next){
     //设置跨域访问
-    res.header('Access-Control-Allow-Origin', '*');
+    res.header('Access-Control-Allow-Origin', req.headers.origin);
     res.header('Access-Control-Allow-Headers', 'Content-Type, Content-Length, Authorization, Accept, X-Requested-With , yourHeaderFeild');
     res.header('Access-Control-Allow-Methods', 'PUT, POST, GET, DELETE, OPTIONS');
+    res.header('Access-Control-Allow-Credentials', true)
 
     if (req.method == 'OPTIONS') {
         res.send(200); /*让options请求快速返回*/

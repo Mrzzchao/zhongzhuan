@@ -194,9 +194,13 @@ function downloadFile({url}) {
     downloadTask = wx.downloadFile({
       url,
       success: (res) => {
+        console.log('---------success')
+        console.log(res)
         resolve(res)
       },
       fail: (res) => {
+        console.log('---------fail')
+        console.log(res)
         const err = new Error('请求错误')
         reject(err)
         downloadFile.abort() // 取消下载任务

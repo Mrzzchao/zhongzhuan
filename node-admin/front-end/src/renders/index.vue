@@ -10,14 +10,14 @@
         name: 'index',
 
         created () {
-            this.func.ajaxGet(this.api.userAutoLogin, res => {
-                console.log(res)
-                if (res.data.code === 200) {
-                    this.$store.commit('user', res.data.user);
+            this.ajax.get(this.api.userAutoLogin, {withCredentials: true}).then((res) => {
+                if (res.code === 100) {
+                    this.$store.commit('user', res.data || {});
+                    this.$router.push('/admin');
                 } else {
                     this.$router.push('/');
                 }
-            });
+            })
         },
     }
 </script>

@@ -39,18 +39,12 @@
             submitForm(formName) {
                 this.$refs[formName].validate((valid) => {
                     if (valid) {
-                        this.func.ajaxPost(this.api.userLogin, this.loginForm, res => {
-
-                            if (res.data.code === 200) {
-                                console.log(res.data.user);
-                                this.$store.commit('user', res.data.user);
-                                this.$message.success('登陆成功');
-                                this.$router.push('/admin');
-
-                            }
-
-                        });
-
+                        this.ajax.post(this.api.userLogin, this.loginForm, {withCredentials: true}).then((res) => {
+                            console.log(res.data);
+                            this.$store.commit('user', res.list);
+                            this.$message.success('登陆成功');
+                            this.$router.push('/admin');
+                        })
                     }
                 });
             },
