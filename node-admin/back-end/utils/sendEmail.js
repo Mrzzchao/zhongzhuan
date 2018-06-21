@@ -1,17 +1,19 @@
 let nodemailer = require('nodemailer');
 let mailTransport = nodemailer.createTransport({
-    host : 'smtp.qq.com',
+    service: 'smtp.163.com',
+    host: "smtp.163.com",
+    port:465,
     secureConnection: true, // 使用SSL方式（安全方式，防止被窃取信息）
     auth : {
-        user : '84930537@qq.com',
-        pass : 'rjbyqgzjiblhcbcc'
+        user : 'lgzzcjb@163.com',
+        pass : 'Lgzhongzhuan1994'
     },
 });
 
 let sendEmail = {
     sendEmail(hr_email, job_name,student_name, student_id){
         var options = {
-            from        : '"龙岗中专" <84930537@qq.com>',
+            from        : '"龙岗中专" <lgzzcjb@163.com>',
             to          : `"周立钊" <${hr_email}>`,
             // cc         : ''  //抄送
             // bcc      : ''    //密送
