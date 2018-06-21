@@ -49,11 +49,11 @@ Page({
       app.utils.Ajax.sendResume(params).then((data) => {
         if(data) {
           wx.showToast({
-            title: '投递成功',
+            title: '联系成功',
           })
         } else {
           wx.showToast({
-            title: '投递失败',
+            title: '联系失败',
             icon: 'none'
           })
         }

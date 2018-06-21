@@ -18,7 +18,7 @@
     "navigationBarTextStyle": "white",
     "navigationBarTitleText": "深圳市龙岗职业技术学院",
     "navigationBarBackgroundColor": "#7398f5",
-    "backgroundColor": "#F8F8F8"
+    "backgroundColo联系用人单位联系用人单位联系用人单位联系用人单r": "#F8F8F8"
   },
   "tabBar": {
     "backgroundColor": "#ffffff",
@@ -27,7 +27,7 @@
     "list": [
       {
         "pagePath": "pages/job/list/list",
-        "text": "招聘信息",
+        "text": "岗位信息",
         "iconPath": "/images/home-g.png",
         "selectedIconPath": "/images/home-b.png"
       },

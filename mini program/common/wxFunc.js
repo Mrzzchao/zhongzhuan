@@ -17,6 +17,9 @@ function request(url, data = {}, method = 'GET') {
     })
 }).catch((err) => {
     console.error(err)
+    wx.showToast({
+      title: err
+    })
   })
 }
 
@@ -39,6 +42,9 @@ function requestPost(url, data = {}) {
     })
 }).catch((err) => {
     console.error(err)
+    wx.showToast({
+      title: err
+    })
   })
 }
 
@@ -65,6 +71,9 @@ function requestPayment(obj) {
     })
 }).catch((err) => {
     console.error(err)
+    wx.showToast({
+      title: err
+    })
   })
 }
 
@@ -86,6 +95,9 @@ function chooseImage(type) {
     })
 }).catch((err) => {
     console.error(err)
+    wx.showToast({
+      title: err
+    })
   })
 }
 
@@ -106,6 +118,9 @@ function login() {
     });
 }).catch((err) => {
     console.error(err)
+    wx.showToast({
+      title: err
+    })
   })
 }
 
@@ -125,6 +140,9 @@ function checkSession() {
     });
 }).catch((err) => {
     console.error(err)
+    wx.showToast({
+      title: err
+    })
   })
 }
 
@@ -165,6 +183,9 @@ function uploadFile({url, filePath, name, formData = {}}) {
     }
 }).catch((err) => {
     console.error(err)
+    wx.showToast({
+      title: err
+    })
     uploadTask.abort() // 取消上传任务
   })
 
@@ -215,6 +236,9 @@ function downloadFile({url}) {
     })
 }).catch((err) => {
     console.error(err)
+    wx.showToast({
+      title: err
+    })
     downloadFile.abort() // 取消下载任务
   })
 
@@ -239,6 +263,9 @@ function saveFile(url) {
     })
   }).catch((err) => {
     console.error(err)
+    wx.showToast({
+      title: err
+    })
   })
 }
 
@@ -258,6 +285,9 @@ function getSetting() {
     });
 }).catch((err) => {
     console.error(err)
+    wx.showToast({
+      title: err
+    })
   })
 }
 
@@ -277,6 +307,9 @@ function getUserInfo() {
     });
 }).catch((err) => {
     console.error(err)
+    wx.showToast({
+      title: err
+    })
   })
 }
 
