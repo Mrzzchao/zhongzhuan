@@ -68,7 +68,7 @@ module.exports = {
     // 添加工作
     addOne(req, res) {
         let {job_name, company, tags, salary, company_logo, job_detail, remarks, operator, hr_email} = req.body
-        company_logo || (company_logo = 'https://www.yukisa.com/asserts/images/company-default.png')
+        company_logo || (company_logo = 'https://www.lgzzcjb.com/asserts/images/company-default.png')
         let obj = {job_name, company, tags, salary, company_logo, job_detail, remarks, operator, hr_email}
         SQLHandler.insert(obj).then((rows) => {
             if(rows.affectedRows) {
@@ -129,7 +129,7 @@ module.exports = {
      // 修改工作
     updateOne(req, res) {
         let {job_name, company, tags, salary, company_logo, job_detail, remarks, operator, hr_email, id, status} = req.body
-        company_logo || (company_logo = 'https://www.yukisa.com/asserts/images/company-default.png')
+        company_logo || (company_logo = 'https://www.lgzzcjb.com/asserts/images/company-default.png')
         let obj = {job_name, company, tags, salary, company_logo, job_detail, remarks, operator, hr_email, id, status}
         SQLHandler.update(obj).then((rows) => {
             if(rows.affectedRows) {

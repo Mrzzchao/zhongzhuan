@@ -19,17 +19,17 @@ module.exports = {
                 NODE_ENV: 'production',
                 PORT: 9999,
                 HOST: '0.0.0.0',
-                ADDRESS: 'www.yukisa.com'
+                ADDRESS: 'www.lgzzcjb.com'
             },
             env_release: {
                 // ADDRESS: '43.247.69.20'
-                ADDRESS: 'www.yukisa.com'
+                ADDRESS: 'www.lgzzcjb.com'
             },
             env_pre: {
-                ADDRESS: 'www.yukisa.com'
+                ADDRESS: 'www.lgzzcjb.com'
             },
             env_dev: {
-                ADDRESS: 'www.yukisa.com'
+                ADDRESS: 'www.lgzzcjb.com'
             }
         }
     ]

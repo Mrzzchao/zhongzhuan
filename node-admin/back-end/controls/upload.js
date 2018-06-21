@@ -1,5 +1,5 @@
 const upload = require('../utils/upload')
-const domain = 'https://www.yukisa.com'
+const domain = 'https://www.lgzzcjb.com'
 
 module.exports = {
     uploadImgOne(req, res, next) {
