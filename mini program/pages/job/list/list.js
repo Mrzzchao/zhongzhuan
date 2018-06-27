@@ -26,13 +26,16 @@ Page({
         msg: '已经到底了...'
       }
     },
-    pageNo: 1
+    pageNo: 1,
+
+    switchContr: false
   },
 
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad(options) {
+    this.handlerSwitchControl()
     this.fetchData()
   },
   formatData(data) {
@@ -44,6 +47,15 @@ Page({
       return job
     })
   },
+
+  handlerSwitchControl() {
+    return app.utils.Ajax.swithControl().then((data) => {
+      this.setData({
+        switchContr: data.switchContr
+      })
+    })
+  },
+
   fetchData(page = 1) {
     return app.utils.Ajax.getJobList(page).then((data) => {
       data = this.formatData(data)
@@ -51,6 +63,7 @@ Page({
       return data
     })
   },
+
   scrollToEnd(e) {
     let loadInfo = this.data.loadInfo
     if (loadInfo.status === 'loaded') {

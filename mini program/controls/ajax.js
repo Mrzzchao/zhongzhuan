@@ -292,6 +292,16 @@ function sendResume({student_id, job_id}) {
   })
 }
 
+function swithControl() {
+  showLoading('玩命发送中...')
+  return WxFunc.requestPost(Api.switchControl).then((res) => {
+    hideLoading()
+    if (res.code === 100) {
+      return res.data
+    }
+  })
+}
+
 
 
 module.exports = {
@@ -317,5 +327,7 @@ module.exports = {
   submitStu,
   getStuInfo,
 
-  sendResume
+  sendResume,
+
+  swithControl
 }

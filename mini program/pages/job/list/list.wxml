@@ -1,7 +1,7 @@
 <view class="page-body l-full l-flex-column bg-g">
   <!-- 职位列表 start-->
   <view class="job-list-wrap l-flex-1 l-relative">
-    <view class="l-full l-flex-column job-list-cont">
+    <view class="l-full l-flex-column job-list-cont" wx:if="{{switchContr}}">
       <view class="">
       <scroll-view class="l-full l-flex-column job-list-cont" scroll-y="true" bindscrolltolower="scrollToEnd" bindscroll="scroll">
         <!-- 一条信息 -->
@@ -35,6 +35,12 @@
         </view>
       </scroll-view>
       </view>
+    </view>
+    <view class="switch" wx:else>
+      <view class='switch-title'>大型宣讲会召开</view>
+      <view class='switch-time'>2018.06.31</view>
+      <view class='switch-place'>华山运动场</view>
+      望各位童鞋周知，找工作顺利
     </view>
   </view>
   <!-- 职位列表 end-->

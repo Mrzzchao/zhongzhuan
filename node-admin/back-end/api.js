@@ -98,6 +98,8 @@ module.exports = {
     wxSession: path + '/wechat/session',
 
     // resume
-    resumeSend: path + '/resume/send'
+    resumeSend: path + '/resume/send',
+    
+    switchControl: path + '/switch'
 
 };

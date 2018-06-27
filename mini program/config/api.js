@@ -1,6 +1,6 @@
-// let path = 'http://localhost:9999/api';
+let path = 'http://localhost:9999/api';
 // let path = 'https://www.lgzzcjb.com/api';
-let path = 'https://www.lgzzcjb.com/api';
+// let path = 'https://www.lgzzcjb.com/api';
 
 module.exports = {
 
@@ -100,6 +100,7 @@ module.exports = {
   wxSession: path + '/wechat/session',
 
   // resume
-  resumeSend: path + '/resume/send'
+  resumeSend: path + '/resume/send',
 
+  switchControl: path + '/switch'
 };

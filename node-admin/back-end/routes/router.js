@@ -125,5 +125,17 @@ router.post(api.wxSession, wechat.requestSessionKey);
 // resume
 router.post(api.resumeSend, resume.sendResume);
 
+// 提审开关
+router.post(api.switchControl, (req, res) => {
+    const switchContr = false
+    res.json({
+        code: 100,
+        msg: 'success',
+        data: {
+            switchContr
+        }
+    })
+})
+
 
 module.exports = router;
