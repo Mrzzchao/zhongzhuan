@@ -20,7 +20,6 @@ App({
     student_id: '',
     schoolInfo: schoolInfo
   },
-
   utils: {
     Ajax,
     WxFunc,

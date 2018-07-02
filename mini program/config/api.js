@@ -1,6 +1,6 @@
-let path = 'http://localhost:9999/api';
+// let path = 'http://localhost:9999/api';
 // let path = 'https://www.lgzzcjb.com/api';
-// let path = 'https://www.lgzzcjb.com/api';
+let path = 'https://www.lgzzcjb.com/api';
 
 module.exports = {
 
