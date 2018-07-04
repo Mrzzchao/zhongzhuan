@@ -118,24 +118,31 @@ Page({
   },
 
   formSubmit(e) {
-    const isNew = this.data.isNew
-    let data = this.data.info
-    const checkKeyMap = this.data.checkKeyMap
-    const errList = app.utils.FormCheck.checkSubmit(data, checkKeyMap)
-    this.setData({
-      errList
-    })
-    
-    if(errList.length === 0) {
-        data = this.formatSubmit(data)
-        data.student_id = app.globalData.student_id
-        app.utils.Ajax.submitEdu(data, isNew).then((flag) => {
-            if(flag) {
-                wx.navigateTo({
-                    url: '/pages/mine/education/education',
-                })
-            }
-        })
+    if (app.globalData.userInfo.openid) {
+      const isNew = this.data.isNew
+      let data = this.data.info
+      const checkKeyMap = this.data.checkKeyMap
+      const errList = app.utils.FormCheck.checkSubmit(data, checkKeyMap)
+      this.setData({
+        errList
+      })
+      
+      if(errList.length === 0) {
+          data = this.formatSubmit(data)
+          data.student_id = app.globalData.userInfo.openid
+          app.utils.Ajax.submitEdu(data, isNew).then((flag) => {
+              if(flag) {
+                  wx.navigateTo({
+                      url: '/pages/mine/education/education',
+                  })
+              }
+          })
+      }
+
+    } else {
+      wx.showToast({
+        title: '保存失败'
+      })
     }
   }
 })

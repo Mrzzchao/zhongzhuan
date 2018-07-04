@@ -18,7 +18,7 @@ Page({
   },
 
   fetchData() {
-    const student_id = app.globalData.student_id
+    const student_id = app.globalData.userInfo.openid
     app.utils.Ajax.getSkillList(student_id).then((data) => {
       this.setData({
         skillList: this.formatData(data)

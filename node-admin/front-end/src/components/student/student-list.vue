@@ -177,6 +177,8 @@
 
                 tableData: [],
 
+                excelData: [],    // 表格输出的数据
+
                 searchObj: {
                     value: '',
                     value2: '',
@@ -226,7 +228,7 @@
             json_data() {
                 const json_fields = this.json_fields
                 let arr = []
-                this.tableData.map((item) => {
+                this.excelData.map((item) => {
                     let obj = {}
                     Object.keys(json_fields).forEach((key) => {
                         obj[key] = item[key]
@@ -255,8 +257,19 @@
                     this.countAll = data.countAll
                     this.load = false
                 })
+            },
 
-
+            fetchAll() {
+                this.load = true;
+                const params = {
+                    pageNo: 1,
+                    pageSize: 999999
+                }
+                this.ajax.post(this.api.studentListWithWork, params).then((data) => {
+                    console.log(data);
+                    this.excelData = this.formatData(data.list)
+                    this.load = false
+                })
             },
 
             fetchItem() {
@@ -310,6 +323,7 @@
                     console.log(data)
                     let index = this.tableData.indexOf(row);
                     this.tableData.splice(index, 1);
+                    this.fetchAll();
                     this.$message.success('删除成功');
                 })
             },
@@ -333,6 +347,7 @@
 
         created() {
             this.fetchList();
+            this.fetchAll()
         },
 
         watch: {

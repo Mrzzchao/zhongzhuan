@@ -166,9 +166,15 @@ module.exports = {
                 const promiseArr = rows.map((row) => {
                     return SQLHandlerWork.queryByType('student_id', row.student_id).then((rowsW) => {
                         const work = rowsW[rowsW.length - 1]
-                        row.company_name = work.company_name
-                        row.title = work.title
-                        row.service_time = work.service_time
+                        if(rowsW.length) {
+                            row.company_name = work.company_name || ''
+                            row.title = work.title || ''
+                            row.service_time = work.service_time || ''
+                        } else {
+                            row.company_name = ''
+                            row.title = ''
+                            row.service_time = ''
+                        }
                         return row
                     })
                 })

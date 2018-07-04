@@ -185,7 +185,6 @@ Page({
         this.setData({
           isNew: true
         })
-        return
       }
       this.changeInfo(data)
       const student_id = data.student_id
@@ -201,7 +200,7 @@ Page({
   },
 
   fetchWork() {
-    const student_id = app.globalData.student_id
+    const student_id = app.globalData.userInfo.openid
 
     return app.utils.Ajax.getWorkList(student_id).then((data) => {
       console.log(data)
@@ -212,7 +211,7 @@ Page({
   },
 
   fetchEdu() {
-    const student_id = app.globalData.student_id
+    const student_id = app.globalData.userInfo.openid
 
     return app.utils.Ajax.getEduList(student_id).then((data) => {
       console.log(data)
@@ -223,7 +222,7 @@ Page({
   },
 
   fetchSkill() {
-    const student_id = app.globalData.student_id
+    const student_id = app.globalData.userInfo.openid
 
     return app.utils.Ajax.getSkillList(student_id).then((data) => {
       this.setData({

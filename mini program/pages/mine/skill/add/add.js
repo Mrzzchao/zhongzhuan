@@ -121,32 +121,38 @@ Page({
   },
 
   formSubmit(e) {
-    if(this.data.isUploaded) {  // 图片上传成功才能提交
-      let formData = this.data.info
-      formData.student_id = app.globalData.student_id
-      const isNew = this.data.isNew
-      const checkKeyMap = this.data.checkKeyMap
-      const errList = app.utils.FormCheck.checkSubmit(formData, checkKeyMap)
-      this.setData({
-        errList
-      })
-      
-      if(errList.length === 0) {
-          app.utils.Ajax.submitSkill(formData, isNew).then((flag) => {
-              console.log(flag)
-              if(flag) {
-                  wx.navigateTo({
-                      url: '/pages/mine/skill/skill',
-                  })
-              }
-          })
+    if (app.globalData.userInfo.openid) {
+      if(this.data.isUploaded) {  // 图片上传成功才能提交
+        let formData = this.data.info
+        formData.student_id = app.globalData.userInfo.openid
+        const isNew = this.data.isNew
+        const checkKeyMap = this.data.checkKeyMap
+        const errList = app.utils.FormCheck.checkSubmit(formData, checkKeyMap)
+        this.setData({
+          errList
+        })
+        
+        if(errList.length === 0) {
+            app.utils.Ajax.submitSkill(formData, isNew).then((flag) => {
+                console.log(flag)
+                if(flag) {
+                    wx.navigateTo({
+                        url: '/pages/mine/skill/skill',
+                    })
+                }
+            })
+        }
+
+      } else {
+        this.setData({
+          errList: ['图片未上传']
+        })
       }
 
     } else {
-      this.setData({
-        errList: ['图片未上传']
+      wx.showToast({
+        title: '保存失败'
       })
     }
   }
-
 })
