@@ -1,8 +1,8 @@
 // 中专项目数据库
 module.exports = {
-    host:'193.112.122.181',
+    host:'192.168.50.49',
     port: 3306,
     user:'vueadmin',
-    password:'68KmU$kXQMwsga#3',
+    password:'xxxxxx',
     database:'vueadmindb',
 }

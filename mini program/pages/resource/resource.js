@@ -26,7 +26,7 @@ Page({
 
   formatData(data) {
     return data.map((item) => {
-      item.img_url = item.img_url || 'https://www.lgzzcjb.com/asserts/images/file-default.png'
+      item.img_url = item.img_url || 'https://www.xxx.xxx.com/asserts/images/file-default.png'
       
       return item
     })

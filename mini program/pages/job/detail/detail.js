@@ -27,7 +27,7 @@ Page({
 
     data.intros = intros
     data.requirements = requirements
-    data.company_logo = data.company_logo || 'https://www.lgzzcjb.com/asserts/images/company-default.png'
+    data.company_logo = data.company_logo || 'https://www.xxx.xxx.com/asserts/images/company-default.png'
     return data
   },
   
